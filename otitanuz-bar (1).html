@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OTITANUZ BAR — Barcelona</title>
+
+  <!-- Google Fonts: Bebas Neue (display) + Lato (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS VARIABLES — Paleta "Dark Nightlife"
+    ============================================================ */
+    :root {
+      --black:        #000000;
+      --deep:         #080b10;
+      --panel:        #0d1117;
+      --card:         #111620;
+      --border:       #1e2a3a;
+      --neon:         #007bff;
+      --neon-glow:    #0062cc;
+      --neon-soft:    rgba(0, 123, 255, 0.18);
+      --text-primary: #e8eaf0;
+      --text-muted:   #6b7a8d;
+      --text-dim:     #3a4556;
+      --white:        #ffffff;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Lato', sans-serif;
+      --radius:       6px;
+      --transition:   0.3s ease;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--black);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ============================================================
+       UTILIDADES
+    ============================================================ */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--neon);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      letter-spacing: 0.06em;
+      line-height: 1.05;
+      color: var(--white);
+    }
+
+    .neon-divider {
+      width: 50px;
+      height: 2px;
+      background: var(--neon);
+      margin: 1.2rem 0 2rem;
+      box-shadow: 0 0 8px var(--neon);
+    }
+
+    /* ============================================================
+       BOTONES
+    ============================================================ */
+    .btn-primary {
+      display: inline-block;
+      padding: 0.8rem 2.4rem;
+      background: var(--neon);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 2px solid var(--neon);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--neon);
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.5), inset 0 0 20px rgba(0, 123, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.65rem 1.8rem;
+      background: transparent;
+      color: var(--neon);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--neon);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+    }
+
+    .btn-ghost:hover {
+      background: var(--neon);
+      color: var(--white);
+      box-shadow: 0 0 14px rgba(0, 123, 255, 0.45);
+    }
+
+    /* ============================================================
+       HEADER / NAV
+    ============================================================ */
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    /* Logotipo */
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .nav-logo .logo-main {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      letter-spacing: 0.15em;
+      color: var(--white);
+    }
+
+    .nav-logo .logo-sub {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      color: var(--neon);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    /* Links de navegación */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--neon);
+      transition: width var(--transition);
+    }
+
+    .nav-links li a:hover {
+      color: var(--neon);
+    }
+
+    .nav-links li a:hover::after {
+      width: 100%;
+    }
+
+    /* Dropdown "Fútbol" */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown > a {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem !important;
+      color: var(--text-muted) !important;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      transition: border-color var(--transition), color var(--transition) !important;
+    }
+
+    .nav-dropdown > a .arrow {
+      font-size: 0.6rem;
+      transition: transform var(--transition);
+    }
+
+    .nav-dropdown:hover > a {
+      color: var(--text-primary) !important;
+      border-color: var(--neon) !important;
+    }
+
+    .nav-dropdown:hover > a .arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      min-width: 180px;
+      padding: 0.5rem 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      list-style: none;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      transition: color var(--transition), background var(--transition);
+    }
+
+    .dropdown-menu li a:hover {
+      color: var(--white);
+      background: var(--neon-soft);
+    }
+
+    /* Hamburger menu (móvil) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    /* Menú móvil desplegado */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--neon);
+    }
+
+    .mobile-menu a.football-link {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Fondo simulado con gradiente (sin imágenes externas) */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 65% 40%, rgba(0, 80, 180, 0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 30% 60%, rgba(0, 40, 100, 0.18) 0%, transparent 60%),
+        linear-gradient(170deg, #050810 0%, #000000 60%, #020408 100%);
+      z-index: 0;
+    }
+
+    /* Partículas / puntos decorativos */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, rgba(0,123,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 15%, rgba(0,123,255,0.35) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 75% 35%, rgba(0,123,255,0.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 65%, rgba(0,123,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 80%, rgba(0,123,255,0.25) 0%, transparent 100%),
+        radial-gradient(2px 2px at 60% 75%, rgba(0,123,255,0.4) 0%, transparent 100%);
+    }
+
+    /* Icono visual decorativo (copa de cóctel) */
+    .hero-visual {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 340px;
+      height: 440px;
+      opacity: 0.08;
+      z-index: 1;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--neon);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow span {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--neon);
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--neon);
+      box-shadow: 0 0 6px var(--neon);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title .accent {
+      color: var(--neon);
+      text-shadow: 0 0 30px rgba(0, 123, 255, 0.55);
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-scroll span {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--neon), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* ============================================================
+       SECCIÓN PRÓXIMOS EVENTOS
+    ============================================================ */
+    #eventos {
+      padding: 6rem 0;
+      background: var(--deep);
+      position: relative;
+    }
+
+    #eventos::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--neon), transparent);
+    }
+
+    .eventos-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    /* Grid de tarjetas de eventos (scroll horizontal en móvil) */
+    .eventos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* Tarjeta de evento */
+    .evento-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .evento-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--neon);
+      box-shadow: 0 0 24px rgba(0, 123, 255, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .evento-card-top {
+      position: relative;
+      height: 160px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Fondos distintos por tarjeta */
+    .evento-card:nth-child(1) .evento-card-top {
+      background: radial-gradient(ellipse at 50% 80%, rgba(0, 60, 140, 0.6) 0%, #0a0f1a 70%);
+    }
+
+    .evento-card:nth-child(2) .evento-card-top {
+      background: radial-gradient(ellipse at 50% 80%, rgba(0, 40, 100, 0.7) 0%, #080c14 70%);
+    }
+
+    .evento-card:nth-child(3) .evento-card-top {
+      background: radial-gradient(ellipse at 50% 80%, rgba(0, 80, 160, 0.55) 0%, #050912 70%);
+    }
+
+    .evento-icon {
+      font-size: 3.5rem;
+      opacity: 0.7;
+      filter: drop-shadow(0 0 12px rgba(0, 123, 255, 0.4));
+    }
+
+    .evento-genre-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--neon-soft);
+      border: 1px solid rgba(0, 123, 255, 0.4);
+      color: var(--neon);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .evento-date-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      border-left: 2px solid var(--neon);
+      padding: 0.3rem 0.6rem;
+      line-height: 1.2;
+    }
+
+    .evento-date-badge .day {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--white);
+      display: block;
+    }
+
+    .evento-date-badge .month {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--neon);
+      display: block;
+    }
+
+    .evento-card-body {
+      padding: 1.25rem 1.4rem;
+    }
+
+    .evento-artist {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .evento-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .evento-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .evento-meta .time {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* ============================================================
+       SECCIÓN NUESTRA BARRA (COCTELERÍA)
+    ============================================================ */
+    #cocteleria {
+      padding: 6rem 0;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo decorativo */
+    #cocteleria::after {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -150px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 80, 180, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cocteleria-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .cocteleria-left {}
+
+    .cocktail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .cocktail-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.1rem 1.3rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: default;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .cocktail-item:hover {
+      border-color: rgba(0, 123, 255, 0.5);
+      background: #131820;
+    }
+
+    .cocktail-emoji {
+      font-size: 2rem;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 6px rgba(0, 123, 255, 0.3));
+    }
+
+    .cocktail-info {}
+
+    .cocktail-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      margin-bottom: 0.15rem;
+    }
+
+    .cocktail-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .cocktail-price {
+      margin-left: auto;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--neon);
+      flex-shrink: 0;
+    }
+
+    .cocteleria-right {
+      position: relative;
+    }
+
+    /* Panel visual decorativo de coctelería */
+    .cocteleria-visual {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cocteleria-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(0, 100, 220, 0.12) 0%, transparent 65%);
+    }
+
+    .cocteleria-visual .big-icon {
+      font-size: 7rem;
+      display: block;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.5));
+      animation: floatIcon 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .cocteleria-visual p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .cocteleria-visual .vis-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .cocteleria-visual .neon-ring {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 123, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.1), inset 0 0 20px rgba(0, 123, 255, 0.05);
+      margin: 1.5rem auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--neon);
+    }
+
+    /* ============================================================
+       SECCIÓN FÚTBOL (SECUNDARIA)
+    ============================================================ */
+    #futbol {
+      padding: 3.5rem 0;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .futbol-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .futbol-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .futbol-icon {
+      font-size: 2.4rem;
+      opacity: 0.7;
+    }
+
+    .futbol-text h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .futbol-text p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    #footer {
+      background: var(--deep);
+      padding: 4rem 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .logo-main {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: 0.15em;
+      color: var(--white);
+    }
+
+    .footer-brand .logo-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      color: var(--neon);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 300px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Redes sociales */
+    .social-links {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: border-color var(--transition), color var(--transition), background var(--transition), box-shadow var(--transition);
+    }
+
+    .social-link:hover {
+      border-color: var(--neon);
+      color: var(--neon);
+      background: var(--neon-soft);
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--neon);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-col ul li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .footer-col ul li .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--neon);
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+      box-shadow: 0 0 4px var(--neon);
+    }
+
+    /* Horarios */
+    .schedule-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+    }
+
+    .schedule-item .day-name {
+      color: var(--text-muted);
+    }
+
+    .schedule-item .time {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .schedule-item.closed .time {
+      color: var(--text-dim);
+    }
+
+    /* Footer bottom */
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    .footer-bottom p span {
+      color: var(--neon);
+    }
+
+    /* ============================================================
+       SELECTOR DE IDIOMA — Banderas
+    ============================================================ */
+
+    /* Wrapper del selector dentro del nav */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 0.25rem 0.5rem;
+      margin-left: 0.5rem;
+      transition: border-color var(--transition);
+    }
+
+    .lang-switcher:hover {
+      border-color: rgba(0, 123, 255, 0.4);
+    }
+
+    /* Botón individual de bandera */
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      background: none;
+      padding: 0;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .lang-btn svg {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .lang-btn:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+      border-color: var(--neon);
+    }
+
+    /* Estado activo: bandera seleccionada */
+    .lang-btn.active {
+      border-color: var(--neon);
+      box-shadow: 0 0 10px rgba(0, 123, 255, 0.55);
+    }
+
+    /* Separador entre banderas */
+    .lang-sep {
+      width: 1px;
+      height: 14px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    /* Tooltip sobre la bandera */
+    .lang-btn::after {
+      content: attr(data-lang-label);
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+      z-index: 200;
+    }
+
+    .lang-btn:hover::after {
+      opacity: 1;
+    }
+
+    /* ============================================================
+       RESPONSIVE — MÓVIL
+    ============================================================ */
+    @media (max-width: 900px) {
+      /* Ocultar nav desktop, mostrar hamburger */
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      /* Hero */
+      .hero-visual {
+        display: none;
+      }
+
+      /* Eventos: scroll horizontal en móvil */
+      .eventos-grid {
+        grid-template-columns: repeat(3, 280px);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 1rem;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .evento-card {
+        scroll-snap-align: start;
+      }
+
+      /* Coctelería */
+      .cocteleria-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      /* Footer */
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      /* Eventos header */
+      .eventos-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      /* Sección fútbol */
+      .futbol-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER / NAVEGACIÓN
+  ============================================================ -->
+  <header id="header">
+    <nav class="container nav-inner">
+
+      <!-- Logotipo -->
+      <a href="#inicio" class="nav-logo">
+        <span class="logo-main">OTITANUZ</span>
+        <span class="logo-sub">Bar · Barcelona</span>
+      </a>
+
+      <!-- Navegación Desktop -->
+      <ul class="nav-links">
+        <li><a href="#inicio" data-i18n="nav-inicio">Inicio</a></li>
+        <li><a href="#eventos" data-i18n="nav-eventos">Cartelera Musical</a></li>
+        <li><a href="#cocteleria" data-i18n="nav-cocteleria">Coctelería</a></li>
+        <li><a href="#contacto" data-i18n="nav-contacto">Contacto</a></li>
+        <!-- Pestaña secundaria: Fútbol -->
+        <li class="nav-dropdown">
+          <a href="#futbol" data-i18n="nav-futbol">
+            ⚽ Fútbol <span class="arrow">▾</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#futbol" data-i18n="nav-dd-1">Zona Deportiva</a></li>
+            <li><a href="#futbol" data-i18n="nav-dd-2">Próximos Partidos</a></li>
+            <li><a href="#futbol" data-i18n="nav-dd-3">Pantallas en Vivo</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Selector de idioma con banderas -->
+      <div class="lang-switcher" aria-label="Cambiar idioma">
+
+        <!-- Español 🇪🇸 -->
+        <button class="lang-btn active" id="lang-es" data-lang="es" data-lang-label="Español" title="Español" onclick="setLang('es')">
+          <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+            <clipPath id="c-es"><circle cx="11" cy="11" r="11"/></clipPath>
+            <g clip-path="url(#c-es)">
+              <rect width="22" height="22" fill="#c60b1e"/>
+              <rect y="5.5" width="22" height="11" fill="#ffc400"/>
+            </g>
+          </svg>
+        </button>
+
+        <div class="lang-sep"></div>
+
+        <!-- Inglés 🇬🇧 -->
+        <button class="lang-btn" id="lang-en" data-lang="en" data-lang-label="English" title="English" onclick="setLang('en')">
+          <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+            <clipPath id="c-en"><circle cx="11" cy="11" r="11"/></clipPath>
+            <g clip-path="url(#c-en)">
+              <rect width="22" height="22" fill="#012169"/>
+              <!-- Diagonales blancas -->
+              <line x1="0" y1="0" x2="22" y2="22" stroke="#fff" stroke-width="3"/>
+              <line x1="22" y1="0" x2="0" y2="22" stroke="#fff" stroke-width="3"/>
+              <!-- Cruz roja diagonal -->
+              <line x1="0" y1="0" x2="22" y2="22" stroke="#C8102E" stroke-width="1.6"/>
+              <line x1="22" y1="0" x2="0" y2="22" stroke="#C8102E" stroke-width="1.6"/>
+              <!-- Cruz blanca central -->
+              <rect x="0" y="8.8" width="22" height="4.4" fill="#fff"/>
+              <rect x="8.8" y="0" width="4.4" height="22" fill="#fff"/>
+              <!-- Cruz roja central -->
+              <rect x="0" y="9.6" width="22" height="2.8" fill="#C8102E"/>
+              <rect x="9.6" y="0" width="2.8" height="22" fill="#C8102E"/>
+            </g>
+          </svg>
+        </button>
+
+        <div class="lang-sep"></div>
+
+        <!-- Francés 🇫🇷 -->
+        <button class="lang-btn" id="lang-fr" data-lang="fr" data-lang-label="Français" title="Français" onclick="setLang('fr')">
+          <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+            <clipPath id="c-fr"><circle cx="11" cy="11" r="11"/></clipPath>
+            <g clip-path="url(#c-fr)">
+              <rect width="22" height="22" fill="#ED2939"/>
+              <rect width="14.67" height="22" fill="#fff"/>
+              <rect width="7.33" height="22" fill="#002395"/>
+            </g>
+          </svg>
+        </button>
+
+      </div><!-- /lang-switcher -->
+
+      <!-- Hamburger (móvil) -->
+      <div class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+    </nav>
+
+    <!-- Menú desplegable móvil -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#inicio" data-i18n="mob-inicio" onclick="closeMobile()">Inicio</a>
+      <a href="#eventos" data-i18n="mob-eventos" onclick="closeMobile()">Cartelera Musical</a>
+      <a href="#cocteleria" data-i18n="mob-cocteleria" onclick="closeMobile()">Coctelería</a>
+      <a href="#contacto" data-i18n="mob-contacto" onclick="closeMobile()">Contacto</a>
+      <a href="#futbol" data-i18n="mob-futbol" class="football-link" onclick="closeMobile()">⚽ Fútbol en Vivo</a>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       HERO — Sección principal
+  ============================================================ -->
+  <section id="inicio" id="hero" style="padding-top:68px;">
+    <div id="hero">
+
+      <!-- Fondo -->
+      <div class="hero-bg"></div>
+
+      <!-- Icono decorativo de copa (SVG inline) -->
+      <div class="hero-visual">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- Copa de cóctel estilizada -->
+          <polygon points="20,20 180,20 110,130 110,200 90,200 90,130" opacity="0.5"/>
+          <rect x="85" y="200" width="30" height="10" rx="3" opacity="0.4"/>
+          <rect x="60" y="210" width="80" height="6" rx="3" opacity="0.3"/>
+          <!-- Destellos -->
+          <circle cx="60" cy="50" r="4" opacity="0.6"/>
+          <circle cx="140" cy="60" r="3" opacity="0.5"/>
+          <circle cx="80" cy="40" r="2" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <!-- Contenido -->
+      <div class="container">
+        <div class="hero-content">
+
+          <div class="hero-eyebrow">
+            <span data-i18n="hero-eyebrow">Música en Vivo · Cócteles · Barcelona</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span data-i18n="hero-line1">Donde la</span><br />
+            <span data-i18n="hero-line2">noche</span><br />
+            <span class="accent" data-i18n="hero-accent">cobra vida</span>
+          </h1>
+
+          <p class="hero-subtitle" data-i18n="hero-subtitle">
+            Cócteles de autor, música en vivo y una atmósfera que transforma cada noche en una experiencia irrepetible. En el corazón de Barcelona.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contacto" class="btn-primary" data-i18n="hero-cta1">Reservar Mesa</a>
+            <a href="#eventos" class="btn-ghost" data-i18n="hero-cta2">Ver Cartelera</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="hero-scroll">
+        <span data-i18n="hero-scroll">Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PRÓXIMOS EVENTOS — Cartelera Musical
+  ============================================================ -->
+  <section id="eventos">
+    <div class="container">
+
+      <div class="eventos-header">
+        <div>
+          <span class="section-label" data-i18n="ev-label">Cartelera Musical</span>
+          <h2 class="section-title" data-i18n="ev-title">Próximos Eventos</h2>
+          <div class="neon-divider"></div>
+        </div>
+        <a href="#eventos" class="btn-ghost" data-i18n="ev-all">Ver todos los eventos</a>
+      </div>
+
+      <!-- Grid de 3 tarjetas (scroll horizontal en móvil) -->
+      <div class="eventos-grid">
+
+        <!-- Tarjeta 1 -->
+        <article class="evento-card">
+          <div class="evento-card-top">
+            <div class="evento-date-badge">
+              <span class="day">14</span>
+              <span class="month" data-i18n="ev1-month">Jun</span>
+            </div>
+            <span class="evento-icon">🎸</span>
+            <span class="evento-genre-badge">Rock · Blues</span>
+          </div>
+          <div class="evento-card-body">
+            <h3 class="evento-artist" data-i18n="ev1-artist">The Midnight Groove</h3>
+            <p class="evento-desc" data-i18n="ev1-desc">Noche de blues eléctrico y rock sureño con la banda más aclamada del circuito barcelonés.</p>
+            <div class="evento-meta">
+              <span class="time">⏱ 22:00 h</span>
+              <a href="#contacto" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta 2 -->
+        <article class="evento-card">
+          <div class="evento-card-top">
+            <div class="evento-date-badge">
+              <span class="day">21</span>
+              <span class="month" data-i18n="ev2-month">Jun</span>
+            </div>
+            <span class="evento-icon">🎷</span>
+            <span class="evento-genre-badge">Jazz · Soul</span>
+          </div>
+          <div class="evento-card-body">
+            <h3 class="evento-artist" data-i18n="ev2-artist">Elena Voss Quartet</h3>
+            <p class="evento-desc" data-i18n="ev2-desc">Jazz contemporáneo con influencias de soul y bossa nova. Una velada íntima y sofisticada.</p>
+            <div class="evento-meta">
+              <span class="time">⏱ 21:30 h</span>
+              <a href="#contacto" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tarjeta 3 -->
+        <article class="evento-card">
+          <div class="evento-card-top">
+            <div class="evento-date-badge">
+              <span class="day">28</span>
+              <span class="month" data-i18n="ev3-month">Jun</span>
+            </div>
+            <span class="evento-icon">🎹</span>
+            <span class="evento-genre-badge">Electro · Ambient</span>
+          </div>
+          <div class="evento-card-body">
+            <h3 class="evento-artist" data-i18n="ev3-artist">Nyx & The Machines</h3>
+            <p class="evento-desc" data-i18n="ev3-desc">Electrónica experimental en vivo: sintetizadores analógicos, percusión y visuales inmersivos.</p>
+            <div class="evento-meta">
+              <span class="time">⏱ 23:00 h</span>
+              <a href="#contacto" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /eventos-grid -->
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       NUESTRA BARRA — Coctelería
+  ============================================================ -->
+  <section id="cocteleria">
+    <div class="container">
+      <div class="cocteleria-inner">
+
+        <!-- Izquierda: listado de cócteles -->
+        <div class="cocteleria-left">
+          <span class="section-label" data-i18n="coc-label">Nuestra Barra</span>
+          <h2 class="section-title"><span data-i18n="coc-title1">Coctelería</span><br /><span data-i18n="coc-title2">de Autor</span></h2>
+          <div class="neon-divider"></div>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.5rem; line-height:1.8;" data-i18n="coc-intro">
+            Cada copa es una historia. Nuestros bartenders fusionan técnica clásica con ingredientes locales para crear experiencias líquidas únicas.
+          </p>
+
+          <div class="cocktail-list">
+
+            <div class="cocktail-item">
+              <span class="cocktail-emoji">🍸</span>
+              <div class="cocktail-info">
+                <div class="cocktail-name" data-i18n="coc-n1">Otitanuz Negroni</div>
+                <div class="cocktail-desc" data-i18n="coc-d1">Gin de autor, Campari, vermut negro con twist de naranja ahumada</div>
+              </div>
+              <span class="cocktail-price">12€</span>
+            </div>
+
+            <div class="cocktail-item">
+              <span class="cocktail-emoji">🍹</span>
+              <div class="cocktail-info">
+                <div class="cocktail-name" data-i18n="coc-n2">Barcelona Sour</div>
+                <div class="cocktail-desc" data-i18n="coc-d2">Whisky escocés, zumo de limón, sirope de cava y clara de huevo</div>
+              </div>
+              <span class="cocktail-price">11€</span>
+            </div>
+
+            <div class="cocktail-item">
+              <span class="cocktail-emoji">🥂</span>
+              <div class="cocktail-info">
+                <div class="cocktail-name" data-i18n="coc-n3">Midnight Blue</div>
+                <div class="cocktail-desc" data-i18n="coc-d3">Vodka infusionado, licor de violeta, agua tónica premium y hierbas mediterráneas</div>
+              </div>
+              <span class="cocktail-price">13€</span>
+            </div>
+
+            <div class="cocktail-item">
+              <span class="cocktail-emoji">🍋</span>
+              <div class="cocktail-info">
+                <div class="cocktail-name" data-i18n="coc-n4">Gaudí Spritz</div>
+                <div class="cocktail-desc" data-i18n="coc-d4">Aperol, cava catalán, soda, naranja fresca y romero</div>
+              </div>
+              <span class="cocktail-price">10€</span>
+            </div>
+
+          </div><!-- /cocktail-list -->
+
+          <div style="margin-top:2rem;">
+            <a href="#cocteleria" class="btn-ghost" data-i18n="coc-menu">Ver carta completa</a>
+          </div>
+        </div><!-- /cocteleria-left -->
+
+        <!-- Derecha: panel visual -->
+        <div class="cocteleria-right">
+          <div class="cocteleria-visual">
+            <span class="big-icon">🍸</span>
+            <div class="vis-title" data-i18n="coc-vis-title">Craft Cocktails</div>
+            <p data-i18n="coc-vis-p">
+              Ingredientes premium, técnicas precisas y una pasión genuina por la mixología. Cada noche, una nueva creación especial de temporada.
+            </p>
+            <div class="neon-ring" data-i18n="coc-ring">Barra Libre</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       ZONA DEPORTIVA — Sección secundaria (Fútbol)
+  ============================================================ -->
+  <section id="futbol">
+    <div class="container futbol-inner">
+
+      <div class="futbol-left">
+        <span class="futbol-icon">⚽</span>
+        <div class="futbol-text">
+          <h3 data-i18n="fut-title">Zona Deportiva</h3>
+          <p data-i18n="fut-desc">Consulta los próximos partidos y disfrútalos en nuestras pantallas con el ambiente del Otitanuz.</p>
+        </div>
+      </div>
+
+      <a href="#futbol" class="btn-ghost" style="white-space:nowrap;" data-i18n="fut-btn">
+        Ver próximos partidos →
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="contacto">
+    <div id="footer">
+      <div class="container">
+
+        <div class="footer-grid">
+
+          <!-- Columna marca -->
+          <div class="footer-brand">
+            <div class="logo-main">OTITANUZ</div>
+            <span class="logo-sub">Bar · Barcelona</span>
+            <p data-i18n="foot-desc">
+              Un espacio donde la música en vivo, la coctelería artesanal y la noche barcelonesa convergen en una sola experiencia.
+            </p>
+            <!-- Redes sociales -->
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Instagram" title="Instagram">IG</a>
+              <a href="#" class="social-link" aria-label="Facebook" title="Facebook">FB</a>
+              <a href="#" class="social-link" aria-label="Twitter/X" title="Twitter">𝕏</a>
+              <a href="#" class="social-link" aria-label="Spotify" title="Spotify">SP</a>
+            </div>
+          </div>
+
+          <!-- Columna dirección -->
+          <div class="footer-col">
+            <h4 data-i18n="foot-find">Encuéntranos</h4>
+            <ul>
+              <li>
+                <span class="dot"></span>
+                <span data-i18n="foot-addr" data-i18n-html="1">📍 Carrer de la Nit, 42<br />08003 Barcelona</span>
+              </li>
+              <li>
+                <span class="dot"></span>
+                <span>📞 +34 93 000 00 00</span>
+              </li>
+              <li>
+                <span class="dot"></span>
+                <span>✉ hola@otitanuz.bar</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Columna horario -->
+          <div class="footer-col">
+            <h4 data-i18n="foot-hours">Horario</h4>
+            <div class="schedule-item closed">
+              <span class="day-name" data-i18n="foot-d1">Lun – Mar</span>
+              <span class="time" data-i18n="foot-t1">Cerrado</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day-name" data-i18n="foot-d2">Mié – Jue</span>
+              <span class="time">19:00 – 02:00</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day-name" data-i18n="foot-d3">Viernes</span>
+              <span class="time">19:00 – 03:00</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day-name" data-i18n="foot-d4">Sábado</span>
+              <span class="time">18:00 – 03:30</span>
+            </div>
+            <div class="schedule-item">
+              <span class="day-name" data-i18n="foot-d5">Domingo</span>
+              <span class="time">18:00 – 01:00</span>
+            </div>
+          </div>
+
+        </div><!-- /footer-grid -->
+
+        <!-- Footer bottom -->
+        <div class="footer-bottom">
+          <p data-i18n="foot-copy" data-i18n-html="1">© 2025 <span>OTITANUZ BAR</span> — Todos los derechos reservados.</p>
+          <p data-i18n="foot-made" data-i18n-html="1">Diseñado en <span>Barcelona</span> · Hecho con pasión 🎵</p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT — Menú móvil
+  ============================================================ -->
+  <script>
+    // Toggle del menú hamburger en móvil
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu   = document.getElementById('mobileMenu');
+
+    hamburgerBtn.addEventListener('click', function () {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Cierre del menú al hacer clic en un enlace
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+    }
+
+    // Efecto de scroll en el header (añade fondo sólido al bajar)
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 60) {
+        header.style.background = 'rgba(0,0,0,0.96)';
+      } else {
+        header.style.background = 'rgba(0,0,0,0.82)';
+      }
+    });
+
+    // ============================================================
+    //  SISTEMA DE TRADUCCIÓN — ES / EN / FR
+    // ============================================================
+
+    // Diccionario de textos por clave y idioma
+    const translations = {
+
+      // ── NAV ──────────────────────────────────────────────────
+      'nav-inicio':        { es: 'Inicio',            en: 'Home',            fr: 'Accueil'         },
+      'nav-eventos':       { es: 'Cartelera Musical', en: 'Live Music',      fr: 'Programmation'   },
+      'nav-cocteleria':    { es: 'Coctelería',        en: 'Cocktails',       fr: 'Cocktails'        },
+      'nav-contacto':      { es: 'Contacto',          en: 'Contact',         fr: 'Contact'          },
+      'nav-futbol':        { es: '⚽ Fútbol ▾',       en: '⚽ Football ▾',   fr: '⚽ Football ▾'   },
+      'nav-dd-1':          { es: 'Zona Deportiva',    en: 'Sports Zone',     fr: 'Zone Sportive'   },
+      'nav-dd-2':          { es: 'Próximos Partidos', en: 'Upcoming Matches',fr: 'Prochains Matchs'},
+      'nav-dd-3':          { es: 'Pantallas en Vivo', en: 'Live Screens',    fr: 'Écrans en Direct'},
+
+      // ── MOBILE MENU ──────────────────────────────────────────
+      'mob-inicio':        { es: 'Inicio',            en: 'Home',            fr: 'Accueil'         },
+      'mob-eventos':       { es: 'Cartelera Musical', en: 'Live Music',      fr: 'Programmation'   },
+      'mob-cocteleria':    { es: 'Coctelería',        en: 'Cocktails',       fr: 'Cocktails'        },
+      'mob-contacto':      { es: 'Contacto',          en: 'Contact',         fr: 'Contact'          },
+      'mob-futbol':        { es: '⚽ Fútbol en Vivo', en: '⚽ Live Football', fr: '⚽ Football Live' },
+
+      // ── HERO ─────────────────────────────────────────────────
+      'hero-eyebrow':      { es: 'Música en Vivo · Cócteles · Barcelona',
+                             en: 'Live Music · Cocktails · Barcelona',
+                             fr: 'Musique Live · Cocktails · Barcelone'      },
+      'hero-line1':        { es: 'Donde la',          en: 'Where the',       fr: 'Là où la'         },
+      'hero-line2':        { es: 'noche',             en: 'night',           fr: 'nuit'             },
+      'hero-accent':       { es: 'cobra vida',        en: 'comes alive',     fr: 'prend vie'        },
+      'hero-subtitle':     { es: 'Cócteles de autor, música en vivo y una atmósfera que transforma cada noche en una experiencia irrepetible. En el corazón de Barcelona.',
+                             en: 'Signature cocktails, live music and an atmosphere that turns every night into an unforgettable experience. In the heart of Barcelona.',
+                             fr: 'Cocktails signatures, musique live et une atmosphère qui transforme chaque nuit en une expérience inoubliable. Au cœur de Barcelone.' },
+      'hero-cta1':         { es: 'Reservar Mesa',     en: 'Book a Table',    fr: 'Réserver une Table'},
+      'hero-cta2':         { es: 'Ver Cartelera',     en: 'See Programme',   fr: 'Voir Programme'   },
+      'hero-scroll':       { es: 'Scroll',            en: 'Scroll',          fr: 'Défiler'          },
+
+      // ── EVENTOS ──────────────────────────────────────────────
+      'ev-label':          { es: 'Cartelera Musical', en: 'Live Music',      fr: 'Programmation'   },
+      'ev-title':          { es: 'Próximos Eventos',  en: 'Upcoming Events', fr: 'Prochains Événements'},
+      'ev-all':            { es: 'Ver todos los eventos', en: 'See all events', fr: 'Tous les événements'},
+      'ev1-month':         { es: 'Jun',               en: 'Jun',             fr: 'Juin'             },
+      'ev1-artist':        { es: 'The Midnight Groove',en:'The Midnight Groove',fr:'The Midnight Groove'},
+      'ev1-desc':          { es: 'Noche de blues eléctrico y rock sureño con la banda más aclamada del circuito barcelonés.',
+                             en: 'A night of electric blues and southern rock with the most acclaimed band on the Barcelona circuit.',
+                             fr: 'Une soirée de blues électrique et de rock sudiste avec le groupe le plus acclamé du circuit barcelonais.' },
+      'ev2-month':         { es: 'Jun',               en: 'Jun',             fr: 'Juin'             },
+      'ev2-artist':        { es: 'Elena Voss Quartet', en:'Elena Voss Quartet',fr:'Elena Voss Quartet'},
+      'ev2-desc':          { es: 'Jazz contemporáneo con influencias de soul y bossa nova. Una velada íntima y sofisticada.',
+                             en: 'Contemporary jazz with soul and bossa nova influences. An intimate and sophisticated evening.',
+                             fr: 'Jazz contemporain avec des influences soul et bossa nova. Une soirée intime et sophistiquée.' },
+      'ev3-month':         { es: 'Jun',               en: 'Jun',             fr: 'Juin'             },
+      'ev3-artist':        { es: 'Nyx & The Machines', en:'Nyx & The Machines',fr:'Nyx & The Machines'},
+      'ev3-desc':          { es: 'Electrónica experimental en vivo: sintetizadores analógicos, percusión y visuales inmersivos.',
+                             en: 'Live experimental electronics: analogue synthesizers, percussion and immersive visuals.',
+                             fr: 'Électronique expérimentale live : synthétiseurs analogiques, percussions et visuels immersifs.' },
+      'ev-reservar':       { es: 'Reservar',          en: 'Book',            fr: 'Réserver'         },
+      'ev-time-prefix':    { es: '⏱',                 en: '⏱',              fr: '⏱'               },
+
+      // ── COCTELERÍA ───────────────────────────────────────────
+      'coc-label':         { es: 'Nuestra Barra',     en: 'Our Bar',         fr: 'Notre Bar'        },
+      'coc-title1':        { es: 'Coctelería',        en: 'Signature',       fr: 'Cocktails'        },
+      'coc-title2':        { es: 'de Autor',          en: 'Cocktails',       fr: "d'Auteur"         },
+      'coc-intro':         { es: 'Cada copa es una historia. Nuestros bartenders fusionan técnica clásica con ingredientes locales para crear experiencias líquidas únicas.',
+                             en: 'Every glass tells a story. Our bartenders blend classic technique with local ingredients to craft unique liquid experiences.',
+                             fr: 'Chaque verre raconte une histoire. Nos bartenders fusionnent technique classique et ingrédients locaux pour créer des expériences uniques.' },
+      'coc-n1':            { es: 'Otitanuz Negroni',  en: 'Otitanuz Negroni',fr: 'Otitanuz Negroni' },
+      'coc-d1':            { es: 'Gin de autor, Campari, vermut negro con twist de naranja ahumada',
+                             en: 'Craft gin, Campari, black vermouth with smoked orange twist',
+                             fr: 'Gin artisanal, Campari, vermouth noir avec twist d\'orange fumée' },
+      'coc-n2':            { es: 'Barcelona Sour',    en: 'Barcelona Sour',  fr: 'Barcelona Sour'   },
+      'coc-d2':            { es: 'Whisky escocés, zumo de limón, sirope de cava y clara de huevo',
+                             en: 'Scotch whisky, lemon juice, cava syrup and egg white',
+                             fr: 'Whisky écossais, jus de citron, sirop de cava et blanc d\'œuf' },
+      'coc-n3':            { es: 'Midnight Blue',     en: 'Midnight Blue',   fr: 'Midnight Blue'    },
+      'coc-d3':            { es: 'Vodka infusionado, licor de violeta, agua tónica premium y hierbas mediterráneas',
+                             en: 'Infused vodka, violet liqueur, premium tonic water and Mediterranean herbs',
+                             fr: 'Vodka infusée, liqueur de violette, tonic premium et herbes méditerranéennes' },
+      'coc-n4':            { es: 'Gaudí Spritz',      en: 'Gaudí Spritz',    fr: 'Gaudí Spritz'     },
+      'coc-d4':            { es: 'Aperol, cava catalán, soda, naranja fresca y romero',
+                             en: 'Aperol, Catalan cava, soda, fresh orange and rosemary',
+                             fr: 'Aperol, cava catalan, soda, orange fraîche et romarin' },
+      'coc-menu':          { es: 'Ver carta completa', en: 'View full menu',  fr: 'Voir la carte complète'},
+      'coc-vis-title':     { es: 'Craft Cocktails',   en: 'Craft Cocktails', fr: 'Cocktails Artisanaux'},
+      'coc-vis-p':         { es: 'Ingredientes premium, técnicas precisas y una pasión genuina por la mixología. Cada noche, una nueva creación especial de temporada.',
+                             en: 'Premium ingredients, precise techniques and a genuine passion for mixology. Every night, a new seasonal special creation.',
+                             fr: 'Ingrédients premium, techniques précises et une vraie passion pour la mixologie. Chaque soir, une nouvelle création spéciale de saison.' },
+      'coc-ring':          { es: 'Barra Libre',       en: 'Open Bar',        fr: 'Bar Libre'        },
+
+      // ── FÚTBOL ───────────────────────────────────────────────
+      'fut-title':         { es: 'Zona Deportiva',    en: 'Sports Zone',     fr: 'Zone Sportive'    },
+      'fut-desc':          { es: 'Consulta los próximos partidos y disfrútalos en nuestras pantallas con el ambiente del Otitanuz.',
+                             en: 'Check upcoming matches and enjoy them on our screens with the Otitanuz vibe.',
+                             fr: 'Consultez les prochains matchs et profitez-en sur nos écrans dans l\'ambiance Otitanuz.' },
+      'fut-btn':           { es: 'Ver próximos partidos →', en: 'See upcoming matches →', fr: 'Voir les prochains matchs →'},
+
+      // ── FOOTER ───────────────────────────────────────────────
+      'foot-desc':         { es: 'Un espacio donde la música en vivo, la coctelería artesanal y la noche barcelonesa convergen en una sola experiencia.',
+                             en: 'A space where live music, craft cocktails and Barcelona nights converge into one single experience.',
+                             fr: 'Un espace où la musique live, les cocktails artisanaux et les nuits barcelonaises convergent en une seule expérience.' },
+      'foot-find':         { es: 'Encuéntranos',      en: 'Find Us',         fr: 'Nous Trouver'     },
+      'foot-addr':         { es: 'Carrer de la Nit, 42<br />08003 Barcelona',
+                             en: 'Carrer de la Nit, 42<br />08003 Barcelona',
+                             fr: 'Carrer de la Nit, 42<br />08003 Barcelone' },
+      'foot-hours':        { es: 'Horario',           en: 'Opening Hours',   fr: 'Horaires'         },
+      'foot-d1':           { es: 'Lun – Mar',         en: 'Mon – Tue',       fr: 'Lun – Mar'        },
+      'foot-t1':           { es: 'Cerrado',           en: 'Closed',          fr: 'Fermé'            },
+      'foot-d2':           { es: 'Mié – Jue',         en: 'Wed – Thu',       fr: 'Mer – Jeu'        },
+      'foot-d3':           { es: 'Viernes',           en: 'Friday',          fr: 'Vendredi'         },
+      'foot-d4':           { es: 'Sábado',            en: 'Saturday',        fr: 'Samedi'           },
+      'foot-d5':           { es: 'Domingo',           en: 'Sunday',          fr: 'Dimanche'         },
+      'foot-copy':         { es: '© 2025 <span>OTITANUZ BAR</span> — Todos los derechos reservados.',
+                             en: '© 2025 <span>OTITANUZ BAR</span> — All rights reserved.',
+                             fr: '© 2025 <span>OTITANUZ BAR</span> — Tous droits réservés.' },
+      'foot-made':         { es: 'Diseñado en <span>Barcelona</span> · Hecho con pasión 🎵',
+                             en: 'Designed in <span>Barcelona</span> · Made with passion 🎵',
+                             fr: 'Conçu à <span>Barcelone</span> · Fait avec passion 🎵' },
+    };
+
+    // Aplica el idioma seleccionado a todos los elementos data-i18n
+    function setLang(lang) {
+
+      // Actualizar botones activos
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      // Actualizar atributo lang del <html>
+      document.documentElement.lang = lang;
+
+      // Recorrer todos los elementos con data-i18n y aplicar traducción
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        const key = el.dataset.i18n;
+        if (translations[key] && translations[key][lang] !== undefined) {
+          // Algunos elementos usan innerHTML (los que tienen <br> o <span>)
+          if (el.dataset.i18nHtml) {
+            el.innerHTML = translations[key][lang];
+          } else {
+            el.textContent = translations[key][lang];
+          }
+        }
+      });
+    }
+
+    // Inicializar en español al cargar
+    document.addEventListener('DOMContentLoaded', function() {
+      setLang('es');
+    });
+  </script>
+
+</body>
+</html>
