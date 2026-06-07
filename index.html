@@ -1267,8 +1267,27 @@
   <section id="inicio" id="hero" style="padding-top:68px;">
     <div id="hero">
 
-      <!-- Fondo -->
-      <div class="hero-bg"></div>
+      <!-- ╔══════════════════════════════════════════════════════╗
+           ║  FOTO HERO — Reemplaza "fotos/hero-bg.jpg"          ║
+           ║  Tamaño recomendado: 1920 × 1080 px mínimo          ║
+           ║  Temática: barra/escenario oscuro con luz neón       ║
+           ╚══════════════════════════════════════════════════════╝ -->
+      <div class="hero-bg" style="
+        background-image: url('fotos/hero-bg.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      "></div>
+      <!-- Overlay oscuro encima de la foto para que el texto se lea bien -->
+      <div style="
+        position:absolute; inset:0; z-index:1;
+        background: linear-gradient(
+          120deg,
+          rgba(0,0,0,0.82) 0%,
+          rgba(0,0,0,0.55) 50%,
+          rgba(0,8,30,0.65) 100%
+        );
+      "></div>
 
       <!-- Icono decorativo de copa (SVG inline) -->
       <div class="hero-visual">
@@ -1340,12 +1359,23 @@
 
         <!-- Tarjeta 1 -->
         <article class="evento-card">
-          <div class="evento-card-top">
+          <div class="evento-card-top" style="padding:0; height:160px;">
+            <!-- ╔══════════════════════════════════════════════════╗
+                 ║  FOTO EVENTO 1 — Reemplaza "fotos/evento-1.jpg" ║
+                 ║  Tamaño recomendado: 600 × 320 px               ║
+                 ║  Temática: banda de rock/blues en escenario      ║
+                 ╚══════════════════════════════════════════════════╝ -->
+            <img
+              src="fotos/evento-1.jpg"
+              alt="The Midnight Groove"
+              style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"
+              onerror="this.style.display='none'; this.parentElement.style.background='radial-gradient(ellipse at 50% 80%, rgba(0,60,140,0.6) 0%, #0a0f1a 70%)';"
+            />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%);"></div>
             <div class="evento-date-badge">
               <span class="day">14</span>
               <span class="month" data-i18n="ev1-month">Jun</span>
             </div>
-            <span class="evento-icon">🎸</span>
             <span class="evento-genre-badge">Rock · Blues</span>
           </div>
           <div class="evento-card-body">
@@ -1360,12 +1390,23 @@
 
         <!-- Tarjeta 2 -->
         <article class="evento-card">
-          <div class="evento-card-top">
+          <div class="evento-card-top" style="padding:0; height:160px;">
+            <!-- ╔══════════════════════════════════════════════════╗
+                 ║  FOTO EVENTO 2 — Reemplaza "fotos/evento-2.jpg" ║
+                 ║  Tamaño recomendado: 600 × 320 px               ║
+                 ║  Temática: cuarteto de jazz, luz íntima          ║
+                 ╚══════════════════════════════════════════════════╝ -->
+            <img
+              src="fotos/evento-2.jpg"
+              alt="Elena Voss Quartet"
+              style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"
+              onerror="this.style.display='none'; this.parentElement.style.background='radial-gradient(ellipse at 50% 80%, rgba(0,40,100,0.7) 0%, #080c14 70%)';"
+            />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%);"></div>
             <div class="evento-date-badge">
               <span class="day">21</span>
               <span class="month" data-i18n="ev2-month">Jun</span>
             </div>
-            <span class="evento-icon">🎷</span>
             <span class="evento-genre-badge">Jazz · Soul</span>
           </div>
           <div class="evento-card-body">
@@ -1380,12 +1421,23 @@
 
         <!-- Tarjeta 3 -->
         <article class="evento-card">
-          <div class="evento-card-top">
+          <div class="evento-card-top" style="padding:0; height:160px;">
+            <!-- ╔══════════════════════════════════════════════════╗
+                 ║  FOTO EVENTO 3 — Reemplaza "fotos/evento-3.jpg" ║
+                 ║  Tamaño recomendado: 600 × 320 px               ║
+                 ║  Temática: electrónica en vivo, visuales neón    ║
+                 ╚══════════════════════════════════════════════════╝ -->
+            <img
+              src="fotos/evento-3.jpg"
+              alt="Nyx & The Machines"
+              style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;"
+              onerror="this.style.display='none'; this.parentElement.style.background='radial-gradient(ellipse at 50% 80%, rgba(0,80,160,0.55) 0%, #050912 70%)';"
+            />
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%);"></div>
             <div class="evento-date-badge">
               <span class="day">28</span>
               <span class="month" data-i18n="ev3-month">Jun</span>
             </div>
-            <span class="evento-icon">🎹</span>
             <span class="evento-genre-badge">Electro · Ambient</span>
           </div>
           <div class="evento-card-body">
@@ -1423,7 +1475,10 @@
           <div class="cocktail-list">
 
             <div class="cocktail-item">
-              <span class="cocktail-emoji">🍸</span>
+              <!-- FOTO: fotos/cocktail-1.jpg — Tamaño: 120×120 px — Temática: Negroni oscuro con twist naranja -->
+              <img src="fotos/cocktail-1.jpg" alt="Otitanuz Negroni"
+                style="width:52px; height:52px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);"
+                onerror="this.outerHTML='<span class=\'cocktail-emoji\'>🍸</span>';" />
               <div class="cocktail-info">
                 <div class="cocktail-name" data-i18n="coc-n1">Otitanuz Negroni</div>
                 <div class="cocktail-desc" data-i18n="coc-d1">Gin de autor, Campari, vermut negro con twist de naranja ahumada</div>
@@ -1432,7 +1487,10 @@
             </div>
 
             <div class="cocktail-item">
-              <span class="cocktail-emoji">🍹</span>
+              <!-- FOTO: fotos/cocktail-2.jpg — Tamaño: 120×120 px — Temática: sour con espuma y limón -->
+              <img src="fotos/cocktail-2.jpg" alt="Barcelona Sour"
+                style="width:52px; height:52px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);"
+                onerror="this.outerHTML='<span class=\'cocktail-emoji\'>🍹</span>';" />
               <div class="cocktail-info">
                 <div class="cocktail-name" data-i18n="coc-n2">Barcelona Sour</div>
                 <div class="cocktail-desc" data-i18n="coc-d2">Whisky escocés, zumo de limón, sirope de cava y clara de huevo</div>
@@ -1441,7 +1499,10 @@
             </div>
 
             <div class="cocktail-item">
-              <span class="cocktail-emoji">🥂</span>
+              <!-- FOTO: fotos/cocktail-3.jpg — Tamaño: 120×120 px — Temática: copa azul con hielo y tónica -->
+              <img src="fotos/cocktail-3.jpg" alt="Midnight Blue"
+                style="width:52px; height:52px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);"
+                onerror="this.outerHTML='<span class=\'cocktail-emoji\'>🥂</span>';" />
               <div class="cocktail-info">
                 <div class="cocktail-name" data-i18n="coc-n3">Midnight Blue</div>
                 <div class="cocktail-desc" data-i18n="coc-d3">Vodka infusionado, licor de violeta, agua tónica premium y hierbas mediterráneas</div>
@@ -1450,7 +1511,10 @@
             </div>
 
             <div class="cocktail-item">
-              <span class="cocktail-emoji">🍋</span>
+              <!-- FOTO: fotos/cocktail-4.jpg — Tamaño: 120×120 px — Temática: spritz naranja con romero -->
+              <img src="fotos/cocktail-4.jpg" alt="Gaudí Spritz"
+                style="width:52px; height:52px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);"
+                onerror="this.outerHTML='<span class=\'cocktail-emoji\'>🍋</span>';" />
               <div class="cocktail-info">
                 <div class="cocktail-name" data-i18n="coc-n4">Gaudí Spritz</div>
                 <div class="cocktail-desc" data-i18n="coc-d4">Aperol, cava catalán, soda, naranja fresca y romero</div>
@@ -1461,19 +1525,42 @@
           </div><!-- /cocktail-list -->
 
           <div style="margin-top:2rem;">
-            <a href="#cocteleria" class="btn-ghost" data-i18n="coc-menu">Ver carta completa</a>
+            <!-- Enlace directo a la carta en PDF — se abre en pestaña nueva -->
+            <a href="carta-cocteleria.pdf" target="_blank" rel="noopener" class="btn-ghost" data-i18n="coc-menu">
+              Ver carta completa
+            </a>
           </div>
         </div><!-- /cocteleria-left -->
 
-        <!-- Derecha: panel visual -->
+        <!-- Derecha: panel visual con foto real -->
         <div class="cocteleria-right">
-          <div class="cocteleria-visual">
-            <span class="big-icon">🍸</span>
-            <div class="vis-title" data-i18n="coc-vis-title">Craft Cocktails</div>
-            <p data-i18n="coc-vis-p">
-              Ingredientes premium, técnicas precisas y una pasión genuina por la mixología. Cada noche, una nueva creación especial de temporada.
-            </p>
-            <div class="neon-ring" data-i18n="coc-ring">Barra Libre</div>
+          <div class="cocteleria-visual" style="padding:0; overflow:hidden; min-height:420px; display:flex; flex-direction:column;">
+
+            <!-- ╔══════════════════════════════════════════════════════╗
+                 ║  FOTO COCTELERÍA — Reemplaza "fotos/cocktail.jpg"   ║
+                 ║  Tamaño recomendado: 700 × 900 px                   ║
+                 ║  Temática: cóctel iluminado sobre fondo oscuro       ║
+                 ╚══════════════════════════════════════════════════════╝ -->
+            <div style="position:relative; flex:1; min-height:280px;">
+              <img
+                src="fotos/cocktail.jpg"
+                alt="Craft Cocktail Otitanuz"
+                style="width:100%; height:100%; object-fit:cover; object-position:center; display:block; border-radius:6px 6px 0 0;"
+                onerror="this.style.display='none'; this.parentElement.style.background='radial-gradient(ellipse at 50% 40%, rgba(0,100,220,0.18) 0%, #111620 80%)';"
+              />
+              <!-- Overlay gradiente encima de la foto -->
+              <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%); border-radius:6px 6px 0 0;"></div>
+            </div>
+
+            <!-- Texto sobre el panel -->
+            <div style="padding:1.8rem 2rem; position:relative; background:var(--card);">
+              <div class="vis-title" data-i18n="coc-vis-title" style="margin-bottom:0.5rem;">Craft Cocktails</div>
+              <p data-i18n="coc-vis-p">
+                Ingredientes premium, técnicas precisas y una pasión genuina por la mixología. Cada noche, una nueva creación especial de temporada.
+              </p>
+              <div class="neon-ring" data-i18n="coc-ring" style="margin:1.2rem auto 0;">Barra Libre</div>
+            </div>
+
           </div>
         </div>
 
