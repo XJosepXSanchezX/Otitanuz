@@ -1201,20 +1201,30 @@
     /* ============================================================
        RESPONSIVE — MÓVIL
     ============================================================ */
+
+    /* Botón "Ver Carta" en el nav desktop */
+    .nav-carta-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--neon);
+      border: 1px solid rgba(0,123,255,0.45); border-radius: 20px;
+      padding: 0.28rem 0.85rem;
+      transition: background 0.25s, box-shadow 0.25s;
+    }
+    .nav-carta-btn:hover {
+      background: rgba(0,123,255,0.12);
+      box-shadow: 0 0 10px rgba(0,123,255,0.3);
+      color: var(--neon);
+    }
+    .nav-carta-btn::after { display: none !important; }
+
     @media (max-width: 900px) {
       /* Ocultar nav desktop, mostrar hamburger */
-      .nav-links {
-        display: none;
-      }
-
-      .hamburger {
-        display: flex;
-      }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
 
       /* Hero */
-      .hero-visual {
-        display: none;
-      }
+      .hero-visual { display: none; }
 
       /* Eventos: scroll horizontal en móvil */
       .eventos-grid {
@@ -1224,50 +1234,83 @@
         padding-bottom: 1rem;
         -webkit-overflow-scrolling: touch;
       }
-
-      .evento-card {
-        scroll-snap-align: start;
-      }
-
-      /* Coctelería */
-      .cocteleria-inner {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
+      .evento-card { scroll-snap-align: start; }
 
       /* Footer */
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
 
       /* Eventos header */
-      .eventos-header {
-        flex-direction: column;
-        align-items: flex-start;
+      .eventos-header { flex-direction: column; align-items: flex-start; }
+
+      /* Footer bottom */
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      /* Mundial hero — columna única en móvil */
+      #futbol .container > div {
+        grid-template-columns: 1fr !important;
+      }
+      #futbol .container > div > div:last-child {
+        display: none !important; /* ocultar trofeo en móvil */
+      }
+      #futbol h2 { font-size: clamp(2.2rem, 10vw, 3.5rem) !important; }
+
+      /* Reseñas — una columna en tablet */
+      #resenas .container > div:last-child {
+        grid-template-columns: 1fr 1fr !important;
       }
 
-      /* Sección fútbol */
-      .futbol-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-      }
+      /* Filtros mundial */
+      #wc-filters { justify-content: flex-start !important; }
     }
 
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: 3rem;
+    @media (max-width: 600px) {
+      /* Hero principal */
+      .hero-title { font-size: 2.8rem; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+
+      /* Eventos: 1 tarjeta visible a la vez */
+      .eventos-grid {
+        grid-template-columns: repeat(3, calc(100vw - 10%));
       }
 
-      .hero-actions {
-        flex-direction: column;
-        align-items: flex-start;
+      /* Mundial hero */
+      #futbol { padding: 3rem 0 !important; }
+      #futbol ul { gap: 0.6rem !important; }
+      #futbol ul li { font-size: 0.82rem !important; }
+
+      /* Botones hero del mundial */
+      #futbol .container > div > div:first-child > div:last-child {
+        flex-direction: column !important;
+        align-items: stretch !important;
       }
+      #futbol .container > div > div:first-child > div:last-child a {
+        text-align: center;
+        justify-content: center !important;
+      }
+
+      /* Reseñas — una columna en móvil */
+      #resenas .container > div:last-child {
+        grid-template-columns: 1fr !important;
+      }
+      #resenas .container > div:first-child {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1.5rem !important;
+      }
+
+      /* Footer grid */
+      .footer-grid { gap: 1.5rem; }
+
+      /* Nav inner en móvil */
+      .nav-inner { height: 58px; }
+
+      /* Menú móvil ocupa bien el espacio */
+      .mobile-menu a { padding: 1rem 0; font-size: 0.9rem; }
+    }
+
+    @media (max-width: 380px) {
+      .hero-title { font-size: 2.2rem; }
+      .nav-logo .logo-main { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -1289,22 +1332,12 @@
       <ul class="nav-links">
         <li><a href="#inicio" data-i18n="nav-inicio">Inicio</a></li>
         <li><a href="#eventos" data-i18n="nav-eventos">Cartelera Musical</a></li>
-        <li><a href="#cocteleria" data-i18n="nav-cocteleria">Coctelería</a></li>
         <!-- Enlace directo a la carta PDF -->
         <li>
-          <a href="carta-cocteleria.pdf" style="
-            display:inline-flex; align-items:center; gap:0.35rem;
-            font-size:0.75rem; font-weight:700; letter-spacing:0.1em;
-            text-transform:uppercase; color:var(--neon);
-            border:1px solid rgba(0,123,255,0.45); border-radius:20px;
-            padding:0.28rem 0.85rem;
-            transition:background 0.25s, box-shadow 0.25s;
-          " onmouseover="this.style.background='rgba(0,123,255,0.12)';this.style.boxShadow='0 0 10px rgba(0,123,255,0.3)'"
-             onmouseout="this.style.background='transparent';this.style.boxShadow='none'">
+          <a href="carta-cocteleria.pdf" class="nav-carta-btn" data-i18n="nav-carta">
             🍸 Ver Carta
           </a>
         </li>
-        <li><a href="#contacto" data-i18n="nav-contacto">Contacto</a></li>
         <!-- Pestaña secundaria: Fútbol -->
         <li class="nav-dropdown">
           <a href="partidos.html" data-i18n="nav-futbol">
@@ -1385,8 +1418,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <a href="#inicio" data-i18n="mob-inicio" onclick="closeMobile()">Inicio</a>
       <a href="#eventos" data-i18n="mob-eventos" onclick="closeMobile()">Cartelera Musical</a>
-      <a href="#cocteleria" data-i18n="mob-cocteleria" onclick="closeMobile()">Coctelería</a>
-      <a href="#contacto" data-i18n="mob-contacto" onclick="closeMobile()">Contacto</a>
+      <a href="carta-cocteleria.pdf" data-i18n="mob-carta" onclick="closeMobile()" style="color:var(--neon);">🍸 Ver Carta</a>
       <a href="partidos.html" data-i18n="mob-futbol" class="football-link" onclick="closeMobile()">⚽ Fútbol en Vivo</a>
     </div>
   </header>
@@ -1588,117 +1620,10 @@
 
 
   <!-- ============================================================
-       NUESTRA BARRA — Coctelería
+       ZONA DEPORTIVA — Hero Mundial 2026
   ============================================================ -->
-  <section id="cocteleria">
-    <div class="container">
-      <div class="cocteleria-inner">
 
         <!-- Izquierda: listado de cócteles -->
-        <div class="cocteleria-left">
-          <span class="section-label" data-i18n="coc-label">Nuestra Barra</span>
-          <h2 class="section-title"><span data-i18n="coc-title1">Coctelería</span><br /><span data-i18n="coc-title2">de Autor</span></h2>
-          <div class="neon-divider"></div>
-          <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.5rem; line-height:1.8;" data-i18n="coc-intro">
-            Cada copa es una historia. Nuestros bartenders fusionan técnica clásica con ingredientes locales para crear experiencias líquidas únicas.
-          </p>
-
-          <div class="cocktail-list">
-
-            <div class="cocktail-item">
-              <!-- FOTO: fotos/cocktail-1.jpg — Tamaño: 120×120 px — Temática: Negroni oscuro con twist naranja -->
-              <img src="fotos/cocktail-1.jpg" alt="Otitanuz Negroni"
-                style="width:52px; height:52px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);"
-                onerror="this.outerHTML='<span class=\'cocktail-emoji\'>🍸</span>';" />
-              <div class="cocktail-info">
-                <div class="cocktail-name" data-i18n="coc-n1">Otitanuz Negroni</div>
-                <div class="cocktail-desc" data-i18n="coc-d1">Gin de autor, Campari, vermut negro con twist de naranja ahumada</div>
-              </div>
-              <span class="cocktail-price">12€</span>
-            </div>
-
-            <div class="cocktail-item">
-              <!-- FOTO: fotos/cocktail-2.jpg — Tamaño: 120×120 px — Temática: sour con espuma y limón -->
-              <img src="fotos/cocktail-2.jpg" alt="Barcelona Sour"
-                style="width:52px; height:52px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);"
-                onerror="this.outerHTML='<span class=\'cocktail-emoji\'>🍹</span>';" />
-              <div class="cocktail-info">
-                <div class="cocktail-name" data-i18n="coc-n2">Barcelona Sour</div>
-                <div class="cocktail-desc" data-i18n="coc-d2">Whisky escocés, zumo de limón, sirope de cava y clara de huevo</div>
-              </div>
-              <span class="cocktail-price">11€</span>
-            </div>
-
-            <div class="cocktail-item">
-              <!-- FOTO: fotos/cocktail-3.jpg — Tamaño: 120×120 px — Temática: copa azul con hielo y tónica -->
-              <img src="fotos/cocktail-3.jpg" alt="Midnight Blue"
-                style="width:52px; height:52px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);"
-                onerror="this.outerHTML='<span class=\'cocktail-emoji\'>🥂</span>';" />
-              <div class="cocktail-info">
-                <div class="cocktail-name" data-i18n="coc-n3">Midnight Blue</div>
-                <div class="cocktail-desc" data-i18n="coc-d3">Vodka infusionado, licor de violeta, agua tónica premium y hierbas mediterráneas</div>
-              </div>
-              <span class="cocktail-price">13€</span>
-            </div>
-
-            <div class="cocktail-item">
-              <!-- FOTO: fotos/cocktail-4.jpg — Tamaño: 120×120 px — Temática: spritz naranja con romero -->
-              <img src="fotos/cocktail-4.jpg" alt="Gaudí Spritz"
-                style="width:52px; height:52px; border-radius:8px; object-fit:cover; flex-shrink:0; border:1px solid var(--border);"
-                onerror="this.outerHTML='<span class=\'cocktail-emoji\'>🍋</span>';" />
-              <div class="cocktail-info">
-                <div class="cocktail-name" data-i18n="coc-n4">Gaudí Spritz</div>
-                <div class="cocktail-desc" data-i18n="coc-d4">Aperol, cava catalán, soda, naranja fresca y romero</div>
-              </div>
-              <span class="cocktail-price">10€</span>
-            </div>
-
-          </div><!-- /cocktail-list -->
-
-          <div style="margin-top:2rem;">
-            <!-- Enlace directo a la carta en PDF — misma pestaña -->
-            <a href="carta-cocteleria.pdf" class="btn-ghost" data-i18n="coc-menu">
-              Ver carta completa
-            </a>
-          </div>
-        </div><!-- /cocteleria-left -->
-
-        <!-- Derecha: panel visual con foto real -->
-        <div class="cocteleria-right">
-          <div class="cocteleria-visual" style="padding:0; overflow:hidden; min-height:420px; display:flex; flex-direction:column;">
-
-            <!-- ╔══════════════════════════════════════════════════════╗
-                 ║  FOTO COCTELERÍA — Reemplaza "fotos/cocktail.jpg"   ║
-                 ║  Tamaño recomendado: 700 × 900 px                   ║
-                 ║  Temática: cóctel iluminado sobre fondo oscuro       ║
-                 ╚══════════════════════════════════════════════════════╝ -->
-            <div style="position:relative; flex:1; min-height:280px;">
-              <img
-                src="fotos/cocktail.jpg"
-                alt="Craft Cocktail Otitanuz"
-                style="width:100%; height:100%; object-fit:cover; object-position:center; display:block; border-radius:6px 6px 0 0;"
-                onerror="this.style.display='none'; this.parentElement.style.background='radial-gradient(ellipse at 50% 40%, rgba(0,100,220,0.18) 0%, #111620 80%)';"
-              />
-              <!-- Overlay gradiente encima de la foto -->
-              <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%); border-radius:6px 6px 0 0;"></div>
-            </div>
-
-            <!-- Texto sobre el panel -->
-            <div style="padding:1.8rem 2rem; position:relative; background:var(--card);">
-              <div class="vis-title" data-i18n="coc-vis-title" style="margin-bottom:0.5rem;">Craft Cocktails</div>
-              <p data-i18n="coc-vis-p">
-                Ingredientes premium, técnicas precisas y una pasión genuina por la mixología. Cada noche, una nueva creación especial de temporada.
-              </p>
-              <div class="neon-ring" data-i18n="coc-ring" style="margin:1.2rem auto 0;">Barra Libre</div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
 
   <!-- ============================================================
        ZONA DEPORTIVA — Hero Mundial 2026
@@ -1732,7 +1657,7 @@
             border-radius:30px; padding:0.35rem 1rem; margin-bottom:1.8rem;
           ">
             <span style="font-size:0.85rem;">⚽</span>
-            <span style="font-size:0.68rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:#ffc800;">FIFA World Cup 2026™</span>
+            <span style="font-size:0.68rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:#ffc800;" data-i18n="fut-badge">FIFA World Cup 2026™</span>
           </div>
 
           <!-- Título -->
@@ -1742,18 +1667,18 @@
             line-height:0.95; letter-spacing:0.04em;
             margin-bottom:1.2rem;
           ">
-            <span style="color:#ffffff; display:block;">TU CUARTEL</span>
-            <span style="color:#ffc800; display:block;">GENERAL DEL</span>
-            <span style="color:#007bff; display:block;">MUNDIAL 2026</span>
+            <span style="color:#ffffff; display:block;" data-i18n="fut-h-line1">TU CUARTEL</span>
+            <span style="color:#ffc800; display:block;" data-i18n="fut-h-line2">GENERAL DEL</span>
+            <span style="color:#007bff; display:block;" data-i18n="fut-h-line3">MUNDIAL 2026</span>
           </h2>
 
           <!-- Sedes y fechas -->
-          <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.2em; color:#6b7a8d; text-transform:uppercase; margin-bottom:1.8rem;">
+          <p style="font-size:0.75rem; font-weight:700; letter-spacing:0.2em; color:#6b7a8d; text-transform:uppercase; margin-bottom:1.8rem;" data-i18n="fut-sedes">
             🇺🇸 USA &nbsp;·&nbsp; 🇨🇦 CANADÁ &nbsp;·&nbsp; 🇲🇽 MÉXICO &nbsp;·&nbsp; 11 JUN — 19 JUL
           </p>
 
           <!-- Descripción -->
-          <p style="font-size:0.95rem; color:#9aa5b4; line-height:1.8; max-width:500px; margin-bottom:2rem;">
+          <p style="font-size:0.95rem; color:#9aa5b4; line-height:1.8; max-width:500px; margin-bottom:2rem;" data-i18n="fut-desc2">
             48 selecciones, 104 partidos, una sola sede en Barcelona para vivirlos: la nuestra. Reserva tu mesa con antelación para los partidos clave de España y los duelos imperdibles.
           </p>
 
@@ -1761,19 +1686,19 @@
           <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem; margin-bottom:2.5rem;">
             <li style="display:flex; align-items:center; gap:0.75rem; font-size:0.9rem; color:#c8d0db;">
               <span style="width:22px; height:22px; border-radius:50%; background:#ffc800; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:900; color:#000; flex-shrink:0;">✓</span>
-              Todos los partidos de España en directo
+              <span data-i18n="fut-check1">Todos los partidos de España en directo</span>
             </li>
             <li style="display:flex; align-items:center; gap:0.75rem; font-size:0.9rem; color:#c8d0db;">
               <span style="width:22px; height:22px; border-radius:50%; background:#ffc800; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:900; color:#000; flex-shrink:0;">✓</span>
-              Pantalla principal reservada para octavos, cuartos y final
+              <span data-i18n="fut-check2">Pantalla principal reservada para octavos, cuartos y final</span>
             </li>
             <li style="display:flex; align-items:center; gap:0.75rem; font-size:0.9rem; color:#c8d0db;">
               <span style="width:22px; height:22px; border-radius:50%; background:#ffc800; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:900; color:#000; flex-shrink:0;">✓</span>
-              Menús especiales y promociones de cerveza
+              <span data-i18n="fut-check3">Menús especiales y promociones de cerveza</span>
             </li>
             <li style="display:flex; align-items:center; gap:0.75rem; font-size:0.9rem; color:#c8d0db;">
               <span style="width:22px; height:22px; border-radius:50%; background:#ffc800; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:900; color:#000; flex-shrink:0;">✓</span>
-              Ambiente internacional y multilingüe
+              <span data-i18n="fut-check4">Ambiente internacional y multilingüe</span>
             </li>
           </ul>
 
@@ -1787,7 +1712,8 @@
               border:2px solid #007bff; border-radius:6px;
               transition:background 0.3s, box-shadow 0.3s, transform 0.3s;
             " onmouseover="this.style.background='transparent';this.style.color='#007bff';this.style.boxShadow='0 0 20px rgba(0,123,255,0.4)'"
-               onmouseout="this.style.background='#007bff';this.style.color='#fff';this.style.boxShadow='none'">
+               onmouseout="this.style.background='#007bff';this.style.color='#fff';this.style.boxShadow='none'"
+               data-i18n="fut-reservar">
               RESERVAR PARA EL MUNDIAL →
             </a>
             <a href="partidos.html" style="
@@ -1798,7 +1724,8 @@
               border:2px solid rgba(255,200,0,0.5); border-radius:6px;
               transition:background 0.3s, border-color 0.3s, box-shadow 0.3s;
             " onmouseover="this.style.background='rgba(255,200,0,0.1)';this.style.borderColor='#ffc800';this.style.boxShadow='0 0 16px rgba(255,200,0,0.25)'"
-               onmouseout="this.style.background='transparent';this.style.borderColor='rgba(255,200,0,0.5)';this.style.boxShadow='none'">
+               onmouseout="this.style.background='transparent';this.style.borderColor='rgba(255,200,0,0.5)';this.style.boxShadow='none'"
+               data-i18n="fut-ver-fechas">
               VER FECHAS DE PARTIDOS 📅
             </a>
           </div>
@@ -1871,15 +1798,15 @@
 
       <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; margin-bottom:3rem; flex-wrap:wrap;">
         <div>
-          <span class="section-label">Google Reviews</span>
-          <h2 class="section-title">Lo que dicen<br/>nuestros clientes</h2>
+          <span class="section-label" data-i18n="rev-label">Google Reviews</span>
+          <h2 class="section-title" data-i18n="rev-title">Lo que dicen<br/>nuestros clientes</h2>
           <div class="neon-divider"></div>
           <!-- Rating global -->
           <div style="display:flex; align-items:center; gap:0.75rem; margin-top:-0.5rem;">
             <span style="font-family:var(--font-display); font-size:3rem; color:var(--white); line-height:1;">4.8</span>
             <div>
               <div style="color:#fbbf24; font-size:1.1rem; letter-spacing:0.1em;">★★★★★</div>
-              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.15rem;">Basado en reseñas de Google</div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.15rem;" data-i18n="rev-based">Basado en reseñas de Google</div>
             </div>
           </div>
         </div>
@@ -1895,7 +1822,8 @@
              transition:background 0.25s, border-color 0.25s, box-shadow 0.25s;
            "
            onmouseover="this.style.background='rgba(251,191,36,0.1)';this.style.borderColor='#fbbf24';this.style.boxShadow='0 0 14px rgba(251,191,36,0.2)'"
-           onmouseout="this.style.background='transparent';this.style.borderColor='rgba(251,191,36,0.45)';this.style.boxShadow='none'">
+           onmouseout="this.style.background='transparent';this.style.borderColor='rgba(251,191,36,0.45)';this.style.boxShadow='none'"
+           data-i18n="rev-leave">
           ⭐ Dejar reseña en Google
         </a>
       </div>
@@ -1987,8 +1915,8 @@
         <div style="background:linear-gradient(135deg, var(--card) 0%, rgba(0,123,255,0.06) 100%); border:1px dashed rgba(0,123,255,0.3); border-radius:var(--radius); padding:1.4rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; text-align:center; min-height:180px;">
           <div style="font-size:2rem;">⭐</div>
           <div>
-            <div style="font-size:0.82rem; font-weight:700; color:var(--white); margin-bottom:0.3rem;">¿Has visitado Otitanuz?</div>
-            <div style="font-size:0.75rem; color:var(--text-muted);">Tu opinión nos ayuda a crecer</div>
+            <div style="font-size:0.82rem; font-weight:700; color:var(--white); margin-bottom:0.3rem;" data-i18n="rev-cta-title">¿Has visitado Otitanuz?</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);" data-i18n="rev-cta-sub">Tu opinión nos ayuda a crecer</div>
           </div>
           <a href="https://share.google/mo12YP3CQAepQzOeU" target="_blank" rel="noopener"
              style="
@@ -2000,7 +1928,8 @@
                transition:background 0.25s, color 0.25s;
              "
              onmouseover="this.style.background='transparent';this.style.color='#007bff'"
-             onmouseout="this.style.background='#007bff';this.style.color='#fff'">
+             onmouseout="this.style.background='#007bff';this.style.color='#fff'"
+             data-i18n="rev-write">
             Escribir reseña →
           </a>
         </div>
@@ -2130,7 +2059,7 @@
       // ── NAV ──────────────────────────────────────────────────
       'nav-inicio':        { es: 'Inicio',            en: 'Home',            fr: 'Accueil'         },
       'nav-eventos':       { es: 'Cartelera Musical', en: 'Live Music',      fr: 'Programmation'   },
-      'nav-cocteleria':    { es: 'Coctelería',        en: 'Cocktails',       fr: 'Cocktails'        },
+      'nav-carta':         { es: '🍸 Ver Carta',      en: '🍸 Our Menu',     fr: '🍸 Carte'        },
       'nav-contacto':      { es: 'Contacto',          en: 'Contact',         fr: 'Contact'          },
       'nav-futbol':        { es: '⚽ Fútbol ▾',       en: '⚽ Football ▾',   fr: '⚽ Football ▾'   },
       'nav-dd-1':          { es: 'Zona Deportiva',    en: 'Sports Zone',     fr: 'Zone Sportive'   },
@@ -2140,8 +2069,7 @@
       // ── MOBILE MENU ──────────────────────────────────────────
       'mob-inicio':        { es: 'Inicio',            en: 'Home',            fr: 'Accueil'         },
       'mob-eventos':       { es: 'Cartelera Musical', en: 'Live Music',      fr: 'Programmation'   },
-      'mob-cocteleria':    { es: 'Coctelería',        en: 'Cocktails',       fr: 'Cocktails'        },
-      'mob-contacto':      { es: 'Contacto',          en: 'Contact',         fr: 'Contact'          },
+      'mob-carta':         { es: '🍸 Ver Carta',      en: '🍸 Our Menu',     fr: '🍸 Carte'        },
       'mob-futbol':        { es: '⚽ Fútbol en Vivo', en: '⚽ Live Football', fr: '⚽ Football Live' },
 
       // ── HERO ─────────────────────────────────────────────────
@@ -2210,12 +2138,45 @@
                              fr: 'Ingrédients premium, techniques précises et une vraie passion pour la mixologie. Chaque soir, une nouvelle création spéciale de saison.' },
       'coc-ring':          { es: 'Barra Libre',       en: 'Open Bar',        fr: 'Bar Libre'        },
 
-      // ── FÚTBOL ───────────────────────────────────────────────
+      // ── FÚTBOL / MUNDIAL ─────────────────────────────────────
       'fut-title':         { es: 'Zona Deportiva',    en: 'Sports Zone',     fr: 'Zone Sportive'    },
       'fut-desc':          { es: 'Consulta los próximos partidos y disfrútalos en nuestras pantallas con el ambiente del Otitanuz.',
                              en: 'Check upcoming matches and enjoy them on our screens with the Otitanuz vibe.',
                              fr: 'Consultez les prochains matchs et profitez-en sur nos écrans dans l\'ambiance Otitanuz.' },
-      'fut-btn':           { es: 'Ver próximos partidos →', en: 'See upcoming matches →', fr: 'Voir les prochains matchs →'},
+      'fut-btn':           { es: 'Ver calendario Mundial 2026 ↓', en: 'See World Cup 2026 schedule ↓', fr: 'Voir le calendrier Coupe du Monde 2026 ↓'},
+      'fut-badge':         { es: '⚽ FIFA World Cup 2026™',  en: '⚽ FIFA World Cup 2026™',  fr: '⚽ Coupe du Monde FIFA 2026™' },
+      'fut-h-line1':       { es: 'TU CUARTEL',        en: 'YOUR WORLD CUP', fr: 'TON QUARTIER'      },
+      'fut-h-line2':       { es: 'GENERAL DEL',       en: 'HEADQUARTERS',   fr: 'GÉNÉRAL DE LA'     },
+      'fut-h-line3':       { es: 'MUNDIAL 2026',      en: 'WORLD CUP 2026', fr: 'COUPE DU MONDE 2026'},
+      'fut-sedes':         { es: '🇺🇸 USA · 🇨🇦 CANADÁ · 🇲🇽 MÉXICO · 11 JUN — 19 JUL',
+                             en: '🇺🇸 USA · 🇨🇦 CANADA · 🇲🇽 MEXICO · 11 JUN — 19 JUL',
+                             fr: '🇺🇸 USA · 🇨🇦 CANADA · 🇲🇽 MEXIQUE · 11 JUIN — 19 JUIL' },
+      'fut-desc2':         { es: '48 selecciones, 104 partidos, una sola sede en Barcelona para vivirlos: la nuestra. Reserva tu mesa con antelación para los partidos clave de España y los duelos imperdibles.',
+                             en: '48 teams, 104 matches, one venue in Barcelona to experience them: ours. Book your table in advance for Spain\'s key matches and the must-see clashes.',
+                             fr: '48 équipes, 104 matchs, un seul lieu à Barcelone pour les vivre: le nôtre. Réservez votre table à l\'avance pour les matchs clés de l\'Espagne.' },
+      'fut-check1':        { es: 'Todos los partidos de España en directo',
+                             en: 'All Spain matches live',
+                             fr: 'Tous les matchs d\'Espagne en direct' },
+      'fut-check2':        { es: 'Pantalla principal reservada para octavos, cuartos y final',
+                             en: 'Main screen reserved for last 16, quarters and final',
+                             fr: 'Écran principal réservé pour les 8es, quarts et finale' },
+      'fut-check3':        { es: 'Menús especiales y promociones de cerveza',
+                             en: 'Special menus and beer promotions',
+                             fr: 'Menus spéciaux et promotions bières' },
+      'fut-check4':        { es: 'Ambiente internacional y multilingüe',
+                             en: 'International and multilingual atmosphere',
+                             fr: 'Ambiance internationale et multilingue' },
+      'fut-reservar':      { es: 'RESERVAR PARA EL MUNDIAL →', en: 'BOOK FOR THE WORLD CUP →', fr: 'RÉSERVER POUR LA COUPE DU MONDE →'},
+      'fut-ver-fechas':    { es: 'VER FECHAS DE PARTIDOS 📅',  en: 'SEE MATCH SCHEDULE 📅',    fr: 'VOIR LE CALENDRIER 📅' },
+
+      // ── RESEÑAS ───────────────────────────────────────────────
+      'rev-label':         { es: 'Google Reviews',    en: 'Google Reviews',  fr: 'Avis Google'      },
+      'rev-title':         { es: 'Lo que dicen\nnuestros clientes', en: 'What our\ncustomers say', fr: 'Ce que disent\nnos clients' },
+      'rev-based':         { es: 'Basado en reseñas de Google', en: 'Based on Google reviews', fr: 'Basé sur les avis Google' },
+      'rev-leave':         { es: '⭐ Dejar reseña en Google', en: '⭐ Leave a Google review', fr: '⭐ Laisser un avis Google' },
+      'rev-cta-title':     { es: '¿Has visitado Otitanuz?',   en: 'Have you visited Otitanuz?', fr: 'Vous avez visité Otitanuz ?' },
+      'rev-cta-sub':       { es: 'Tu opinión nos ayuda a crecer', en: 'Your review helps us grow', fr: 'Votre avis nous aide à grandir' },
+      'rev-write':         { es: 'Escribir reseña →',         en: 'Write a review →',          fr: 'Écrire un avis →' },
 
       // ── FOOTER ───────────────────────────────────────────────
       'foot-desc':         { es: 'Un espacio donde la música en vivo, la coctelería artesanal y la noche barcelonesa convergen en una sola experiencia.',
