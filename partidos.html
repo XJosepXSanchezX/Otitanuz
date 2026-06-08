@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partidos Mundial 2026 — OTITANUZ BAR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:      #000000;
+      --deep:       #080b10;
+      --panel:      #0d1117;
+      --card:       #111620;
+      --border:     #1e2a3a;
+      --neon:       #007bff;
+      --neon-soft:  rgba(0,123,255,0.15);
+      --gold:       #ffc800;
+      --gold-soft:  rgba(255,200,0,0.12);
+      --text:       #e8eaf0;
+      --muted:      #6b7a8d;
+      --dim:        #3a4556;
+      --font-d:     'Bebas Neue', sans-serif;
+      --font-b:     'Lato', sans-serif;
+      --radius:     6px;
+      --tr:         0.25s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text); font-family: var(--font-b); font-weight: 300; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .topbar-logo { font-family: var(--font-d); font-size: 1.5rem; letter-spacing: 0.15em; color: #fff; }
+    .topbar-logo span { color: var(--neon); }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 20px;
+      padding: 0.35rem 1rem;
+      transition: color var(--tr), border-color var(--tr);
+    }
+    .back-btn:hover { color: var(--neon); border-color: var(--neon); }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      position: relative; overflow: hidden;
+      background: radial-gradient(ellipse 80% 70% at 70% 50%, rgba(20,16,0,0.95) 0%, #0a0800 60%, #000 100%);
+      padding: 4rem 5% 3.5rem;
+      border-bottom: 1px solid rgba(255,200,0,0.12);
+    }
+    .hero-bg-num {
+      position: absolute; right: -1%; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-d); font-size: clamp(140px,20vw,300px);
+      color: rgba(255,200,0,0.04); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold-soft); border: 1px solid rgba(255,200,0,0.35);
+      border-radius: 30px; padding: 0.3rem 1rem; margin-bottom: 1.2rem;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .hero-title {
+      font-family: var(--font-d);
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      line-height: 0.95; letter-spacing: 0.04em; margin-bottom: 0.8rem;
+    }
+    .hero-title .w { color: #fff; display: block; }
+    .hero-title .g { color: var(--gold); display: block; }
+    .hero-title .b { color: var(--neon); display: block; }
+    .hero-meta {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+      color: var(--muted); text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .hero-desc { font-size: 0.88rem; color: #9aa5b4; line-height: 1.8; max-width: 480px; }
+
+    /* Trofeo */
+    .trophy-wrap {
+      position: relative; width: 180px; height: 180px; flex-shrink: 0;
+    }
+    .trophy-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid rgba(255,200,0,0.2);
+      box-shadow: 0 0 30px rgba(255,200,0,0.07);
+    }
+    .trophy-star {
+      position: absolute; color: var(--gold); font-size: 0.7rem; opacity: 0.6;
+    }
+
+    /* ── CONTROLES ───────────────────────────────────────────── */
+    .controls {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 5%;
+      position: sticky; top: 62px; z-index: 90;
+    }
+    .controls-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .controls-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted); white-space: nowrap;
+    }
+    .filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .f-btn {
+      padding: 0.3rem 0.85rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; background: transparent;
+      color: var(--muted); border: 1px solid var(--border);
+      border-radius: 20px; cursor: pointer;
+      transition: all var(--tr);
+    }
+    .f-btn:hover { color: var(--neon); border-color: var(--neon); background: var(--neon-soft); }
+    .f-btn.active { color: var(--neon); border-color: var(--neon); background: var(--neon-soft); }
+    .f-btn.gold { color: var(--gold); border-color: rgba(255,200,0,0.4); }
+    .f-btn.gold:hover, .f-btn.gold.active { background: var(--gold-soft); border-color: var(--gold); color: var(--gold); }
+
+    /* Contador de resultados */
+    #match-count {
+      margin-left: auto; font-size: 0.72rem; color: var(--muted);
+      white-space: nowrap;
+    }
+    #match-count span { color: var(--neon); font-weight: 700; }
+
+    /* ── GRID DE PARTIDOS ────────────────────────────────────── */
+    .matches-section {
+      max-width: 1200px; margin: 0 auto;
+      padding: 2.5rem 5% 5rem;
+    }
+
+    /* Separador de grupo */
+    .group-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin: 2.5rem 0 1.2rem;
+    }
+    .group-header:first-child { margin-top: 0; }
+    .group-title {
+      font-family: var(--font-d); font-size: 1.4rem;
+      letter-spacing: 0.1em; color: var(--text);
+      white-space: nowrap;
+    }
+    .group-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+    .group-count {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--dim);
+    }
+
+    /* Grid */
+    .matches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.85rem;
+    }
+
+    /* Tarjeta */
+    .mc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: border-color var(--tr), transform var(--tr), box-shadow var(--tr);
+      cursor: default;
+    }
+    .mc:hover {
+      border-color: rgba(0,123,255,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+    .mc.spain {
+      border-color: rgba(255,200,0,0.28);
+      background: linear-gradient(135deg, var(--card) 55%, rgba(255,200,0,0.03) 100%);
+    }
+    .mc.spain:hover {
+      border-color: rgba(255,200,0,0.6);
+      box-shadow: 0 6px 22px rgba(255,200,0,0.1);
+    }
+    .mc.final-card {
+      border-color: rgba(255,200,0,0.4);
+      background: linear-gradient(135deg, var(--card) 40%, rgba(255,200,0,0.06) 100%);
+    }
+    .mc.hidden { display: none; }
+
+    /* Badge */
+    .mc-badge {
+      display: inline-block; align-self: flex-start;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; padding: 0.18rem 0.55rem;
+      border-radius: 20px; border: 1px solid rgba(0,123,255,0.3);
+      color: var(--neon); background: var(--neon-soft);
+    }
+    .mc-badge.gold { color: var(--gold); background: var(--gold-soft); border-color: rgba(255,200,0,0.35); }
+    .mc-badge.orange { color: #ffa000; background: rgba(255,160,0,0.12); border-color: rgba(255,160,0,0.35); }
+
+    /* Fecha */
+    .mc-date {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+      color: var(--text);
+    }
+
+    /* Equipos */
+    .mc-teams {
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .mc-team {
+      font-size: 0.86rem; color: var(--muted); flex: 1; line-height: 1.3;
+    }
+    .mc-team.bold { color: #fff; font-weight: 700; }
+    .mc-team.right { text-align: right; }
+    .mc-vs {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--dim); background: var(--border);
+      padding: 0.12rem 0.35rem; border-radius: 3px; flex-shrink: 0;
+    }
+
+    /* Sede */
+    .mc-venue {
+      font-size: 0.68rem; color: var(--dim);
+      border-top: 1px solid var(--border); padding-top: 0.45rem;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero-inner { flex-direction: column; }
+      .trophy-wrap { display: none; }
+      .controls-inner { flex-direction: column; align-items: flex-start; }
+      #match-count { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOPBAR ─────────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-logo">OTITANUZ <span>BAR</span></div>
+    <a href="otitanuz-bar.html" class="back-btn">← Volver al inicio</a>
+  </header>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg-num">26</div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">⚽ FIFA World Cup 2026™</div>
+        <h1 class="hero-title">
+          <span class="w">CALENDARIO</span>
+          <span class="g">MUNDIAL</span>
+          <span class="b">2026</span>
+        </h1>
+        <p class="hero-meta">🇺🇸 USA &nbsp;·&nbsp; 🇨🇦 CANADÁ &nbsp;·&nbsp; 🇲🇽 MÉXICO &nbsp;·&nbsp; 11 JUN — 19 JUL 2026</p>
+        <p class="hero-desc">104 partidos · 48 selecciones · Horarios en hora de España peninsular (CEST). Vívelos todos en OTITANUZ BAR.</p>
+      </div>
+      <!-- Trofeo -->
+      <div class="trophy-wrap">
+        <div class="trophy-ring"></div>
+        <div class="trophy-star" style="top:14px;left:24px;">★</div>
+        <div class="trophy-star" style="top:14px;right:24px;">★</div>
+        <div class="trophy-star" style="bottom:24px;left:14px;opacity:.5;">★</div>
+        <div class="trophy-star" style="bottom:24px;right:14px;opacity:.5;">★</div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <svg viewBox="0 0 100 110" width="96" height="96" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffd700"/>
+                <stop offset="50%" stop-color="#ffb300"/>
+                <stop offset="100%" stop-color="#e65c00"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="50" cy="30" rx="28" ry="28" fill="url(#g1)" opacity=".95"/>
+            <path d="M22 18 Q20 50 35 62 L50 68 L65 62 Q80 50 78 18 Z" fill="url(#g1)"/>
+            <ellipse cx="40" cy="28" rx="8" ry="5" fill="rgba(255,255,255,0.22)" transform="rotate(-20,40,28)"/>
+            <circle cx="50" cy="6" r="7" fill="#fff" stroke="#222" stroke-width=".5"/>
+            <path d="M44 4 Q50 2 56 4 Q54 8 50 9 Q46 8 44 4Z" fill="#222" opacity=".7"/>
+            <path d="M22 35 Q8 35 10 50 Q12 62 22 58" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
+            <path d="M78 35 Q92 35 90 50 Q88 62 78 58" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round"/>
+            <rect x="44" y="68" width="12" height="14" rx="3" fill="#e6a800"/>
+            <rect x="32" y="82" width="36" height="7" rx="3" fill="url(#g1)"/>
+            <rect x="36" y="89" width="28" height="4" rx="2" fill="#cc8800"/>
+            <text x="50" y="102" text-anchor="middle" font-family="Bebas Neue,sans-serif" font-size="9" fill="#007bff" letter-spacing="1">2026</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTROLES / FILTROS ───────────────────────────────── -->
+  <div class="controls">
+    <div class="controls-inner">
+      <span class="controls-label">Filtrar:</span>
+      <div class="filters">
+        <button class="f-btn active" data-filter="all">Todos</button>
+        <button class="f-btn gold" data-filter="spain">🇪🇸 España</button>
+        <button class="f-btn" data-filter="A">Grupo A</button>
+        <button class="f-btn" data-filter="B">Grupo B</button>
+        <button class="f-btn" data-filter="C">Grupo C</button>
+        <button class="f-btn" data-filter="D">Grupo D</button>
+        <button class="f-btn" data-filter="E">Grupo E</button>
+        <button class="f-btn" data-filter="F">Grupo F</button>
+        <button class="f-btn" data-filter="G">Grupo G</button>
+        <button class="f-btn" data-filter="H">Grupo H</button>
+        <button class="f-btn" data-filter="I">Grupo I</button>
+        <button class="f-btn" data-filter="J">Grupo J</button>
+        <button class="f-btn" data-filter="K">Grupo K</button>
+        <button class="f-btn" data-filter="L">Grupo L</button>
+        <button class="f-btn" data-filter="elim">⚡ Eliminatorias</button>
+      </div>
+      <span id="match-count"><span id="cnt">—</span> partidos</span>
+    </div>
+  </div>
+
+  <!-- ── PARTIDOS ──────────────────────────────────────────── -->
+  <main class="matches-section">
+
+    <!-- ══════════ FASE DE GRUPOS ══════════ -->
+
+    <!-- GRUPO A -->
+    <div class="group-header" data-gh="A">
+      <span class="group-title">Grupo A</span>
+      <div class="group-line"></div>
+      <span class="group-count">6 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="A">
+        <span class="mc-badge">Grupo A</span>
+        <div class="mc-date">Jue 11 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇲🇽 México</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇿🇦 Sudáfrica</span>
+        </div>
+        <div class="mc-venue">📍 Est. Azteca, Ciudad de México</div>
+      </div>
+      <div class="mc" data-group="A">
+        <span class="mc-badge">Grupo A</span>
+        <div class="mc-date">Vie 12 Jun · 04:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇰🇷 Corea del Sur</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇿 Rep. Checa</span>
+        </div>
+        <div class="mc-venue">📍 Est. Akron, Zapopan</div>
+      </div>
+      <div class="mc" data-group="A">
+        <span class="mc-badge">Grupo A</span>
+        <div class="mc-date">Mié 18 Jun · 18:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇨🇿 Rep. Checa</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇿🇦 Sudáfrica</span>
+        </div>
+        <div class="mc-venue">📍 Mercedes-Benz, Atlanta</div>
+      </div>
+      <div class="mc" data-group="A">
+        <span class="mc-badge">Grupo A</span>
+        <div class="mc-date">Jue 19 Jun · 03:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇲🇽 México</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇰🇷 Corea del Sur</span>
+        </div>
+        <div class="mc-venue">📍 Est. Akron, Zapopan</div>
+      </div>
+      <div class="mc" data-group="A">
+        <span class="mc-badge">Grupo A</span>
+        <div class="mc-date">Mié 25 Jun · 03:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇨🇿 Rep. Checa</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇲🇽 México</span>
+        </div>
+        <div class="mc-venue">📍 Est. Azteca, Ciudad de México</div>
+      </div>
+      <div class="mc" data-group="A">
+        <span class="mc-badge">Grupo A</span>
+        <div class="mc-date">Mié 25 Jun · 03:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇿🇦 Sudáfrica</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇰🇷 Corea del Sur</span>
+        </div>
+        <div class="mc-venue">📍 Est. BBVA, Guadalupe</div>
+      </div>
+    </div>
+
+    <!-- GRUPO B -->
+    <div class="group-header" data-gh="B">
+      <span class="group-title">Grupo B</span>
+      <div class="group-line"></div>
+      <span class="group-count">6 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="B">
+        <span class="mc-badge">Grupo B</span>
+        <div class="mc-date">Jue 12 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇨🇦 Canadá</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇧🇦 Bosnia</span>
+        </div>
+        <div class="mc-venue">📍 BMO Field, Toronto</div>
+      </div>
+      <div class="mc" data-group="B">
+        <span class="mc-badge">Grupo B</span>
+        <div class="mc-date">Vie 13 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇶🇦 Catar</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇭 Suiza</span>
+        </div>
+        <div class="mc-venue">📍 Levi's Stadium, Santa Clara</div>
+      </div>
+      <div class="mc" data-group="B">
+        <span class="mc-badge">Grupo B</span>
+        <div class="mc-date">Mié 18 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇨🇭 Suiza</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇧🇦 Bosnia</span>
+        </div>
+        <div class="mc-venue">📍 SoFi Stadium, Los Ángeles</div>
+      </div>
+      <div class="mc" data-group="B">
+        <span class="mc-badge">Grupo B</span>
+        <div class="mc-date">Jue 19 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇨🇦 Canadá</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇶🇦 Catar</span>
+        </div>
+        <div class="mc-venue">📍 BC Place, Vancouver</div>
+      </div>
+      <div class="mc" data-group="B">
+        <span class="mc-badge">Grupo B</span>
+        <div class="mc-date">Mar 24 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇨🇭 Suiza</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇦 Canadá</span>
+        </div>
+        <div class="mc-venue">📍 BC Place, Vancouver</div>
+      </div>
+      <div class="mc" data-group="B">
+        <span class="mc-badge">Grupo B</span>
+        <div class="mc-date">Mar 24 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇧🇦 Bosnia</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇶🇦 Catar</span>
+        </div>
+        <div class="mc-venue">📍 Lumen Field, Seattle</div>
+      </div>
+    </div>
+
+    <!-- GRUPO C -->
+    <div class="group-header" data-gh="C">
+      <span class="group-title">Grupo C</span>
+      <div class="group-line"></div>
+      <span class="group-count">6 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="C">
+        <span class="mc-badge">Grupo C</span>
+        <div class="mc-date">Dom 14 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇧🇷 Brasil</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇲🇦 Marruecos</span>
+        </div>
+        <div class="mc-venue">📍 MetLife, Nueva Jersey</div>
+      </div>
+      <div class="mc" data-group="C">
+        <span class="mc-badge">Grupo C</span>
+        <div class="mc-date">Dom 14 Jun · 03:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇭🇹 Haití</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia</span>
+        </div>
+        <div class="mc-venue">📍 Gillette Stadium, Boston</div>
+      </div>
+      <div class="mc" data-group="C">
+        <span class="mc-badge">Grupo C</span>
+        <div class="mc-date">Vie 20 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇧🇷 Brasil</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇭🇹 Haití</span>
+        </div>
+        <div class="mc-venue">📍 Gillette Stadium, Boston</div>
+      </div>
+      <div class="mc" data-group="C">
+        <span class="mc-badge">Grupo C</span>
+        <div class="mc-date">Vie 20 Jun · 03:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇲🇦 Marruecos</span>
+        </div>
+        <div class="mc-venue">📍 Lincoln Financial, Filadelfia</div>
+      </div>
+      <div class="mc" data-group="C">
+        <span class="mc-badge">Grupo C</span>
+        <div class="mc-date">Mié 25 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇧🇷 Brasil</span>
+        </div>
+        <div class="mc-venue">📍 Hard Rock, Miami</div>
+      </div>
+      <div class="mc" data-group="C">
+        <span class="mc-badge">Grupo C</span>
+        <div class="mc-date">Mié 25 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇲🇦 Marruecos</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇭🇹 Haití</span>
+        </div>
+        <div class="mc-venue">📍 Mercedes-Benz, Atlanta</div>
+      </div>
+    </div>
+
+    <!-- GRUPO D -->
+    <div class="group-header" data-gh="D">
+      <span class="group-title">Grupo D</span>
+      <div class="group-line"></div>
+      <span class="group-count">5 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="D">
+        <span class="mc-badge">Grupo D</span>
+        <div class="mc-date">Vie 13 Jun · 03:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇺🇸 EE.UU</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇵🇾 Paraguay</span>
+        </div>
+        <div class="mc-venue">📍 SoFi Stadium, Los Ángeles</div>
+      </div>
+      <div class="mc" data-group="D">
+        <span class="mc-badge">Grupo D</span>
+        <div class="mc-date">Vie 13 Jun · 06:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇦🇺 Australia</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇹🇷 Turquía</span>
+        </div>
+        <div class="mc-venue">📍 BC Place, Vancouver</div>
+      </div>
+      <div class="mc" data-group="D">
+        <span class="mc-badge">Grupo D</span>
+        <div class="mc-date">Jue 19 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇺🇸 EE.UU</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇦🇺 Australia</span>
+        </div>
+        <div class="mc-venue">📍 Lumen Field, Seattle</div>
+      </div>
+      <div class="mc" data-group="D">
+        <span class="mc-badge">Grupo D</span>
+        <div class="mc-date">Vie 26 Jun · 04:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇹🇷 Turquía</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇺🇸 EE.UU</span>
+        </div>
+        <div class="mc-venue">📍 SoFi Stadium, Los Ángeles</div>
+      </div>
+      <div class="mc" data-group="D">
+        <span class="mc-badge">Grupo D</span>
+        <div class="mc-date">Vie 26 Jun · 04:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇵🇾 Paraguay</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇦🇺 Australia</span>
+        </div>
+        <div class="mc-venue">📍 Levi's Stadium, Santa Clara</div>
+      </div>
+    </div>
+
+    <!-- GRUPO E -->
+    <div class="group-header" data-gh="E">
+      <span class="group-title">Grupo E</span>
+      <div class="group-line"></div>
+      <span class="group-count">4 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="E">
+        <span class="mc-badge">Grupo E</span>
+        <div class="mc-date">Dom 14 Jun · 19:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇩🇪 Alemania</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇼 Curazao</span>
+        </div>
+        <div class="mc-venue">📍 NRG Stadium, Houston</div>
+      </div>
+      <div class="mc" data-group="E">
+        <span class="mc-badge">Grupo E</span>
+        <div class="mc-date">Dom 15 Jun · 01:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇨🇮 Costa de Marfil</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇪🇨 Ecuador</span>
+        </div>
+        <div class="mc-venue">📍 Lincoln Financial, Filadelfia</div>
+      </div>
+      <div class="mc" data-group="E">
+        <span class="mc-badge">Grupo E</span>
+        <div class="mc-date">Sáb 21 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇩🇪 Alemania</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇮 Costa de Marfil</span>
+        </div>
+        <div class="mc-venue">📍 BMO Field, Toronto</div>
+      </div>
+      <div class="mc" data-group="E">
+        <span class="mc-badge">Grupo E</span>
+        <div class="mc-date">Jue 26 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇪🇨 Ecuador</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇩🇪 Alemania</span>
+        </div>
+        <div class="mc-venue">📍 MetLife, Nueva Jersey</div>
+      </div>
+    </div>
+
+    <!-- GRUPO F -->
+    <div class="group-header" data-gh="F">
+      <span class="group-title">Grupo F</span>
+      <div class="group-line"></div>
+      <span class="group-count">5 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="F">
+        <span class="mc-badge">Grupo F</span>
+        <div class="mc-date">Dom 15 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇳🇱 Países Bajos</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇯🇵 Japón</span>
+        </div>
+        <div class="mc-venue">📍 AT&T Stadium, Dallas</div>
+      </div>
+      <div class="mc" data-group="F">
+        <span class="mc-badge">Grupo F</span>
+        <div class="mc-date">Dom 15 Jun · 04:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇸🇪 Suecia</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇹🇳 Túnez</span>
+        </div>
+        <div class="mc-venue">📍 Est. BBVA, Guadalupe</div>
+      </div>
+      <div class="mc" data-group="F">
+        <span class="mc-badge">Grupo F</span>
+        <div class="mc-date">Vie 20 Jun · 19:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇳🇱 Países Bajos</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇸🇪 Suecia</span>
+        </div>
+        <div class="mc-venue">📍 NRG Stadium, Houston</div>
+      </div>
+      <div class="mc" data-group="F">
+        <span class="mc-badge">Grupo F</span>
+        <div class="mc-date">Jue 26 Jun · 01:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇹🇳 Túnez</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇳🇱 Países Bajos</span>
+        </div>
+        <div class="mc-venue">📍 Arrowhead, Kansas City</div>
+      </div>
+      <div class="mc" data-group="F">
+        <span class="mc-badge">Grupo F</span>
+        <div class="mc-date">Jue 26 Jun · 01:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇯🇵 Japón</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇸🇪 Suecia</span>
+        </div>
+        <div class="mc-venue">📍 AT&T Stadium, Dallas</div>
+      </div>
+    </div>
+
+    <!-- GRUPO G -->
+    <div class="group-header" data-gh="G">
+      <span class="group-title">Grupo G</span>
+      <div class="group-line"></div>
+      <span class="group-count">4 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="G">
+        <span class="mc-badge">Grupo G</span>
+        <div class="mc-date">Dom 15 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇧🇪 Bélgica</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇪🇬 Egipto</span>
+        </div>
+        <div class="mc-venue">📍 Lumen Field, Seattle</div>
+      </div>
+      <div class="mc" data-group="G">
+        <span class="mc-badge">Grupo G</span>
+        <div class="mc-date">Lun 16 Jun · 03:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇮🇷 Irán</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇳🇿 Nueva Zelanda</span>
+        </div>
+        <div class="mc-venue">📍 SoFi Stadium, Los Ángeles</div>
+      </div>
+      <div class="mc" data-group="G">
+        <span class="mc-badge">Grupo G</span>
+        <div class="mc-date">Dom 22 Jun · 01:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇧🇪 Bélgica</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇮🇷 Irán</span>
+        </div>
+        <div class="mc-venue">📍 SoFi Stadium, Los Ángeles</div>
+      </div>
+      <div class="mc" data-group="G">
+        <span class="mc-badge">Grupo G</span>
+        <div class="mc-date">Vie 27 Jun · 05:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇳🇿 Nueva Zelanda</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇧🇪 Bélgica</span>
+        </div>
+        <div class="mc-venue">📍 Lumen Field, Seattle</div>
+      </div>
+    </div>
+
+    <!-- GRUPO H — ESPAÑA ⭐ -->
+    <div class="group-header" data-gh="H" style="border-left:3px solid var(--gold); padding-left:0.8rem;">
+      <span class="group-title" style="color:var(--gold);">Grupo H &nbsp;🇪🇸 España</span>
+      <div class="group-line"></div>
+      <span class="group-count" style="color:var(--gold);">5 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc spain" data-group="H" data-spain="1">
+        <span class="mc-badge gold">🇪🇸 ESPAÑA · Grupo H</span>
+        <div class="mc-date">Dom 15 Jun · 18:00</div>
+        <div class="mc-teams">
+          <span class="mc-team bold">🇪🇸 España</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇻 Cabo Verde</span>
+        </div>
+        <div class="mc-venue">📍 Mercedes-Benz, Atlanta</div>
+      </div>
+      <div class="mc" data-group="H">
+        <span class="mc-badge">Grupo H</span>
+        <div class="mc-date">Lun 16 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇸🇦 Arabia Saudí</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇺🇾 Uruguay</span>
+        </div>
+        <div class="mc-venue">📍 Hard Rock, Miami</div>
+      </div>
+      <div class="mc spain" data-group="H" data-spain="1">
+        <span class="mc-badge gold">🇪🇸 ESPAÑA · Grupo H</span>
+        <div class="mc-date">Sáb 21 Jun · 18:00</div>
+        <div class="mc-teams">
+          <span class="mc-team bold">🇪🇸 España</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇸🇦 Arabia Saudí</span>
+        </div>
+        <div class="mc-venue">📍 Mercedes-Benz, Atlanta</div>
+      </div>
+      <div class="mc" data-group="H">
+        <span class="mc-badge">Grupo H</span>
+        <div class="mc-date">Dom 22 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇺🇾 Uruguay</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇻 Cabo Verde</span>
+        </div>
+        <div class="mc-venue">📍 Hard Rock, Miami</div>
+      </div>
+      <div class="mc spain" data-group="H" data-spain="1">
+        <span class="mc-badge gold">🇪🇸 ESPAÑA · Grupo H</span>
+        <div class="mc-date">Vie 27 Jun · 02:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇺🇾 Uruguay</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team bold right">🇪🇸 España</span>
+        </div>
+        <div class="mc-venue">📍 Est. Akron, Zapopan</div>
+      </div>
+    </div>
+
+    <!-- GRUPO I -->
+    <div class="group-header" data-gh="I">
+      <span class="group-title">Grupo I</span>
+      <div class="group-line"></div>
+      <span class="group-count">4 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="I">
+        <span class="mc-badge">Grupo I</span>
+        <div class="mc-date">Lun 16 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇫🇷 Francia</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇸🇳 Senegal</span>
+        </div>
+        <div class="mc-venue">📍 MetLife, Nueva Jersey</div>
+      </div>
+      <div class="mc" data-group="I">
+        <span class="mc-badge">Grupo I</span>
+        <div class="mc-date">Mar 17 Jun · 00:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇮🇶 Irak</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇳🇴 Noruega</span>
+        </div>
+        <div class="mc-venue">📍 Gillette Stadium, Boston</div>
+      </div>
+      <div class="mc" data-group="I">
+        <span class="mc-badge">Grupo I</span>
+        <div class="mc-date">Dom 22 Jun · 23:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇫🇷 Francia</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇮🇶 Irak</span>
+        </div>
+        <div class="mc-venue">📍 Lincoln Financial, Filadelfia</div>
+      </div>
+      <div class="mc" data-group="I">
+        <span class="mc-badge">Grupo I</span>
+        <div class="mc-date">Jue 26 Jun · 21:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇳🇴 Noruega</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇫🇷 Francia</span>
+        </div>
+        <div class="mc-venue">📍 Gillette Stadium, Boston</div>
+      </div>
+    </div>
+
+    <!-- GRUPO J -->
+    <div class="group-header" data-gh="J">
+      <span class="group-title">Grupo J</span>
+      <div class="group-line"></div>
+      <span class="group-count">4 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="J">
+        <span class="mc-badge">Grupo J</span>
+        <div class="mc-date">Mar 17 Jun · 03:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇦🇷 Argentina</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇩🇿 Argelia</span>
+        </div>
+        <div class="mc-venue">📍 Arrowhead, Kansas City</div>
+      </div>
+      <div class="mc" data-group="J">
+        <span class="mc-badge">Grupo J</span>
+        <div class="mc-date">Mar 17 Jun · 06:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇦🇹 Austria</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇯🇴 Jordania</span>
+        </div>
+        <div class="mc-venue">📍 Levi's Stadium, Santa Clara</div>
+      </div>
+      <div class="mc" data-group="J">
+        <span class="mc-badge">Grupo J</span>
+        <div class="mc-date">Dom 22 Jun · 19:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇦🇷 Argentina</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇦🇹 Austria</span>
+        </div>
+        <div class="mc-venue">📍 AT&T Stadium, Dallas</div>
+      </div>
+      <div class="mc" data-group="J">
+        <span class="mc-badge">Grupo J</span>
+        <div class="mc-date">Sáb 28 Jun · 04:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇯🇴 Jordania</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇦🇷 Argentina</span>
+        </div>
+        <div class="mc-venue">📍 Arrowhead, Kansas City</div>
+      </div>
+    </div>
+
+    <!-- GRUPO K -->
+    <div class="group-header" data-gh="K">
+      <span class="group-title">Grupo K</span>
+      <div class="group-line"></div>
+      <span class="group-count">4 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="K">
+        <span class="mc-badge">Grupo K</span>
+        <div class="mc-date">Mar 17 Jun · 19:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇵🇹 Portugal</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇩 RD Congo</span>
+        </div>
+        <div class="mc-venue">📍 NRG Stadium, Houston</div>
+      </div>
+      <div class="mc" data-group="K">
+        <span class="mc-badge">Grupo K</span>
+        <div class="mc-date">Mié 18 Jun · 04:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇺🇿 Uzbekistán</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇨🇴 Colombia</span>
+        </div>
+        <div class="mc-venue">📍 Est. Azteca, Ciudad de México</div>
+      </div>
+      <div class="mc" data-group="K">
+        <span class="mc-badge">Grupo K</span>
+        <div class="mc-date">Lun 23 Jun · 19:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇵🇹 Portugal</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇺🇿 Uzbekistán</span>
+        </div>
+        <div class="mc-venue">📍 NRG Stadium, Houston</div>
+      </div>
+      <div class="mc" data-group="K">
+        <span class="mc-badge">Grupo K</span>
+        <div class="mc-date">Sáb 28 Jun · 01:30</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇨🇴 Colombia</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇵🇹 Portugal</span>
+        </div>
+        <div class="mc-venue">📍 Hard Rock, Miami</div>
+      </div>
+    </div>
+
+    <!-- GRUPO L -->
+    <div class="group-header" data-gh="L">
+      <span class="group-title">Grupo L</span>
+      <div class="group-line"></div>
+      <span class="group-count">3 partidos</span>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="L">
+        <span class="mc-badge">Grupo L</span>
+        <div class="mc-date">Mar 17 Jun · 22:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇭🇷 Croacia</span>
+        </div>
+        <div class="mc-venue">📍 AT&T Stadium, Dallas</div>
+      </div>
+      <div class="mc" data-group="L">
+        <span class="mc-badge">Grupo L</span>
+        <div class="mc-date">Mié 18 Jun · 01:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🇬🇭 Ghana</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇵🇦 Panamá</span>
+        </div>
+        <div class="mc-venue">📍 BMO Field, Toronto</div>
+      </div>
+      <div class="mc" data-group="L">
+        <span class="mc-badge">Grupo L</span>
+        <div class="mc-date">Lun 23 Jun · 22:00</div>
+        <div class="mc-teams">
+          <span class="mc-team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</span>
+          <span class="mc-vs">VS</span>
+          <span class="mc-team right">🇬🇭 Ghana</span>
+        </div>
+        <div class="mc-venue">📍 Gillette Stadium, Boston</div>
+      </div>
+    </div>
+
+    <!-- ══════════ FASE ELIMINATORIA ══════════ -->
+    <div class="group-header" data-gh="elim" style="border-left:3px solid var(--neon); padding-left:0.8rem; margin-top:3.5rem;">
+      <span class="group-title" style="color:var(--neon);">⚡ Fase Eliminatoria</span>
+      <div class="group-line"></div>
+    </div>
+    <div class="matches-grid">
+      <div class="mc" data-group="elim">
+        <span class="mc-badge">⚡ Dieciseisavos</span>
+        <div class="mc-date">Jue 2 Jul — Dom 6 Jul</div>
+        <div class="mc-teams" style="justify-content:center;">
+          <span style="font-size:0.85rem; color:var(--muted);">16 partidos · 8 sedes</span>
+        </div>
+        <div class="mc-venue">📍 Varias sedes EE.UU, México y Canadá</div>
+      </div>
+      <div class="mc" data-group="elim">
+        <span class="mc-badge">⚡ Octavos de Final</span>
+        <div class="mc-date">Lun 6 Jul — Jue 10 Jul</div>
+        <div class="mc-teams" style="justify-content:center;">
+          <span style="font-size:0.85rem; color:var(--muted);">8 partidos</span>
+        </div>
+        <div class="mc-venue">📍 Dallas, Atlanta, Miami, Los Ángeles</div>
+      </div>
+      <div class="mc" data-group="elim">
+        <span class="mc-badge">⚡ Cuartos de Final</span>
+        <div class="mc-date">Vie 10 Jul — Lun 13 Jul</div>
+        <div class="mc-teams" style="justify-content:center;">
+          <span style="font-size:0.85rem; color:var(--muted);">4 partidos</span>
+        </div>
+        <div class="mc-venue">📍 Los Ángeles, Kansas City, Nueva York</div>
+      </div>
+      <div class="mc" data-group="elim">
+        <span class="mc-badge">⚡ Semifinales</span>
+        <div class="mc-date">Lun 14 Jul · Mar 15 Jul</div>
+        <div class="mc-teams" style="justify-content:center;">
+          <span style="font-size:0.85rem; color:var(--muted);">Dallas · Atlanta</span>
+        </div>
+        <div class="mc-venue">📍 AT&T Stadium · Mercedes-Benz</div>
+      </div>
+      <div class="mc" data-group="elim">
+        <span class="mc-badge orange">🥉 3er y 4º Puesto</span>
+        <div class="mc-date">Sáb 18 Jul · hora por confirmar</div>
+        <div class="mc-teams" style="justify-content:center;">
+          <span style="font-size:0.85rem; color:var(--muted);">Hard Rock Stadium</span>
+        </div>
+        <div class="mc-venue">📍 Miami Gardens, Florida</div>
+      </div>
+      <div class="mc final-card" data-group="elim">
+        <span class="mc-badge gold">🏆 GRAN FINAL</span>
+        <div class="mc-date" style="font-size:0.9rem; color:var(--gold); font-weight:700;">Dom 19 Jul 2026</div>
+        <div class="mc-teams" style="justify-content:center;">
+          <span style="font-size:1rem; color:var(--muted);">El mundo elige su campeón</span>
+        </div>
+        <div class="mc-venue" style="color:var(--gold);">📍 MetLife Stadium · Nueva Jersey</div>
+      </div>
+    </div>
+
+    <!-- CTA reserva -->
+    <div style="margin-top:4rem; text-align:center; padding:3rem; background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);">
+      <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.3em; text-transform:uppercase; color:var(--neon); margin-bottom:0.6rem;">OTITANUZ BAR · BARCELONA</p>
+      <h3 style="font-family:var(--font-d); font-size:2.2rem; letter-spacing:0.08em; color:#fff; margin-bottom:0.8rem;">RESERVA TU MESA PARA EL MUNDIAL</h3>
+      <p style="font-size:0.88rem; color:var(--muted); margin-bottom:2rem;">No te quedes sin sitio en los partidos clave. Escríbenos o llámanos.</p>
+      <a href="otitanuz-bar.html#contacto" style="
+        display:inline-block; padding:0.9rem 2.5rem;
+        background:var(--neon); color:#fff;
+        font-family:var(--font-b); font-size:0.8rem; font-weight:700;
+        letter-spacing:0.15em; text-transform:uppercase;
+        border:2px solid var(--neon); border-radius:6px;
+        transition:background 0.25s, color 0.25s, box-shadow 0.25s;
+      " onmouseover="this.style.background='transparent';this.style.color='#007bff';this.style.boxShadow='0 0 20px rgba(0,123,255,0.4)'"
+         onmouseout="this.style.background='#007bff';this.style.color='#fff';this.style.boxShadow='none'">
+        RESERVAR MESA →
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    // ── FILTROS ──────────────────────────────────────────────
+    const allCards = document.querySelectorAll('.mc');
+    const allHeaders = document.querySelectorAll('.group-header');
+    const countEl = document.getElementById('cnt');
+
+    function updateCount() {
+      const visible = document.querySelectorAll('.mc:not(.hidden)').length;
+      countEl.textContent = visible;
+    }
+
+    document.querySelectorAll('.f-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        allCards.forEach(function(card) {
+          if (filter === 'all') {
+            card.classList.remove('hidden');
+          } else if (filter === 'spain') {
+            card.classList.toggle('hidden', !card.dataset.spain);
+          } else {
+            card.classList.toggle('hidden', card.dataset.group !== filter);
+          }
+        });
+
+        // Ocultar cabeceras de grupos vacíos
+        allHeaders.forEach(function(gh) {
+          const g = gh.dataset.gh;
+          if (!g) return;
+          const sibling = gh.nextElementSibling;
+          if (!sibling) return;
+          const visible = sibling.querySelectorAll('.mc:not(.hidden)').length;
+          gh.style.display = visible === 0 ? 'none' : 'flex';
+          sibling.style.display = visible === 0 ? 'none' : 'grid';
+        });
+
+        updateCount();
+      });
+    });
+
+    // Inicializar contador
+    updateCount();
+  </script>
+
+</body>
+</html>
