@@ -1322,11 +1322,113 @@
   <header id="header">
     <nav class="container nav-inner">
 
-      <!-- Logotipo -->
-      <a href="#inicio" class="nav-logo">
-        <span class="logo-main">OTITANUZ</span>
-        <span class="logo-sub">Bar · Barcelona</span>
+      <!-- Logotipo con copa animada -->
+      <a href="#inicio" class="nav-logo" style="display:flex; flex-direction:row; align-items:center; gap:0.6rem;">
+
+        <!-- Copa animada -->
+        <div class="nav-copa" aria-hidden="true">
+          <svg viewBox="0 0 44 54" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="copag" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#007bff"/>
+                <stop offset="100%" stop-color="#00c6ff"/>
+              </linearGradient>
+              <!-- Clip para el líquido -->
+              <clipPath id="glassc">
+                <polygon points="4,4 40,4 28,34 16,34"/>
+              </clipPath>
+            </defs>
+
+            <!-- Brillos laterales -->
+            <line x1="10" y1="6" x2="7" y2="18" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="15" y1="5" x2="13" y2="13" stroke="rgba(255,255,255,0.12)" stroke-width="0.8" stroke-linecap="round"/>
+
+            <!-- Líquido animado dentro del vaso -->
+            <g clip-path="url(#glassc)">
+              <rect class="copa-liquid" x="0" y="18" width="44" height="20" fill="url(#copag)" opacity="0.7"/>
+              <!-- Ola del líquido -->
+              <path class="copa-wave" d="M0 18 Q11 15 22 18 Q33 21 44 18 L44 38 L0 38 Z" fill="url(#copag)" opacity="0.85"/>
+            </g>
+
+            <!-- Contorno de la copa (triángulo) -->
+            <polygon points="4,4 40,4 28,34 16,34" fill="none" stroke="url(#copag)" stroke-width="1.8" stroke-linejoin="round"/>
+
+            <!-- Pie de la copa -->
+            <line x1="22" y1="34" x2="22" y2="46" stroke="url(#copag)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="14" y1="46" x2="30" y2="46" stroke="url(#copag)" stroke-width="2" stroke-linecap="round"/>
+
+            <!-- Burbuja animada 1 -->
+            <circle class="copa-bub1" cx="17" cy="28" r="1.5" fill="rgba(255,255,255,0.55)"/>
+            <!-- Burbuja animada 2 -->
+            <circle class="copa-bub2" cx="24" cy="24" r="1" fill="rgba(255,255,255,0.4)"/>
+            <!-- Burbuja animada 3 -->
+            <circle class="copa-bub3" cx="20" cy="22" r="1.2" fill="rgba(255,255,255,0.35)"/>
+
+            <!-- Destellos superiores (brillo de la copa) -->
+            <circle class="copa-spark1" cx="10" cy="7" r="1.2" fill="#00c6ff" opacity="0"/>
+            <circle class="copa-spark2" cx="34" cy="9" r="0.9" fill="#007bff" opacity="0"/>
+          </svg>
+        </div>
+
+        <!-- Texto del logo -->
+        <div style="display:flex; flex-direction:column; line-height:1;">
+          <span class="logo-main">OTITANUZ</span>
+          <span class="logo-sub">Bar · Barcelona</span>
+        </div>
+
       </a>
+
+      <style>
+        /* Animación ola del líquido */
+        .copa-wave {
+          animation: copaWave 2.8s ease-in-out infinite;
+          transform-origin: center bottom;
+        }
+        @keyframes copaWave {
+          0%,100% { d: path("M0 18 Q11 15 22 18 Q33 21 44 18 L44 38 L0 38 Z"); }
+          50%      { d: path("M0 20 Q11 17 22 20 Q33 23 44 20 L44 38 L0 38 Z"); }
+        }
+
+        /* Burbujas que suben */
+        .copa-bub1 {
+          animation: copaRise 2.2s ease-in infinite;
+        }
+        .copa-bub2 {
+          animation: copaRise 2.8s ease-in 0.6s infinite;
+        }
+        .copa-bub3 {
+          animation: copaRise 3.2s ease-in 1.2s infinite;
+        }
+        @keyframes copaRise {
+          0%   { transform:translateY(0);   opacity:0.7; }
+          80%  { transform:translateY(-14px); opacity:0.2; }
+          100% { transform:translateY(-18px); opacity:0; }
+        }
+
+        /* Destellos intermitentes */
+        .copa-spark1 {
+          animation: copaSpark 3.5s ease-in-out 0.5s infinite;
+        }
+        .copa-spark2 {
+          animation: copaSpark 3.5s ease-in-out 1.8s infinite;
+        }
+        @keyframes copaSpark {
+          0%,100% { opacity:0; r:0.9; }
+          40%     { opacity:0.9; r:1.6; }
+          60%     { opacity:0; r:0.9; }
+        }
+
+        /* Balanceo suave de toda la copa al hacer hover en el logo */
+        .nav-logo:hover .nav-copa {
+          animation: copaTilt 0.5s ease-in-out;
+        }
+        @keyframes copaTilt {
+          0%  { transform:rotate(0deg); }
+          25% { transform:rotate(-8deg); }
+          75% { transform:rotate(8deg); }
+          100%{ transform:rotate(0deg); }
+        }
+      </style>
 
       <!-- Navegación Desktop -->
       <ul class="nav-links">
@@ -1485,7 +1587,7 @@
           </p>
 
           <div class="hero-actions">
-            <a href="#contacto" class="btn-primary" data-i18n="hero-cta1">Reservar Mesa</a>
+            <a href="https://wa.me/34693296828" class="btn-primary" data-i18n="hero-cta1">Reservar Mesa</a>
             <a href="#eventos" class="btn-ghost" data-i18n="hero-cta2">Ver Cartelera</a>
           </div>
 
@@ -1546,7 +1648,7 @@
             <p class="evento-desc" data-i18n="ev1-desc">Noche de blues eléctrico y rock sureño con la banda más aclamada del circuito barcelonés.</p>
             <div class="evento-meta">
               <span class="time">⏱ 22:00 h</span>
-              <a href="#contacto" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
+              <a href="https://wa.me/34693296828" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
             </div>
           </div>
         </article>
@@ -1577,7 +1679,7 @@
             <p class="evento-desc" data-i18n="ev2-desc">Jazz contemporáneo con influencias de soul y bossa nova. Una velada íntima y sofisticada.</p>
             <div class="evento-meta">
               <span class="time">⏱ 21:30 h</span>
-              <a href="#contacto" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
+              <a href="https://wa.me/34693296828" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
             </div>
           </div>
         </article>
@@ -1608,7 +1710,7 @@
             <p class="evento-desc" data-i18n="ev3-desc">Electrónica experimental en vivo: sintetizadores analógicos, percusión y visuales inmersivos.</p>
             <div class="evento-meta">
               <span class="time">⏱ 23:00 h</span>
-              <a href="#contacto" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
+              <a href="https://wa.me/34693296828" class="btn-ghost" style="font-size:0.7rem; padding:0.3rem 0.9rem;" data-i18n="ev-reservar">Reservar</a>
             </div>
           </div>
         </article>
@@ -1704,7 +1806,7 @@
 
           <!-- Botones -->
           <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
-            <a href="#contacto" style="
+            <a href="https://wa.me/34693296828" style="
               display:inline-flex; align-items:center; gap:0.5rem;
               padding:0.9rem 2rem; background:#007bff; color:#fff;
               font-family:'Lato',sans-serif; font-size:0.8rem; font-weight:700;
