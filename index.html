@@ -1107,6 +1107,41 @@
     }
 
     /* ============================================================
+       COPA ANIMADA — Logo nav
+    ============================================================ */
+    .copa-wave {
+      animation: copaWave 2.8s ease-in-out infinite;
+    }
+    @keyframes copaWave {
+      0%,100% { transform: translateY(0px); }
+      50%     { transform: translateY(2px); }
+    }
+    .copa-bub1 { animation: copaRise 2.2s ease-in infinite; }
+    .copa-bub2 { animation: copaRise 2.8s ease-in 0.6s infinite; }
+    .copa-bub3 { animation: copaRise 3.2s ease-in 1.2s infinite; }
+    @keyframes copaRise {
+      0%   { transform:translateY(0);    opacity:0.7; }
+      80%  { transform:translateY(-12px); opacity:0.15; }
+      100% { transform:translateY(-15px); opacity:0; }
+    }
+    .copa-spark1 { animation: copaSpark 3.5s ease-in-out 0.5s infinite; }
+    .copa-spark2 { animation: copaSpark 3.5s ease-in-out 1.8s infinite; }
+    @keyframes copaSpark {
+      0%,100% { opacity:0; }
+      40%     { opacity:0.9; }
+      60%     { opacity:0; }
+    }
+    .nav-logo:hover .nav-copa {
+      animation: copaTilt 0.5s ease-in-out;
+    }
+    @keyframes copaTilt {
+      0%  { transform:rotate(0deg); }
+      25% { transform:rotate(-8deg); }
+      75% { transform:rotate(8deg); }
+      100%{ transform:rotate(0deg); }
+    }
+
+    /* ============================================================
        SELECTOR DE IDIOMA — Banderas
     ============================================================ */
 
@@ -1326,8 +1361,8 @@
       <a href="#inicio" class="nav-logo" style="display:flex; flex-direction:row; align-items:center; gap:0.6rem;">
 
         <!-- Copa animada -->
-        <div class="nav-copa" aria-hidden="true">
-          <svg viewBox="0 0 44 54" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+        <div class="nav-copa" aria-hidden="true" style="flex-shrink:0; display:flex; align-items:center;">
+          <svg viewBox="0 0 44 54" width="32" height="40" xmlns="http://www.w3.org/2000/svg" style="display:block;">
             <defs>
               <linearGradient id="copag" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#007bff"/>
@@ -1377,58 +1412,6 @@
         </div>
 
       </a>
-
-      <style>
-        /* Animación ola del líquido */
-        .copa-wave {
-          animation: copaWave 2.8s ease-in-out infinite;
-          transform-origin: center bottom;
-        }
-        @keyframes copaWave {
-          0%,100% { d: path("M0 18 Q11 15 22 18 Q33 21 44 18 L44 38 L0 38 Z"); }
-          50%      { d: path("M0 20 Q11 17 22 20 Q33 23 44 20 L44 38 L0 38 Z"); }
-        }
-
-        /* Burbujas que suben */
-        .copa-bub1 {
-          animation: copaRise 2.2s ease-in infinite;
-        }
-        .copa-bub2 {
-          animation: copaRise 2.8s ease-in 0.6s infinite;
-        }
-        .copa-bub3 {
-          animation: copaRise 3.2s ease-in 1.2s infinite;
-        }
-        @keyframes copaRise {
-          0%   { transform:translateY(0);   opacity:0.7; }
-          80%  { transform:translateY(-14px); opacity:0.2; }
-          100% { transform:translateY(-18px); opacity:0; }
-        }
-
-        /* Destellos intermitentes */
-        .copa-spark1 {
-          animation: copaSpark 3.5s ease-in-out 0.5s infinite;
-        }
-        .copa-spark2 {
-          animation: copaSpark 3.5s ease-in-out 1.8s infinite;
-        }
-        @keyframes copaSpark {
-          0%,100% { opacity:0; r:0.9; }
-          40%     { opacity:0.9; r:1.6; }
-          60%     { opacity:0; r:0.9; }
-        }
-
-        /* Balanceo suave de toda la copa al hacer hover en el logo */
-        .nav-logo:hover .nav-copa {
-          animation: copaTilt 0.5s ease-in-out;
-        }
-        @keyframes copaTilt {
-          0%  { transform:rotate(0deg); }
-          25% { transform:rotate(-8deg); }
-          75% { transform:rotate(8deg); }
-          100%{ transform:rotate(0deg); }
-        }
-      </style>
 
       <!-- Navegación Desktop -->
       <ul class="nav-links">
@@ -1529,7 +1512,7 @@
   <!-- ============================================================
        HERO — Sección principal
   ============================================================ -->
-  <section id="inicio" id="hero" style="padding-top:68px;">
+  <section id="inicio" style="padding-top:68px;">
     <div id="hero">
 
       <!-- ╔══════════════════════════════════════════════════════╗
