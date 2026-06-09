@@ -56,10 +56,58 @@
     .nav-links li a:hover { color: var(--neon); }
     .nav-links li a:hover::after { width: 100%; }
 
-    /* Carta button */
-    .nav-carta-btn { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--neon); border: 1px solid rgba(0,123,255,0.45); border-radius: 20px; padding: 0.28rem 0.85rem; transition: background var(--tr), box-shadow var(--tr); }
+    /* ── VER CARTA — botón llamativo ── */
+    .nav-carta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff !important;
+      background: linear-gradient(90deg, #007bff 0%, #00c6ff 40%, #007bff 70%, #0040cc 100%);
+      background-size: 250% auto;
+      border: none;
+      border-radius: 20px;
+      padding: 0.4rem 1.1rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      animation: cartaBg 2s linear infinite, cartaPulse 1.6s ease-in-out infinite;
+    }
+    /* Barrido de brillo blanco */
+    .nav-carta-btn::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: -80%;
+      width: 55%;
+      height: 120%;
+      background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%);
+      animation: cartaSweep 1.8s ease-in-out infinite;
+      pointer-events: none;
+      border-radius: 20px;
+    }
     .nav-carta-btn::after { display: none !important; }
-    .nav-carta-btn:hover { background: rgba(0,123,255,0.12); box-shadow: 0 0 10px rgba(0,123,255,0.3); color: var(--neon); }
+    .nav-carta-btn:hover {
+      color: #fff !important;
+      transform: scale(1.1) translateY(-1px);
+      box-shadow: 0 0 28px rgba(0,123,255,0.9), 0 0 60px rgba(0,198,255,0.5) !important;
+    }
+    @keyframes cartaBg {
+      0%   { background-position: 0% center; }
+      100% { background-position: 250% center; }
+    }
+    @keyframes cartaPulse {
+      0%,100% { box-shadow: 0 0 10px rgba(0,123,255,0.6), 0 0 20px rgba(0,198,255,0.3); }
+      50%      { box-shadow: 0 0 22px rgba(0,123,255,1),   0 0 44px rgba(0,198,255,0.7); }
+    }
+    @keyframes cartaSweep {
+      0%        { left: -80%; }
+      55%, 100% { left: 130%; }
+    }
 
     /* Dropdown */
     .nav-dropdown { position: relative; }
@@ -273,7 +321,7 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#hero" data-i18n="mob-inicio" onclick="closeMobile()">Inicio</a>
     <a href="#eventos" data-i18n="mob-eventos" onclick="closeMobile()">Cartelera Musical</a>
-    <a href="carta-cocteleria.pdf" data-i18n="mob-carta" onclick="closeMobile()" style="color:var(--neon);">🍸 Ver Carta</a>
+    <a href="carta-cocteleria.pdf" data-i18n="mob-carta" onclick="closeMobile()" style="background:linear-gradient(135deg,#007bff,#00c6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900;animation:cartaGlow 2.5s ease-in-out infinite;">🍸 Ver Carta</a>
     <a href="partidos.html" data-i18n="mob-futbol" class="football-link" onclick="closeMobile()">⚽ Fútbol en Vivo</a>
   </div>
 </header>
