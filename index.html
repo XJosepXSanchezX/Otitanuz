@@ -109,17 +109,51 @@
       55%, 100% { left: 130%; }
     }
 
-    /* Dropdown */
-    .nav-dropdown { position: relative; }
-    .nav-dropdown > a { display: flex; align-items: center; gap: 0.3rem; font-size: 0.75rem !important; color: var(--muted) !important; border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: 20px; transition: border-color var(--tr), color var(--tr) !important; }
+    /* Dropdown — fútbol en verde */
+    .nav-dropdown > a {
+      display: flex; align-items: center; gap: 0.3rem;
+      font-size: 0.72rem !important; font-weight: 900 !important;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #fff !important;
+      background: linear-gradient(90deg, #16a34a 0%, #22c55e 40%, #16a34a 70%, #15803d 100%);
+      background-size: 250% auto;
+      border: none !important;
+      padding: 0.4rem 1.1rem; border-radius: 20px;
+      position: relative; overflow: hidden;
+      animation: futBg 2.2s linear infinite, futPulse 1.6s ease-in-out infinite;
+      transition: transform 0.2s !important;
+    }
+    .nav-dropdown > a::before {
+      content: ''; position: absolute; top: -10%; left: -80%;
+      width: 55%; height: 120%;
+      background: linear-gradient(110deg,transparent 0%,rgba(255,255,255,0.55) 50%,transparent 100%);
+      animation: cartaSweep 2s ease-in-out infinite;
+      pointer-events: none; border-radius: 20px;
+    }
+    .nav-dropdown:hover > a { color: #fff !important; border: none !important; transform: scale(1.08); }
     .nav-dropdown > a .arrow { font-size: 0.6rem; transition: transform var(--tr); }
-    .nav-dropdown:hover > a { color: var(--text) !important; border-color: var(--neon) !important; }
     .nav-dropdown:hover > a .arrow { transform: rotate(180deg); }
+    @keyframes futBg {
+      0%   { background-position: 0% center; }
+      100% { background-position: 250% center; }
+    }
+    @keyframes futPulse {
+      0%,100% { box-shadow: 0 0 10px rgba(34,197,94,0.5), 0 0 18px rgba(34,197,94,0.2); }
+      50%      { box-shadow: 0 0 20px rgba(34,197,94,0.9), 0 0 38px rgba(34,197,94,0.5); }
+    }
+
+    /* Dropdown menu */
+    .nav-dropdown { position: relative; }
     .dropdown-menu { display: none; position: absolute; top: calc(100% + 10px); right: 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--r); min-width: 180px; padding: 0.5rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.6); z-index: 200; }
     .nav-dropdown:hover .dropdown-menu { display: block; }
     .dropdown-menu li { list-style: none; }
-    .dropdown-menu li a { display: block; padding: 0.55rem 1.1rem; font-size: 0.78rem; color: var(--muted); transition: color var(--tr), background var(--tr); }
-    .dropdown-menu li a:hover { color: #fff; background: var(--neon-soft); }
+    .dropdown-menu li a { display: block; padding: 0.55rem 1.1rem; font-size: 0.78rem; color: var(--muted); background: none; border: none; animation: none; box-shadow: none; transition: color var(--tr), background var(--tr); }
+    .dropdown-menu li a::before { display: none !important; }
+    .dropdown-menu li a:hover { color: #fff; background: var(--neon-soft); transform: none; }
+    @media (max-width: 800px) {
+      #visita .container > div { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      #visita .container > div > div:last-child { aspect-ratio: 16/9 !important; min-height: 260px; }
+    }
 
     /* Hamburger */
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
@@ -210,6 +244,15 @@
     .footer-bottom p { font-size: 0.78rem; color: var(--dim); }
     .footer-bottom p span { color: var(--neon); }
 
+    /* === VISÍTANOS === */
+    .visita-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3.5rem; align-items: start; }
+    .visita-info { display: flex; flex-direction: column; gap: 2rem; }
+    .visita-block-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--neon); margin-bottom: 0.6rem; }
+    .visita-schedule { display: flex; flex-direction: column; }
+    .visita-row { display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--muted); }
+    .visita-row:last-child { border-bottom: none; }
+    .visita-map-wrap { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 0 40px rgba(0,123,255,0.12); height: 480px; }
+
     /* === RESPONSIVE === */
     @media (max-width: 900px) {
       .nav-links { display: none; }
@@ -217,12 +260,12 @@
       .hero-visual { display: none; }
       .eventos-grid { grid-template-columns: repeat(3,280px); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
       .evento-card { scroll-snap-align: start; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
       .eventos-header { flex-direction: column; align-items: flex-start; }
-      .footer-bottom { flex-direction: column; text-align: center; }
       #futbol .container > div { grid-template-columns: 1fr !important; }
       #futbol .container > div > div:last-child { display: none !important; }
       #resenas .container > div:last-child { grid-template-columns: 1fr 1fr !important; }
+      .visita-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .visita-map-wrap { height: 340px; }
     }
     @media (max-width: 600px) {
       .hero-title { font-size: 2.8rem; }
@@ -232,7 +275,8 @@
       #resenas .container > div:first-child { flex-direction: column !important; align-items: flex-start !important; gap: 1.5rem !important; }
       .nav-inner { height: 58px; }
       .mobile-menu a { padding: 1rem 0; }
-      .footer-grid { gap: 1.5rem; }
+      .visita-map-wrap { height: 260px; }
+      #visita { padding: 3rem 0; }
     }
     @media (max-width: 380px) {
       .hero-title { font-size: 2.2rem; }
@@ -284,6 +328,7 @@
     <ul class="nav-links">
       <li><a href="#hero" data-i18n="nav-inicio">Inicio</a></li>
       <li><a href="#eventos" data-i18n="nav-eventos">Cartelera Musical</a></li>
+      <li><a href="#visita" data-i18n="nav-contacto">Contacto</a></li>
       <li><a href="carta-cocteleria.pdf" class="nav-carta-btn" data-i18n="nav-carta">🍸 Ver Carta</a></li>
       <li class="nav-dropdown">
         <a href="partidos.html" data-i18n="nav-futbol">⚽ Fútbol <span class="arrow">▾</span></a>
@@ -321,7 +366,8 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#hero" data-i18n="mob-inicio" onclick="closeMobile()">Inicio</a>
     <a href="#eventos" data-i18n="mob-eventos" onclick="closeMobile()">Cartelera Musical</a>
-    <a href="carta-cocteleria.pdf" data-i18n="mob-carta" onclick="closeMobile()" style="background:linear-gradient(135deg,#007bff,#00c6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900;animation:cartaGlow 2.5s ease-in-out infinite;">🍸 Ver Carta</a>
+    <a href="#visita" data-i18n="mob-contacto" onclick="closeMobile()">Contacto</a>
+    <a href="carta-cocteleria.pdf" data-i18n="mob-carta" onclick="closeMobile()" style="background:linear-gradient(135deg,#007bff,#00c6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900;">🍸 Ver Carta</a>
     <a href="partidos.html" data-i18n="mob-futbol" class="football-link" onclick="closeMobile()">⚽ Fútbol en Vivo</a>
   </div>
 </header>
@@ -588,50 +634,111 @@
 </section>
 
 
-<!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
-<footer id="contacto">
-  <div id="footer">
-    <div class="container">
-      <div class="footer-grid">
+<!-- ═══ VISÍTANOS ═════════════════════════════════════════════ -->
+<section id="visita" style="background:var(--black);padding:5rem 0;border-top:1px solid var(--border);">
+  <div class="container">
 
-        <div class="footer-brand">
-          <div class="logo-main">OTITANUZ</div>
-          <span class="logo-sub">Bar · Barcelona</span>
-          <p data-i18n="foot-desc">Un espacio donde la música en vivo, la coctelería artesanal y la noche barcelonesa convergen en una sola experiencia.</p>
-          <div class="social-links">
-            <a href="#" class="social-link" title="Instagram">IG</a>
-            <a href="#" class="social-link" title="Facebook">FB</a>
-            <a href="#" class="social-link" title="Twitter">𝕏</a>
-            <a href="#" class="social-link" title="Spotify">SP</a>
-            <a href="https://share.google/mo12YP3CQAepQzOeU" target="_blank" rel="noopener" class="social-link" title="Google Reviews" style="font-size:0.65rem;font-weight:700;">G★</a>
+    <div style="margin-bottom:3rem;">
+      <span class="section-label" data-i18n="vis-label">Visítanos</span>
+      <h2 class="section-title">
+        <span data-i18n="vis-title1">En el corazón</span><br>
+        <span style="color:var(--neon);" data-i18n="vis-title2">de l'Eixample</span>
+      </h2>
+      <div class="neon-divider"></div>
+    </div>
+
+    <!-- Info + Mapa en grid -->
+    <div class="visita-grid">
+
+      <!-- Columna izquierda: datos -->
+      <div class="visita-info">
+
+        <!-- Dirección -->
+        <div class="visita-block">
+          <div class="visita-block-label" data-i18n="vis-dir-label">Dirección</div>
+          <div style="font-family:var(--font-d);font-size:1.5rem;letter-spacing:0.06em;color:#fff;margin-bottom:0.25rem;" data-i18n="vis-dir-street">Carrer de València, 2</div>
+          <div style="font-size:0.85rem;color:var(--muted);" data-i18n="vis-dir-city">08015 Barcelona · La Nova Esquerra de l'Eixample</div>
+        </div>
+
+        <!-- Horario -->
+        <div class="visita-block">
+          <div class="visita-block-label" data-i18n="vis-hours-label">Horario</div>
+          <div class="visita-schedule">
+            <div class="visita-row">
+              <span data-i18n="vis-h1">Lunes — Sábado</span>
+              <span style="color:#fff;font-weight:700;">10:00 — 02:30</span>
+            </div>
+            <div class="visita-row">
+              <span data-i18n="vis-h2">Domingo</span>
+              <span style="color:#fff;font-weight:700;">10:00 — 01:30</span>
+            </div>
+            <div class="visita-row">
+              <span>⚽ <span data-i18n="vis-h3">Días de partido</span></span>
+              <span style="color:var(--neon);font-weight:700;" data-i18n="vis-h3-val">Hasta tarde</span>
+            </div>
           </div>
         </div>
 
-        <div class="footer-col">
-          <h4 data-i18n="foot-find">Encuéntranos</h4>
-          <ul>
-            <li><span class="dot"></span><span data-i18n="foot-addr" data-i18n-html="1">📍 Carrer de Valencia, 2<br>08014 Barcelona</span></li>
-            <li><span class="dot"></span><span>📞 +34 932 50 42 02</span></li>
-            <li><span class="dot"></span><span>✉ hola.otitanuz@gmail.com</span></li>
-          </ul>
+        <!-- Cómo llegar -->
+        <div class="visita-block">
+          <div class="visita-block-label" data-i18n="vis-how-label">Cómo llegar</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <div style="font-size:0.85rem;color:var(--muted);">🚇 <span data-i18n="vis-metro">Metro Espanya (L1, L3, L8) — 4 min</span></div>
+            <div style="font-size:0.85rem;color:var(--muted);">🚌 <span data-i18n="vis-bus">Líneas 13, 27, 50, 109, H12</span></div>
+            <div style="font-size:0.85rem;color:var(--muted);">🚉 <span data-i18n="vis-fgc">Plaça Espanya FGC — 5 min</span></div>
+          </div>
         </div>
 
-        <div class="footer-col">
-          <h4 data-i18n="foot-hours">Horario</h4>
-          <div class="schedule-item closed"><span class="day-name" data-i18n="d1">Lunes</span><span class="time">12:00 pm – 02:30 am</span></div>
-          <div class="schedule-item"><span class="day-name" data-i18n="foot-d2">Martes</span><span class="time">12:00 pm – 02:30 am</span></div>
-          <div class="schedule-item"><span class="day-name" data-i18n="foot-d3">Miercoles</span><span class="time">12:00 pm – 02:30 am</span></div>
-          <div class="schedule-item"><span class="day-name" data-i18n="foot-d4">Jueves</span><span class="time">12:00 pm – 02:30 am</span></div>
-          <div class="schedule-item"><span class="day-name" data-i18n="foot-d5">Viernes</span><span class="time">12:00 pm – 02:30 am</span></div>
-          <div class="schedule-item"><span class="day-name" data-i18n="foot-d6">Sabado</span><span class="time">12:00 pm – 02:30 am</span></div>
-          <div class="schedule-item"><span class="day-name" data-i18n="foot-d7">Domingos</span><span class="time">12:00 pm – 02:30 am</span></div>
-        </div>
+        <!-- CTA reserva -->
+        <a href="https://wa.me/34693296828" class="btn-primary" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.5rem;" data-i18n="vis-cta">
+          Reservar por WhatsApp →
+        </a>
 
       </div>
-      <div class="footer-bottom">
-        <p data-i18n="foot-copy" data-i18n-html="1">© 2025 <span>OTITANUZ BAR</span> — Todos los derechos reservados.</p>
-        <p data-i18n="foot-made" data-i18n-html="1">Diseñado en <span>Barcelona</span> · Hecho con pasión 🎵</p>
+
+      <!-- Columna derecha: mapa -->
+      <div class="visita-map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.3582!2d2.14882!3d41.37518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2ef0b8f8b8b%3A0x1a2b3c4d5e6f7890!2sCarrer+de+Val%C3%A8ncia%2C+2%2C+08015+Barcelona!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses"
+          width="100%" height="100%"
+          style="border:0;display:block;filter:invert(0.9) hue-rotate(180deg) brightness(0.82) saturate(1.3);"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Otitanuz Bar · Carrer de València 2, Barcelona">
+        </iframe>
+        <!-- Tarjeta info flotante -->
+        <div style="position:absolute;top:14px;left:14px;background:rgba(8,11,16,0.93);border:1px solid var(--border);border-radius:8px;padding:0.7rem 1rem;backdrop-filter:blur(8px);max-width:210px;z-index:2;">
+          <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:0.15rem;">Otitanuz Bar</div>
+          <div style="font-size:0.68rem;color:var(--muted);margin-bottom:0.3rem;" data-i18n="vis-card-addr">Carrer de València, 2 · Eixample</div>
+          <div style="display:flex;align-items:center;gap:0.3rem;">
+            <span style="color:#fbbf24;font-size:0.72rem;">★ 4.1</span>
+            <span style="font-size:0.65rem;color:var(--dim);" data-i18n="vis-card-rev">(283 reseñas)</span>
+          </div>
+        </div>
+        <!-- Botón Maps -->
+        <a href="https://maps.google.com/?q=Carrer+de+València,+2,+08015+Barcelona" target="_blank" rel="noopener"
+           style="position:absolute;bottom:14px;right:14px;background:var(--neon);color:#fff;font-family:var(--font-b);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1rem;border-radius:6px;text-decoration:none;z-index:2;transition:background var(--tr);"
+           onmouseover="this.style.background='#0056d6'" onmouseout="this.style.background='#007bff'"
+           data-i18n="vis-maps-btn">
+          Abrir en Maps →
+        </a>
       </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER MÍNIMO ════════════════════════════════════════════ -->
+<footer style="background:var(--deep);border-top:1px solid var(--border);padding:2rem 0;">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem;">
+    <p style="font-size:0.78rem;color:var(--dim);">© 2025 <span style="color:var(--neon);">OTITANUZ BAR</span> — Todos los derechos reservados.</p>
+    <div style="display:flex;gap:0.7rem;">
+      <a href="#" class="social-link" title="Instagram">IG</a>
+      <a href="#" class="social-link" title="Facebook">FB</a>
+      <a href="#" class="social-link" title="Twitter">𝕏</a>
+      <a href="#" class="social-link" title="Spotify">SP</a>
+      <a href="https://share.google/mo12YP3CQAepQzOeU" target="_blank" rel="noopener" class="social-link" title="Google Reviews" style="font-size:0.65rem;font-weight:700;">G★</a>
     </div>
   </div>
 </footer>
