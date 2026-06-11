@@ -150,10 +150,6 @@
     .dropdown-menu li a { display: block; padding: 0.55rem 1.1rem; font-size: 0.78rem; color: var(--muted); background: none; border: none; animation: none; box-shadow: none; transition: color var(--tr), background var(--tr); }
     .dropdown-menu li a::before { display: none !important; }
     .dropdown-menu li a:hover { color: #fff; background: var(--neon-soft); transform: none; }
-    @media (max-width: 800px) {
-      #visita .container > div { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-      #visita .container > div > div:last-child { aspect-ratio: 16/9 !important; min-height: 260px; }
-    }
 
     /* Hamburger */
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
@@ -264,8 +260,9 @@
       #futbol .container > div { grid-template-columns: 1fr !important; }
       #futbol .container > div > div:last-child { display: none !important; }
       #resenas .container > div:last-child { grid-template-columns: 1fr 1fr !important; }
-      .visita-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .visita-map-wrap { height: 340px; }
+      .visita-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .visita-map-wrap { height: 320px; }
+      .hoy-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
       .hero-title { font-size: 2.8rem; }
@@ -275,12 +272,21 @@
       #resenas .container > div:first-child { flex-direction: column !important; align-items: flex-start !important; gap: 1.5rem !important; }
       .nav-inner { height: 58px; }
       .mobile-menu a { padding: 1rem 0; }
-      .visita-map-wrap { height: 260px; }
+      .visita-map-wrap { height: 240px; }
       #visita { padding: 3rem 0; }
+      #hoy-juega { padding: 2.5rem 0; }
+      .hoy-grid { grid-template-columns: 1fr; }
+      .hoy-card { padding: 1rem; }
+      #futbol { padding: 3rem 0 !important; }
+      #futbol h2 { font-size: clamp(2.2rem,10vw,3.5rem) !important; }
+      #futbol ul li { font-size: 0.82rem !important; }
+      #futbol > div > div > div:first-child > div:last-child { flex-direction: column !important; }
     }
     @media (max-width: 380px) {
       .hero-title { font-size: 2.2rem; }
       .nav-logo .logo-main { font-size: 1.4rem; }
+      .hoy-teams { flex-wrap: wrap; justify-content: center; gap: 0.3rem; }
+      .hoy-team.right { text-align: center; }
     }
 
     /* WhatsApp pulse */
@@ -407,6 +413,332 @@
     <div class="scroll-line"></div>
   </div>
 </div>
+
+
+<!-- ═══ HOY JUEGA ════════════════════════════════════════════════ -->
+<section id="hoy-juega" style="background:var(--panel);padding:3.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.8rem;flex-wrap:wrap;">
+      <span style="font-size:1.4rem;animation:hoyPulse 1.2s ease-in-out infinite;">⚽</span>
+      <span class="section-label" style="margin-bottom:0;" data-i18n="hoy-label">Mundial 2026 · Hoy en Otitanuz</span>
+    </div>
+
+    <!-- Contenido dinámico -->
+    <div id="hoy-content"></div>
+
+  </div>
+</section>
+
+<style>
+  @keyframes hoyPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.18)} }
+
+  .hoy-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem; }
+
+  .hoy-card {
+    background:var(--card); border:1px solid rgba(0,123,255,0.35);
+    border-radius:var(--r); padding:1.2rem 1.4rem;
+    display:flex; flex-direction:column; gap:0.6rem;
+    box-shadow:0 0 18px rgba(0,123,255,0.12);
+    animation:hoyCardIn 0.4s ease both;
+  }
+  .hoy-card.spain {
+    border-color:rgba(255,200,0,0.5);
+    box-shadow:0 0 24px rgba(255,200,0,0.18);
+    background:linear-gradient(135deg,var(--card) 55%,rgba(255,200,0,0.04) 100%);
+  }
+  @keyframes hoyCardIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  .hoy-badge {
+    display:inline-block; font-size:0.6rem; font-weight:700;
+    letter-spacing:0.2em; text-transform:uppercase;
+    padding:0.18rem 0.6rem; border-radius:20px;
+    border:1px solid rgba(0,123,255,0.35);
+    color:var(--neon); background:var(--neon-soft);
+    align-self:flex-start;
+  }
+  .hoy-badge.gold { color:var(--gold); background:rgba(255,200,0,0.12); border-color:rgba(255,200,0,0.4); }
+
+  .hoy-time { font-size:0.8rem; font-weight:700; color:var(--muted); }
+  .hoy-time .live { color:#22c55e; animation:liveBlink 1s ease-in-out infinite; }
+  @keyframes liveBlink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .hoy-teams {
+    display:flex; align-items:center; gap:0.5rem;
+    font-size:1rem;
+  }
+  .hoy-team { flex:1; font-size:0.9rem; color:var(--muted); }
+  .hoy-team.bold { color:#fff; font-weight:700; }
+  .hoy-team.right { text-align:right; }
+  .hoy-vs { font-size:0.65rem; font-weight:700; color:var(--dim); background:var(--border); padding:0.12rem 0.35rem; border-radius:3px; flex-shrink:0; }
+
+  .hoy-venue { font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); padding-top:0.45rem; }
+
+  .hoy-empty {
+    text-align:center; padding:2.5rem 1rem;
+    background:var(--card); border:1px dashed var(--border);
+    border-radius:var(--r);
+  }
+  .hoy-empty p { color:var(--muted); font-size:0.9rem; margin-top:0.5rem; }
+
+  .hoy-tomorrow {
+    margin-top:1.5rem; padding:1rem 1.4rem;
+    background:rgba(0,123,255,0.05); border:1px solid rgba(0,123,255,0.15);
+    border-radius:var(--r); font-size:0.82rem; color:var(--muted);
+  }
+  .hoy-tomorrow strong { color:var(--neon); }
+</style>
+
+<script>
+(function() {
+
+  // ── BASE DE DATOS COMPLETA DE PARTIDOS ─────────────────────────
+  // Formato: { date:'YYYY-MM-DD', time:'HH:MM', home:'🏳 Equipo', away:'🏳 Equipo', group:'X', venue:'Estadio, Ciudad', spain:true/false }
+  var MATCHES = [
+    // GRUPO A
+    {date:'2026-06-11',time:'21:00',home:'🇲🇽 México',away:'🇿🇦 Sudáfrica',group:'A',venue:'Est. Azteca, Ciudad de México'},
+    {date:'2026-06-12',time:'04:00',home:'🇰🇷 Corea del Sur',away:'🇨🇿 Rep. Checa',group:'A',venue:'Est. Akron, Zapopan'},
+    {date:'2026-06-18',time:'18:00',home:'🇨🇿 Rep. Checa',away:'🇿🇦 Sudáfrica',group:'A',venue:'Mercedes-Benz, Atlanta'},
+    {date:'2026-06-19',time:'03:00',home:'🇲🇽 México',away:'🇰🇷 Corea del Sur',group:'A',venue:'Est. Akron, Zapopan'},
+    {date:'2026-06-25',time:'03:00',home:'🇨🇿 Rep. Checa',away:'🇲🇽 México',group:'A',venue:'Est. Azteca, Ciudad de México'},
+    {date:'2026-06-25',time:'03:00',home:'🇿🇦 Sudáfrica',away:'🇰🇷 Corea del Sur',group:'A',venue:'Est. BBVA, Guadalupe'},
+    // GRUPO B
+    {date:'2026-06-12',time:'21:00',home:'🇨🇦 Canadá',away:'🇧🇦 Bosnia',group:'B',venue:'BMO Field, Toronto'},
+    {date:'2026-06-13',time:'21:00',home:'🇶🇦 Catar',away:'🇨🇭 Suiza',group:'B',venue:"Levi's Stadium, Santa Clara"},
+    {date:'2026-06-18',time:'21:00',home:'🇨🇭 Suiza',away:'🇧🇦 Bosnia',group:'B',venue:'SoFi Stadium, Los Ángeles'},
+    {date:'2026-06-19',time:'00:00',home:'🇨🇦 Canadá',away:'🇶🇦 Catar',group:'B',venue:'BC Place, Vancouver'},
+    {date:'2026-06-24',time:'21:00',home:'🇨🇭 Suiza',away:'🇨🇦 Canadá',group:'B',venue:'BC Place, Vancouver'},
+    {date:'2026-06-24',time:'21:00',home:'🇧🇦 Bosnia',away:'🇶🇦 Catar',group:'B',venue:'Lumen Field, Seattle'},
+    // GRUPO C
+    {date:'2026-06-14',time:'00:00',home:'🇧🇷 Brasil',away:'🇲🇦 Marruecos',group:'C',venue:'MetLife, Nueva Jersey'},
+    {date:'2026-06-14',time:'03:00',home:'🇭🇹 Haití',away:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',group:'C',venue:'Gillette Stadium, Boston'},
+    {date:'2026-06-20',time:'00:00',home:'🇧🇷 Brasil',away:'🇭🇹 Haití',group:'C',venue:'Gillette Stadium, Boston'},
+    {date:'2026-06-20',time:'03:00',home:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',away:'🇲🇦 Marruecos',group:'C',venue:'Lincoln Financial, Filadelfia'},
+    {date:'2026-06-25',time:'00:00',home:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',away:'🇧🇷 Brasil',group:'C',venue:'Hard Rock, Miami'},
+    {date:'2026-06-25',time:'00:00',home:'🇲🇦 Marruecos',away:'🇭🇹 Haití',group:'C',venue:'Mercedes-Benz, Atlanta'},
+    // GRUPO D
+    {date:'2026-06-13',time:'03:00',home:'🇺🇸 EE.UU',away:'🇵🇾 Paraguay',group:'D',venue:'SoFi Stadium, Los Ángeles'},
+    {date:'2026-06-13',time:'06:00',home:'🇦🇺 Australia',away:'🇹🇷 Turquía',group:'D',venue:'BC Place, Vancouver'},
+    {date:'2026-06-19',time:'21:00',home:'🇺🇸 EE.UU',away:'🇦🇺 Australia',group:'D',venue:'Lumen Field, Seattle'},
+    {date:'2026-06-26',time:'04:00',home:'🇹🇷 Turquía',away:'🇺🇸 EE.UU',group:'D',venue:'SoFi Stadium, Los Ángeles'},
+    {date:'2026-06-26',time:'04:00',home:'🇵🇾 Paraguay',away:'🇦🇺 Australia',group:'D',venue:"Levi's Stadium, Santa Clara"},
+    // GRUPO E
+    {date:'2026-06-14',time:'19:00',home:'🇩🇪 Alemania',away:'🇨🇼 Curazao',group:'E',venue:'NRG Stadium, Houston'},
+    {date:'2026-06-15',time:'01:00',home:'🇨🇮 Costa de Marfil',away:'🇪🇨 Ecuador',group:'E',venue:'Lincoln Financial, Filadelfia'},
+    {date:'2026-06-21',time:'00:00',home:'🇩🇪 Alemania',away:'🇨🇮 Costa de Marfil',group:'E',venue:'BMO Field, Toronto'},
+    {date:'2026-06-26',time:'00:00',home:'🇪🇨 Ecuador',away:'🇩🇪 Alemania',group:'E',venue:'MetLife, Nueva Jersey'},
+    // GRUPO F
+    {date:'2026-06-15',time:'00:00',home:'🇳🇱 Países Bajos',away:'🇯🇵 Japón',group:'F',venue:'AT&T Stadium, Dallas'},
+    {date:'2026-06-15',time:'04:00',home:'🇸🇪 Suecia',away:'🇹🇳 Túnez',group:'F',venue:'Est. BBVA, Guadalupe'},
+    {date:'2026-06-20',time:'19:00',home:'🇳🇱 Países Bajos',away:'🇸🇪 Suecia',group:'F',venue:'NRG Stadium, Houston'},
+    {date:'2026-06-26',time:'01:00',home:'🇹🇳 Túnez',away:'🇳🇱 Países Bajos',group:'F',venue:'Arrowhead, Kansas City'},
+    {date:'2026-06-26',time:'01:00',home:'🇯🇵 Japón',away:'🇸🇪 Suecia',group:'F',venue:'AT&T Stadium, Dallas'},
+    // GRUPO G
+    {date:'2026-06-15',time:'21:00',home:'🇧🇪 Bélgica',away:'🇪🇬 Egipto',group:'G',venue:'Lumen Field, Seattle'},
+    {date:'2026-06-16',time:'03:00',home:'🇮🇷 Irán',away:'🇳🇿 Nueva Zelanda',group:'G',venue:'SoFi Stadium, Los Ángeles'},
+    {date:'2026-06-22',time:'01:00',home:'🇧🇪 Bélgica',away:'🇮🇷 Irán',group:'G',venue:'SoFi Stadium, Los Ángeles'},
+    {date:'2026-06-27',time:'05:00',home:'🇳🇿 Nueva Zelanda',away:'🇧🇪 Bélgica',group:'G',venue:'Lumen Field, Seattle'},
+    // GRUPO H — ESPAÑA
+    {date:'2026-06-15',time:'18:00',home:'🇪🇸 España',away:'🇨🇻 Cabo Verde',group:'H',venue:'Mercedes-Benz, Atlanta',spain:true},
+    {date:'2026-06-16',time:'00:00',home:'🇸🇦 Arabia Saudí',away:'🇺🇾 Uruguay',group:'H',venue:'Hard Rock, Miami'},
+    {date:'2026-06-21',time:'18:00',home:'🇪🇸 España',away:'🇸🇦 Arabia Saudí',group:'H',venue:'Mercedes-Benz, Atlanta',spain:true},
+    {date:'2026-06-22',time:'00:00',home:'🇺🇾 Uruguay',away:'🇨🇻 Cabo Verde',group:'H',venue:'Hard Rock, Miami'},
+    {date:'2026-06-27',time:'02:00',home:'🇺🇾 Uruguay',away:'🇪🇸 España',group:'H',venue:'Est. Akron, Zapopan',spain:true},
+    // GRUPO I
+    {date:'2026-06-16',time:'21:00',home:'🇫🇷 Francia',away:'🇸🇳 Senegal',group:'I',venue:'MetLife, Nueva Jersey'},
+    {date:'2026-06-17',time:'00:00',home:'🇮🇶 Irak',away:'🇳🇴 Noruega',group:'I',venue:'Gillette Stadium, Boston'},
+    {date:'2026-06-22',time:'23:00',home:'🇫🇷 Francia',away:'🇮🇶 Irak',group:'I',venue:'Lincoln Financial, Filadelfia'},
+    {date:'2026-06-26',time:'21:00',home:'🇳🇴 Noruega',away:'🇫🇷 Francia',group:'I',venue:'Gillette Stadium, Boston'},
+    // GRUPO J
+    {date:'2026-06-17',time:'03:00',home:'🇦🇷 Argentina',away:'🇩🇿 Argelia',group:'J',venue:'Arrowhead, Kansas City'},
+    {date:'2026-06-17',time:'06:00',home:'🇦🇹 Austria',away:'🇯🇴 Jordania',group:'J',venue:"Levi's Stadium, Santa Clara"},
+    {date:'2026-06-22',time:'19:00',home:'🇦🇷 Argentina',away:'🇦🇹 Austria',group:'J',venue:'AT&T Stadium, Dallas'},
+    {date:'2026-06-28',time:'04:00',home:'🇯🇴 Jordania',away:'🇦🇷 Argentina',group:'J',venue:'Arrowhead, Kansas City'},
+    // GRUPO K
+    {date:'2026-06-17',time:'19:00',home:'🇵🇹 Portugal',away:'🇨🇩 RD Congo',group:'K',venue:'NRG Stadium, Houston'},
+    {date:'2026-06-18',time:'04:00',home:'🇺🇿 Uzbekistán',away:'🇨🇴 Colombia',group:'K',venue:'Est. Azteca, Ciudad de México'},
+    {date:'2026-06-23',time:'19:00',home:'🇵🇹 Portugal',away:'🇺🇿 Uzbekistán',group:'K',venue:'NRG Stadium, Houston'},
+    {date:'2026-06-28',time:'01:30',home:'🇨🇴 Colombia',away:'🇵🇹 Portugal',group:'K',venue:'Hard Rock, Miami'},
+    // GRUPO L
+    {date:'2026-06-17',time:'22:00',home:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',away:'🇭🇷 Croacia',group:'L',venue:'AT&T Stadium, Dallas'},
+    {date:'2026-06-18',time:'01:00',home:'🇬🇭 Ghana',away:'🇵🇦 Panamá',group:'L',venue:'BMO Field, Toronto'},
+    {date:'2026-06-23',time:'22:00',home:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',away:'🇬🇭 Ghana',group:'L',venue:'Gillette Stadium, Boston'},
+    // ELIMINATORIAS
+    {date:'2026-07-02',time:'00:00',home:'1A',away:'2B',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-02',time:'03:00',home:'1C',away:'2D',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-03',time:'00:00',home:'1E',away:'2F',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-03',time:'03:00',home:'1G',away:'2H',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-04',time:'00:00',home:'1I',away:'2J',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-04',time:'03:00',home:'1K',away:'2L',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-05',time:'00:00',home:'2A',away:'1B',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-05',time:'03:00',home:'2C',away:'1D',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-06',time:'00:00',home:'2E',away:'1F',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-06',time:'03:00',home:'2G',away:'1H',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-07',time:'00:00',home:'2I',away:'1J',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-07',time:'03:00',home:'2K',away:'1L',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-08',time:'00:00',home:'3A/B/C/D',away:'3E/F/G/H',group:'16',venue:'Varias sedes'},
+    {date:'2026-07-08',time:'03:00',home:'3I/J/K/L',away:'3X',group:'16',venue:'Varias sedes'},
+    // OCTAVOS
+    {date:'2026-07-09',time:'00:00',home:'Octavo 1',away:'Octavo 2',group:'QF',venue:'Dallas'},
+    {date:'2026-07-09',time:'03:00',home:'Octavo 3',away:'Octavo 4',group:'QF',venue:'Atlanta'},
+    {date:'2026-07-10',time:'00:00',home:'Octavo 5',away:'Octavo 6',group:'QF',venue:'Miami'},
+    {date:'2026-07-10',time:'03:00',home:'Octavo 7',away:'Octavo 8',group:'QF',venue:'Los Ángeles'},
+    // CUARTOS
+    {date:'2026-07-11',time:'00:00',home:'Cuarto 1',away:'Cuarto 2',group:'SF',venue:'Los Ángeles'},
+    {date:'2026-07-11',time:'03:00',home:'Cuarto 3',away:'Cuarto 4',group:'SF',venue:'Kansas City'},
+    {date:'2026-07-12',time:'00:00',home:'Cuarto 5',away:'Cuarto 6',group:'SF',venue:'Nueva Jersey'},
+    {date:'2026-07-12',time:'03:00',home:'Cuarto 7',away:'Cuarto 8',group:'SF',venue:'Houston'},
+    // SEMIFINALES
+    {date:'2026-07-14',time:'02:00',home:'Semi 1',away:'Semi 2',group:'SEMI',venue:'AT&T Stadium, Dallas'},
+    {date:'2026-07-15',time:'02:00',home:'Semi 3',away:'Semi 4',group:'SEMI',venue:'Mercedes-Benz, Atlanta'},
+    // 3ER PUESTO
+    {date:'2026-07-18',time:'21:00',home:'3er Puesto 1',away:'3er Puesto 2',group:'3RD',venue:'Hard Rock, Miami'},
+    // FINAL
+    {date:'2026-07-19',time:'21:00',home:'🏆 Finalista 1',away:'🏆 Finalista 2',group:'FINAL',venue:'MetLife Stadium, Nueva Jersey'},
+  ];
+
+  // ── TEXTOS MULTIIDIOMA ────────────────────────────────────────
+  var HOY_TXT = {
+    es: {
+      noMatches:   'Hoy no hay partidos del Mundial.',
+      next:        'Próximo partido',
+      tomorrow:    'Mañana',
+      live:        '● EN VIVO',
+      timeLabel:   'Hoy · {time}h (hora España)',
+      andMore:     'y {n} más',
+    },
+    en: {
+      noMatches:   'No World Cup matches today.',
+      next:        'Next match',
+      tomorrow:    'Tomorrow',
+      live:        '● LIVE NOW',
+      timeLabel:   'Today · {time}h (Spain time)',
+      andMore:     'and {n} more',
+    },
+    fr: {
+      noMatches:   "Pas de matchs de la Coupe du Monde aujourd'hui.",
+      next:        'Prochain match',
+      tomorrow:    'Demain',
+      live:        '● EN DIRECT',
+      timeLabel:   "Aujourd'hui · {time}h (heure Espagne)",
+      andMore:     'et {n} de plus',
+    },
+  };
+
+  function getLang() {
+    return document.documentElement.lang || 'es';
+  }
+
+  function txt(key, vars) {
+    var lang = getLang();
+    var t = (HOY_TXT[lang] || HOY_TXT['es'])[key] || '';
+    if (vars) {
+      Object.keys(vars).forEach(function(k) { t = t.replace('{'+k+'}', vars[k]); });
+    }
+    return t;
+  }
+  function padZ(n){ return n < 10 ? '0'+n : ''+n; }
+
+  function getTodayStr() {
+    var d = new Date();
+    return d.getFullYear()+'-'+padZ(d.getMonth()+1)+'-'+padZ(d.getDate());
+  }
+
+  function getTomorrowStr() {
+    var d = new Date();
+    d.setDate(d.getDate()+1);
+    return d.getFullYear()+'-'+padZ(d.getMonth()+1)+'-'+padZ(d.getDate());
+  }
+
+  function isLive(dateStr, timeStr) {
+    var now = new Date();
+    var parts = timeStr.split(':');
+    var start = new Date(dateStr+'T'+timeStr+':00');
+    var end   = new Date(start.getTime() + 2*60*60*1000); // +2h
+    return now >= start && now <= end;
+  }
+
+  function groupLabel(g) {
+    var map = {
+      'A':'Grupo A','B':'Grupo B','C':'Grupo C','D':'Grupo D',
+      'E':'Grupo E','F':'Grupo F','G':'Grupo G','H':'Grupo H',
+      'I':'Grupo I','J':'Grupo J','K':'Grupo K','L':'Grupo L',
+      '16':'⚡ Dieciseisavos','QF':'⚡ Octavos de Final',
+      'SF':'⚡ Cuartos de Final','SEMI':'⚡ Semifinales',
+      '3RD':'🥉 3er y 4º Puesto','FINAL':'🏆 FINAL'
+    };
+    return map[g] || ('Grupo '+g);
+  }
+
+  function renderHoy() {
+    var today    = getTodayStr();
+    var tomorrow = getTomorrowStr();
+    var todayMatches    = MATCHES.filter(function(m){ return m.date === today; });
+    var tomorrowMatches = MATCHES.filter(function(m){ return m.date === tomorrow; });
+    var container = document.getElementById('hoy-content');
+
+    if (!container) return;
+
+    // Sin partidos hoy
+    if (todayMatches.length === 0) {
+      var nextMatch = MATCHES.filter(function(m){ return m.date >= today; })[0];
+      var noHoy = '<div class="hoy-empty">';
+      noHoy += '<div style="font-size:2.5rem;">😴</div>';
+      noHoy += '<p>'+txt('noMatches')+'</p>';
+      if (nextMatch) {
+        noHoy += '<p style="margin-top:0.4rem;font-size:0.8rem;color:var(--dim);">'+txt('next')+': <strong style="color:var(--neon);">'+nextMatch.home+' vs '+nextMatch.away+'</strong> · '+nextMatch.date.split('-').reverse().join('/')+' · '+nextMatch.time+'h</p>';
+      }
+      noHoy += '</div>';
+      if (tomorrowMatches.length > 0) { noHoy += renderTomorrow(tomorrowMatches); }
+      container.innerHTML = noHoy;
+      return;
+    }
+
+    // Partidos hoy
+    var html = '<div class="hoy-grid">';
+    todayMatches.forEach(function(m, i) {
+      var live    = isLive(m.date, m.time);
+      var isSpain = m.spain || false;
+      var cardClass  = 'hoy-card' + (isSpain ? ' spain' : '');
+      var badgeClass = 'hoy-badge' + (isSpain ? ' gold' : '');
+      var delay = (i*0.08).toFixed(2);
+
+      html += '<div class="'+cardClass+'" style="animation-delay:'+delay+'s">';
+      html += '<span class="'+badgeClass+'">'+groupLabel(m.group)+'</span>';
+      html += '<div class="hoy-time">';
+      if (live) {
+        html += '<span class="live">'+txt('live')+'</span>';
+      } else {
+        html += '⏱ '+txt('timeLabel',{time:m.time});
+      }
+      html += '</div>';
+      html += '<div class="hoy-teams">';
+      html += '<span class="hoy-team'+(isSpain && m.home.includes('España')?' bold':'')+'">'+m.home+'</span>';
+      html += '<span class="hoy-vs">VS</span>';
+      html += '<span class="hoy-team right'+(isSpain && m.away.includes('España')?' bold':'')+'">'+m.away+'</span>';
+      html += '</div>';
+      html += '<div class="hoy-venue">📍 '+m.venue+'</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    if (tomorrowMatches.length > 0) { html += renderTomorrow(tomorrowMatches); }
+    container.innerHTML = html;
+  }
+
+  function renderTomorrow(matches) {
+    var names = matches.slice(0,3).map(function(m){ return m.home+' vs '+m.away; }).join(' · ');
+    if (matches.length > 3) names += ' '+txt('andMore',{n:matches.length-3});
+    return '<div class="hoy-tomorrow">🗓 <strong>'+txt('tomorrow')+':</strong> '+names+'</div>';
+  }
+
+  // Ejecutar al cargar y actualizar cada minuto
+  renderHoy();
+  setInterval(renderHoy, 60000);
+  window.renderHoy = renderHoy;
+
+})();
+</script>
 
 
 <!-- ═══ EVENTOS ═══════════════════════════════════════════════════ -->
@@ -769,6 +1101,7 @@
   const T = {
     'nav-inicio':   {es:'Inicio',en:'Home',fr:'Accueil'},
     'nav-eventos':  {es:'Cartelera Musical',en:'Live Music',fr:'Programmation'},
+    'nav-contacto': {es:'Contacto',en:'Contact',fr:'Contact'},
     'nav-carta':    {es:'🍸 Ver Carta',en:'🍸 Our Menu',fr:'🍸 Carte'},
     'nav-futbol':   {es:'⚽ Fútbol ▾',en:'⚽ Football ▾',fr:'⚽ Football ▾'},
     'nav-dd-1':     {es:'Zona Deportiva',en:'Sports Zone',fr:'Zone Sportive'},
@@ -776,6 +1109,7 @@
     'nav-dd-3':     {es:'Pantallas en Vivo',en:'Live Screens',fr:'Écrans en Direct'},
     'mob-inicio':   {es:'Inicio',en:'Home',fr:'Accueil'},
     'mob-eventos':  {es:'Cartelera Musical',en:'Live Music',fr:'Programmation'},
+    'mob-contacto': {es:'Contacto',en:'Contact',fr:'Contact'},
     'mob-carta':    {es:'🍸 Ver Carta',en:'🍸 Our Menu',fr:'🍸 Carte'},
     'mob-futbol':   {es:'⚽ Fútbol en Vivo',en:'⚽ Live Football',fr:'⚽ Football Live'},
     'hero-eyebrow': {es:'Música en Vivo · Cócteles · Barcelona',en:'Live Music · Cocktails · Barcelona',fr:'Musique Live · Cocktails · Barcelone'},
@@ -818,18 +1152,38 @@
     'rev-cta-title':{es:'¿Has visitado Otitanuz?',en:'Have you visited Otitanuz?',fr:'Vous avez visité Otitanuz ?'},
     'rev-cta-sub':  {es:'Tu opinión nos ayuda a crecer',en:'Your review helps us grow',fr:'Votre avis nous aide à grandir'},
     'rev-write':    {es:'Escribir reseña →',en:'Write a review →',fr:'Écrire un avis →'},
-    'foot-desc':    {es:'Un espacio donde la música en vivo, la coctelería artesanal y la noche barcelonesa convergen en una sola experiencia.',en:'A space where live music, craft cocktails and Barcelona nights converge into one single experience.',fr:'Un espace où la musique live, les cocktails artisanaux et les nuits barcelonaises convergent en une seule expérience.'},
-    'foot-find':    {es:'Encuéntranos',en:'Find Us',fr:'Nous Trouver'},
-    'foot-addr':    {es:'📍 Carrer de la Nit, 42<br>08003 Barcelona',en:'📍 Carrer de la Nit, 42<br>08003 Barcelona',fr:'📍 Carrer de la Nit, 42<br>08003 Barcelone'},
-    'foot-hours':   {es:'Horario',en:'Opening Hours',fr:'Horaires'},
-    'foot-d1':      {es:'Lun – Mar',en:'Mon – Tue',fr:'Lun – Mar'},
-    'foot-t1':      {es:'Cerrado',en:'Closed',fr:'Fermé'},
-    'foot-d2':      {es:'Mié – Jue',en:'Wed – Thu',fr:'Mer – Jeu'},
-    'foot-d3':      {es:'Viernes',en:'Friday',fr:'Vendredi'},
-    'foot-d4':      {es:'Sábado',en:'Saturday',fr:'Samedi'},
-    'foot-d5':      {es:'Domingo',en:'Sunday',fr:'Dimanche'},
-    'foot-copy':    {es:'© 2025 <span>OTITANUZ BAR</span> — Todos los derechos reservados.',en:'© 2025 <span>OTITANUZ BAR</span> — All rights reserved.',fr:'© 2025 <span>OTITANUZ BAR</span> — Tous droits réservés.'},
-    'foot-made':    {es:'Diseñado en <span>Barcelona</span> · Hecho con pasión 🎵',en:'Designed in <span>Barcelona</span> · Made with passion 🎵',fr:'Conçu à <span>Barcelone</span> · Fait avec passion 🎵'},
+
+    // ── VISÍTANOS ─────────────────────────────────────────────
+    'hoy-label':    {es:'Mundial 2026 · Hoy en Otitanuz', en:'World Cup 2026 · On Today at Otitanuz', fr:'Coupe du Monde 2026 · Ce soir à Otitanuz'},
+    'vis-label':      {es:'Visítanos',              en:'Visit Us',              fr:'Nous Rendre Visite'   },
+    'vis-title1':     {es:'En el corazón',           en:'In the heart',          fr:'Au cœur'              },
+    'vis-title2':     {es:"de l'Eixample",           en:'of l\'Eixample',         fr:"de l'Eixample"        },
+    'vis-dir-label':  {es:'Dirección',               en:'Address',               fr:'Adresse'              },
+    'vis-dir-street': {es:'Carrer de València, 2',   en:'Carrer de València, 2', fr:'Carrer de València, 2'},
+    'vis-dir-city':   {es:"08015 Barcelona · La Nova Esquerra de l'Eixample",
+                       en:"08015 Barcelona · La Nova Esquerra de l'Eixample",
+                       fr:"08015 Barcelone · La Nova Esquerra de l'Eixample"    },
+    'vis-hours-label':{es:'Horario',                 en:'Opening Hours',         fr:'Horaires'             },
+    'vis-h1':         {es:'Lunes — Sábado',          en:'Monday — Saturday',     fr:'Lundi — Samedi'       },
+    'vis-h2':         {es:'Domingo',                 en:'Sunday',                fr:'Dimanche'             },
+    'vis-h3':         {es:'Días de partido',         en:'Match days',            fr:'Jours de match'       },
+    'vis-h3-val':     {es:'Hasta tarde',             en:'Until late',            fr:"Jusqu'à tard"         },
+    'vis-how-label':  {es:'Cómo llegar',             en:'Getting Here',          fr:'Comment Venir'        },
+    'vis-metro':      {es:'Metro Espanya (L1, L3, L8) — 4 min',
+                       en:'Metro Espanya (L1, L3, L8) — 4 min',
+                       fr:'Métro Espanya (L1, L3, L8) — 4 min'                 },
+    'vis-bus':        {es:'Líneas 13, 27, 50, 109, H12',
+                       en:'Bus lines 13, 27, 50, 109, H12',
+                       fr:'Lignes de bus 13, 27, 50, 109, H12'                 },
+    'vis-fgc':        {es:'Plaça Espanya FGC — 5 min',
+                       en:'Plaça Espanya FGC — 5 min',
+                       fr:'Plaça Espanya FGC — 5 min'                          },
+    'vis-cta':        {es:'Reservar por WhatsApp →', en:'Book via WhatsApp →',   fr:'Réserver via WhatsApp →'},
+    'vis-card-addr':  {es:"Carrer de València, 2 · Eixample",
+                       en:"Carrer de València, 2 · Eixample",
+                       fr:"Carrer de València, 2 · Eixample"                   },
+    'vis-card-rev':   {es:'(283 reseñas)',           en:'(283 reviews)',         fr:'(283 avis)'           },
+    'vis-maps-btn':   {es:'Abrir en Maps →',         en:'Open in Maps →',        fr:'Ouvrir dans Maps →'   },
   };
 
   function setLang(lang) {
@@ -842,6 +1196,8 @@
         else { el.textContent = T[key][lang]; }
       }
     });
+    // Re-render hoy-juega widget with new language
+    if (typeof renderHoy === 'function') { renderHoy(); }
   }
 
   document.addEventListener('DOMContentLoaded', function() { setLang('es'); });
