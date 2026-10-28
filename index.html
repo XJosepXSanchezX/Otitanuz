@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Otitanuz Bar</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 44 46' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23007bff'/%3E%3Cstop offset='100%25' stop-color='%2300c6ff'/%3E%3C/linearGradient%3E%3CclipPath id='c'%3E%3Cpolygon points='4,3 40,3 28,27 16,27'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23c)'%3E%3Cpath d='M0 14 Q11 11 22 14 Q33 17 44 14 L44 30 L0 30 Z' fill='url(%23g)' opacity='0.85'/%3E%3C/g%3E%3Cpolygon points='4,3 40,3 28,27 16,27' fill='none' stroke='url(%23g)' stroke-width='2.5' stroke-linejoin='round'/%3E%3Cline x1='22' y1='27' x2='22' y2='38' stroke='url(%23g)' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='41' x2='30' y2='41' stroke='url(%23g)' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/png" href="logo-otitanuz.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
@@ -49,8 +49,8 @@
     #header { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(0,0,0,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: background var(--tr); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
     .nav-logo { display: flex; flex-direction: row; align-items: center; gap: 0.6rem; line-height: 1; }
-    .nav-logo .logo-main { font-family: var(--font-d); font-size: 1.75rem; letter-spacing: 0.15em; color: #fff; }
-    .nav-logo .logo-sub { font-size: 0.62rem; letter-spacing: 0.4em; color: var(--neon); text-transform: uppercase; }
+    .nav-logo-img { height: 52px; width: auto; display: block; transition: transform var(--tr); }
+    .nav-logo:hover .nav-logo-img { transform: scale(1.05); }
     .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
     .nav-links li a { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); transition: color var(--tr); position: relative; }
     .nav-links li a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--neon); transition: width var(--tr); }
@@ -162,19 +162,6 @@
     .mobile-menu a:hover { color: var(--neon); }
     .mobile-menu a.football-link { color: var(--muted); font-size: 0.78rem; }
 
-    /* Copa animada */
-    .copa-wave { animation: copaWave 2.8s ease-in-out infinite; }
-    @keyframes copaWave { 0%,100%{transform:translateY(0)} 50%{transform:translateY(2px)} }
-    .copa-bub1 { animation: copaRise 2.2s ease-in infinite; }
-    .copa-bub2 { animation: copaRise 2.8s ease-in 0.6s infinite; }
-    .copa-bub3 { animation: copaRise 3.2s ease-in 1.2s infinite; }
-    @keyframes copaRise { 0%{transform:translateY(0);opacity:0.7} 80%{transform:translateY(-12px);opacity:0.15} 100%{transform:translateY(-15px);opacity:0} }
-    .copa-spark1 { animation: copaSpark 3.5s ease-in-out 0.5s infinite; }
-    .copa-spark2 { animation: copaSpark 3.5s ease-in-out 1.8s infinite; }
-    @keyframes copaSpark { 0%,100%{opacity:0} 40%{opacity:0.9} 60%{opacity:0} }
-    .nav-logo:hover .nav-copa { animation: copaTilt 0.5s ease-in-out; }
-    @keyframes copaTilt { 0%{transform:rotate(0deg)} 25%{transform:rotate(-8deg)} 75%{transform:rotate(8deg)} 100%{transform:rotate(0deg)} }
-
     /* Lang switcher */
     .lang-switcher { display: flex; align-items: center; gap: 0.3rem; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 30px; padding: 0.25rem 0.5rem; margin-left: 0.5rem; }
     .lang-btn { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; background: none; padding: 0; transition: border-color var(--tr), transform var(--tr), box-shadow var(--tr); position: relative; overflow: hidden; flex-shrink: 0; }
@@ -280,7 +267,7 @@
     .evento-card:nth-child(3) .evento-card-top { background: radial-gradient(ellipse at 50% 80%,rgba(0,80,160,0.55) 0%,#050912 70%); }
     .evento-genre-badge { position: absolute; top: 12px; right: 12px; background: var(--neon-soft); border: 1px solid rgba(0,123,255,0.4); color: var(--neon); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 20px; }
     .evento-date-badge { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.7); border-left: 2px solid var(--neon); padding: 0.3rem 0.6rem; line-height: 1.2; z-index: 2; }
-    .evento-date-badge .day { font-family: var(--font-d); font-size: 1.6rem; color: #fff; display: block; }
+    .evento-date-badge .day { font-family: var(--font-d); font-size: 1.6rem; color: #fff; display: block; letter-spacing: 0.02em; }
     .evento-date-badge .month { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--neon); display: block; }
     .evento-card-body { padding: 1.25rem 1.4rem; }
     .evento-artist { font-family: var(--font-d); font-size: 1.4rem; letter-spacing: 0.08em; color: #fff; margin-bottom: 0.3rem; }
@@ -340,6 +327,7 @@
       #resenas .container > div:last-child { grid-template-columns: 1fr !important; }
       #resenas .container > div:first-child { flex-direction: column !important; align-items: flex-start !important; gap: 1.5rem !important; }
       .nav-inner { height: 58px; }
+      .nav-logo-img { height: 44px; }
       .mobile-menu a { padding: 1rem 0; }
       .visita-map-wrap { height: 240px; }
       #visita { padding: 3rem 0; }
@@ -353,7 +341,7 @@
     }
     @media (max-width: 380px) {
       .hero-title { font-size: 2.2rem; }
-      .nav-logo .logo-main { font-size: 1.4rem; }
+      .nav-logo-img { height: 42px; }
       .hoy-teams { flex-wrap: wrap; justify-content: center; gap: 0.3rem; }
       .hoy-team.right { text-align: center; }
     }
@@ -368,35 +356,9 @@
 <header id="header">
   <nav class="container nav-inner">
 
-    <!-- Logo + copa animada -->
+    <!-- Logo Otitanuz -->
     <a href="#hero" class="nav-logo">
-      <div class="nav-copa" aria-hidden="true" style="flex-shrink:0;display:flex;align-items:center;">
-        <svg viewBox="0 0 44 46" width="34" height="36" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-          <defs>
-            <linearGradient id="copag" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#007bff"/>
-              <stop offset="100%" stop-color="#00c6ff"/>
-            </linearGradient>
-            <clipPath id="glassc"><polygon points="4,3 40,3 28,27 16,27"/></clipPath>
-          </defs>
-          <g clip-path="url(#glassc)">
-            <rect x="0" y="14" width="44" height="16" fill="url(#copag)" opacity="0.7"/>
-            <path class="copa-wave" d="M0 14 Q11 11 22 14 Q33 17 44 14 L44 30 L0 30 Z" fill="url(#copag)" opacity="0.85"/>
-          </g>
-          <polygon points="4,3 40,3 28,27 16,27" fill="none" stroke="url(#copag)" stroke-width="1.8" stroke-linejoin="round"/>
-          <line x1="22" y1="27" x2="22" y2="38" stroke="url(#copag)" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="14" y1="41" x2="30" y2="41" stroke="url(#copag)" stroke-width="2.2" stroke-linecap="round"/>
-          <circle class="copa-bub1" cx="17" cy="22" r="1.4" fill="rgba(255,255,255,0.55)"/>
-          <circle class="copa-bub2" cx="24" cy="19" r="1" fill="rgba(255,255,255,0.4)"/>
-          <circle class="copa-bub3" cx="20" cy="17" r="1.1" fill="rgba(255,255,255,0.35)"/>
-          <circle class="copa-spark1" cx="10" cy="6" r="1.2" fill="#00c6ff" opacity="0"/>
-          <circle class="copa-spark2" cx="34" cy="8" r="0.9" fill="#007bff" opacity="0"/>
-        </svg>
-      </div>
-      <div style="display:flex;flex-direction:column;line-height:1;">
-        <span class="logo-main">OTITANUZ</span>
-        <span class="logo-sub">Bar · Barcelona</span>
-      </div>
+      <img src="logo-otitanuz.png" alt="Otitanuz Bar" class="nav-logo-img" />
     </a>
 
     <!-- Nav desktop -->
@@ -507,7 +469,7 @@
 
     <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.8rem;flex-wrap:wrap;">
       <span style="font-size:1.4rem;animation:hoyPulse 1.2s ease-in-out infinite;">⚽</span>
-      <span class="section-label" style="margin-bottom:0;" data-i18n="hoy-label">Mundial 2026 · Hoy en Otitanuz</span>
+      <span class="section-label" style="margin-bottom:0;" data-i18n="hoy-label">LaLiga · Hoy en Otitanuz</span>
     </div>
 
     <!-- Contenido dinámico -->
@@ -579,114 +541,25 @@
 (function() {
 
   // ── BASE DE DATOS COMPLETA DE PARTIDOS ─────────────────────────
-  // Formato: { date:'YYYY-MM-DD', time:'HH:MM', home:'🏳 Equipo', away:'🏳 Equipo', group:'X', venue:'Estadio, Ciudad', spain:true/false }
+  // Formato: { date:'YYYY-MM-DD', time:'HH:MM', home:'Equipo', away:'Equipo', group:'J11', venue:'Estadio', barca:true/false }
   var MATCHES = [
-    // GRUPO A
-    {date:'2026-06-11',time:'21:00',home:'🇲🇽 México',away:'🇿🇦 Sudáfrica',group:'A',venue:'Est. Azteca, Ciudad de México'},
-    {date:'2026-06-12',time:'04:00',home:'🇰🇷 Corea del Sur',away:'🇨🇿 Rep. Checa',group:'A',venue:'Est. Akron, Zapopan'},
-    {date:'2026-06-18',time:'18:00',home:'🇨🇿 Rep. Checa',away:'🇿🇦 Sudáfrica',group:'A',venue:'Mercedes-Benz, Atlanta'},
-    {date:'2026-06-19',time:'03:00',home:'🇲🇽 México',away:'🇰🇷 Corea del Sur',group:'A',venue:'Est. Akron, Zapopan'},
-    {date:'2026-06-25',time:'03:00',home:'🇨🇿 Rep. Checa',away:'🇲🇽 México',group:'A',venue:'Est. Azteca, Ciudad de México'},
-    {date:'2026-06-25',time:'03:00',home:'🇿🇦 Sudáfrica',away:'🇰🇷 Corea del Sur',group:'A',venue:'Est. BBVA, Guadalupe'},
-    // GRUPO B
-    {date:'2026-06-12',time:'21:00',home:'🇨🇦 Canadá',away:'🇧🇦 Bosnia',group:'B',venue:'BMO Field, Toronto'},
-    {date:'2026-06-13',time:'21:00',home:'🇶🇦 Catar',away:'🇨🇭 Suiza',group:'B',venue:"Levi's Stadium, Santa Clara"},
-    {date:'2026-06-18',time:'21:00',home:'🇨🇭 Suiza',away:'🇧🇦 Bosnia',group:'B',venue:'SoFi Stadium, Los Ángeles'},
-    {date:'2026-06-19',time:'00:00',home:'🇨🇦 Canadá',away:'🇶🇦 Catar',group:'B',venue:'BC Place, Vancouver'},
-    {date:'2026-06-24',time:'21:00',home:'🇨🇭 Suiza',away:'🇨🇦 Canadá',group:'B',venue:'BC Place, Vancouver'},
-    {date:'2026-06-24',time:'21:00',home:'🇧🇦 Bosnia',away:'🇶🇦 Catar',group:'B',venue:'Lumen Field, Seattle'},
-    // GRUPO C
-    {date:'2026-06-14',time:'00:00',home:'🇧🇷 Brasil',away:'🇲🇦 Marruecos',group:'C',venue:'MetLife, Nueva Jersey'},
-    {date:'2026-06-14',time:'03:00',home:'🇭🇹 Haití',away:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',group:'C',venue:'Gillette Stadium, Boston'},
-    {date:'2026-06-20',time:'00:00',home:'🇧🇷 Brasil',away:'🇭🇹 Haití',group:'C',venue:'Gillette Stadium, Boston'},
-    {date:'2026-06-20',time:'03:00',home:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',away:'🇲🇦 Marruecos',group:'C',venue:'Lincoln Financial, Filadelfia'},
-    {date:'2026-06-25',time:'00:00',home:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',away:'🇧🇷 Brasil',group:'C',venue:'Hard Rock, Miami'},
-    {date:'2026-06-25',time:'00:00',home:'🇲🇦 Marruecos',away:'🇭🇹 Haití',group:'C',venue:'Mercedes-Benz, Atlanta'},
-    // GRUPO D
-    {date:'2026-06-13',time:'03:00',home:'🇺🇸 EE.UU',away:'🇵🇾 Paraguay',group:'D',venue:'SoFi Stadium, Los Ángeles'},
-    {date:'2026-06-13',time:'06:00',home:'🇦🇺 Australia',away:'🇹🇷 Turquía',group:'D',venue:'BC Place, Vancouver'},
-    {date:'2026-06-19',time:'21:00',home:'🇺🇸 EE.UU',away:'🇦🇺 Australia',group:'D',venue:'Lumen Field, Seattle'},
-    {date:'2026-06-26',time:'04:00',home:'🇹🇷 Turquía',away:'🇺🇸 EE.UU',group:'D',venue:'SoFi Stadium, Los Ángeles'},
-    {date:'2026-06-26',time:'04:00',home:'🇵🇾 Paraguay',away:'🇦🇺 Australia',group:'D',venue:"Levi's Stadium, Santa Clara"},
-    // GRUPO E
-    {date:'2026-06-14',time:'19:00',home:'🇩🇪 Alemania',away:'🇨🇼 Curazao',group:'E',venue:'NRG Stadium, Houston'},
-    {date:'2026-06-15',time:'01:00',home:'🇨🇮 Costa de Marfil',away:'🇪🇨 Ecuador',group:'E',venue:'Lincoln Financial, Filadelfia'},
-    {date:'2026-06-21',time:'00:00',home:'🇩🇪 Alemania',away:'🇨🇮 Costa de Marfil',group:'E',venue:'BMO Field, Toronto'},
-    {date:'2026-06-26',time:'00:00',home:'🇪🇨 Ecuador',away:'🇩🇪 Alemania',group:'E',venue:'MetLife, Nueva Jersey'},
-    // GRUPO F
-    {date:'2026-06-15',time:'00:00',home:'🇳🇱 Países Bajos',away:'🇯🇵 Japón',group:'F',venue:'AT&T Stadium, Dallas'},
-    {date:'2026-06-15',time:'04:00',home:'🇸🇪 Suecia',away:'🇹🇳 Túnez',group:'F',venue:'Est. BBVA, Guadalupe'},
-    {date:'2026-06-20',time:'19:00',home:'🇳🇱 Países Bajos',away:'🇸🇪 Suecia',group:'F',venue:'NRG Stadium, Houston'},
-    {date:'2026-06-26',time:'01:00',home:'🇹🇳 Túnez',away:'🇳🇱 Países Bajos',group:'F',venue:'Arrowhead, Kansas City'},
-    {date:'2026-06-26',time:'01:00',home:'🇯🇵 Japón',away:'🇸🇪 Suecia',group:'F',venue:'AT&T Stadium, Dallas'},
-    // GRUPO G
-    {date:'2026-06-15',time:'21:00',home:'🇧🇪 Bélgica',away:'🇪🇬 Egipto',group:'G',venue:'Lumen Field, Seattle'},
-    {date:'2026-06-16',time:'03:00',home:'🇮🇷 Irán',away:'🇳🇿 Nueva Zelanda',group:'G',venue:'SoFi Stadium, Los Ángeles'},
-    {date:'2026-06-22',time:'01:00',home:'🇧🇪 Bélgica',away:'🇮🇷 Irán',group:'G',venue:'SoFi Stadium, Los Ángeles'},
-    {date:'2026-06-27',time:'05:00',home:'🇳🇿 Nueva Zelanda',away:'🇧🇪 Bélgica',group:'G',venue:'Lumen Field, Seattle'},
-    // GRUPO H — ESPAÑA
-    {date:'2026-06-15',time:'18:00',home:'🇪🇸 España',away:'🇨🇻 Cabo Verde',group:'H',venue:'Mercedes-Benz, Atlanta',spain:true},
-    {date:'2026-06-16',time:'00:00',home:'🇸🇦 Arabia Saudí',away:'🇺🇾 Uruguay',group:'H',venue:'Hard Rock, Miami'},
-    {date:'2026-06-21',time:'18:00',home:'🇪🇸 España',away:'🇸🇦 Arabia Saudí',group:'H',venue:'Mercedes-Benz, Atlanta',spain:true},
-    {date:'2026-06-22',time:'00:00',home:'🇺🇾 Uruguay',away:'🇨🇻 Cabo Verde',group:'H',venue:'Hard Rock, Miami'},
-    {date:'2026-06-27',time:'02:00',home:'🇺🇾 Uruguay',away:'🇪🇸 España',group:'H',venue:'Est. Akron, Zapopan',spain:true},
-    // GRUPO I
-    {date:'2026-06-16',time:'21:00',home:'🇫🇷 Francia',away:'🇸🇳 Senegal',group:'I',venue:'MetLife, Nueva Jersey'},
-    {date:'2026-06-17',time:'00:00',home:'🇮🇶 Irak',away:'🇳🇴 Noruega',group:'I',venue:'Gillette Stadium, Boston'},
-    {date:'2026-06-22',time:'23:00',home:'🇫🇷 Francia',away:'🇮🇶 Irak',group:'I',venue:'Lincoln Financial, Filadelfia'},
-    {date:'2026-06-26',time:'21:00',home:'🇳🇴 Noruega',away:'🇫🇷 Francia',group:'I',venue:'Gillette Stadium, Boston'},
-    // GRUPO J
-    {date:'2026-06-17',time:'03:00',home:'🇦🇷 Argentina',away:'🇩🇿 Argelia',group:'J',venue:'Arrowhead, Kansas City'},
-    {date:'2026-06-17',time:'06:00',home:'🇦🇹 Austria',away:'🇯🇴 Jordania',group:'J',venue:"Levi's Stadium, Santa Clara"},
-    {date:'2026-06-22',time:'19:00',home:'🇦🇷 Argentina',away:'🇦🇹 Austria',group:'J',venue:'AT&T Stadium, Dallas'},
-    {date:'2026-06-28',time:'04:00',home:'🇯🇴 Jordania',away:'🇦🇷 Argentina',group:'J',venue:'Arrowhead, Kansas City'},
-    // GRUPO K
-    {date:'2026-06-17',time:'19:00',home:'🇵🇹 Portugal',away:'🇨🇩 RD Congo',group:'K',venue:'NRG Stadium, Houston'},
-    {date:'2026-06-18',time:'04:00',home:'🇺🇿 Uzbekistán',away:'🇨🇴 Colombia',group:'K',venue:'Est. Azteca, Ciudad de México'},
-    {date:'2026-06-23',time:'19:00',home:'🇵🇹 Portugal',away:'🇺🇿 Uzbekistán',group:'K',venue:'NRG Stadium, Houston'},
-    {date:'2026-06-28',time:'01:30',home:'🇨🇴 Colombia',away:'🇵🇹 Portugal',group:'K',venue:'Hard Rock, Miami'},
-    // GRUPO L
-    {date:'2026-06-17',time:'22:00',home:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',away:'🇭🇷 Croacia',group:'L',venue:'AT&T Stadium, Dallas'},
-    {date:'2026-06-18',time:'01:00',home:'🇬🇭 Ghana',away:'🇵🇦 Panamá',group:'L',venue:'BMO Field, Toronto'},
-    {date:'2026-06-23',time:'22:00',home:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',away:'🇬🇭 Ghana',group:'L',venue:'Gillette Stadium, Boston'},
-    // ELIMINATORIAS
-    {date:'2026-07-02',time:'00:00',home:'1A',away:'2B',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-02',time:'03:00',home:'1C',away:'2D',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-03',time:'00:00',home:'1E',away:'2F',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-03',time:'03:00',home:'1G',away:'2H',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-04',time:'00:00',home:'1I',away:'2J',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-04',time:'03:00',home:'1K',away:'2L',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-05',time:'00:00',home:'2A',away:'1B',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-05',time:'03:00',home:'2C',away:'1D',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-06',time:'00:00',home:'2E',away:'1F',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-06',time:'03:00',home:'2G',away:'1H',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-07',time:'00:00',home:'2I',away:'1J',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-07',time:'03:00',home:'2K',away:'1L',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-08',time:'00:00',home:'3A/B/C/D',away:'3E/F/G/H',group:'16',venue:'Varias sedes'},
-    {date:'2026-07-08',time:'03:00',home:'3I/J/K/L',away:'3X',group:'16',venue:'Varias sedes'},
-    // OCTAVOS
-    {date:'2026-07-09',time:'00:00',home:'Octavo 1',away:'Octavo 2',group:'QF',venue:'Dallas'},
-    {date:'2026-07-09',time:'03:00',home:'Octavo 3',away:'Octavo 4',group:'QF',venue:'Atlanta'},
-    {date:'2026-07-10',time:'00:00',home:'Octavo 5',away:'Octavo 6',group:'QF',venue:'Miami'},
-    {date:'2026-07-10',time:'03:00',home:'Octavo 7',away:'Octavo 8',group:'QF',venue:'Los Ángeles'},
-    // CUARTOS
-    {date:'2026-07-11',time:'00:00',home:'Cuarto 1',away:'Cuarto 2',group:'SF',venue:'Los Ángeles'},
-    {date:'2026-07-11',time:'03:00',home:'Cuarto 3',away:'Cuarto 4',group:'SF',venue:'Kansas City'},
-    {date:'2026-07-12',time:'00:00',home:'Cuarto 5',away:'Cuarto 6',group:'SF',venue:'Nueva Jersey'},
-    {date:'2026-07-12',time:'03:00',home:'Cuarto 7',away:'Cuarto 8',group:'SF',venue:'Houston'},
-    // SEMIFINALES
-    {date:'2026-07-14',time:'02:00',home:'Semi 1',away:'Semi 2',group:'SEMI',venue:'AT&T Stadium, Dallas'},
-    {date:'2026-07-15',time:'02:00',home:'Semi 3',away:'Semi 4',group:'SEMI',venue:'Mercedes-Benz, Atlanta'},
-    // 3ER PUESTO
-    {date:'2026-07-18',time:'21:00',home:'3er Puesto 1',away:'3er Puesto 2',group:'3RD',venue:'Hard Rock, Miami'},
-    // FINAL
-    {date:'2026-07-19',time:'21:00',home:'🏆 Finalista 1',away:'🏆 Finalista 2',group:'FINAL',venue:'MetLife Stadium, Nueva Jersey'},
+    // JORNADA 11 · LaLiga EA Sports 2026-27  (horarios hora peninsular España)
+    {date:'2026-10-30',time:'21:00',home:'Villarreal',away:'Espanyol',group:'J11',venue:'Estadio de la Cerámica'},
+    {date:'2026-10-31',time:'14:00',home:'Levante',away:'Atlético de Madrid',group:'J11',venue:'Ciutat de València'},
+    {date:'2026-10-31',time:'16:15',home:'Rayo Vallecano',away:'Celta',group:'J11',venue:'Vallecas'},
+    {date:'2026-10-31',time:'18:30',home:'Real Betis',away:'Málaga',group:'J11',venue:'Benito Villamarín'},
+    {date:'2026-10-31',time:'21:00',home:'🔵🔴 Barcelona',away:'Alavés',group:'J11',venue:'Estadi Olímpic Lluís Companys',barca:true},
+    {date:'2026-11-01',time:'14:00',home:'Getafe',away:'Sevilla',group:'J11',venue:'Coliseum'},
+    {date:'2026-11-01',time:'16:15',home:'Racing de Santander',away:'Real Madrid',group:'J11',venue:'El Sardinero'},
+    {date:'2026-11-01',time:'18:30',home:'Elche',away:'Valencia',group:'J11',venue:'Martínez Valero'},
+    {date:'2026-11-01',time:'21:00',home:'Athletic Club',away:'Real Sociedad',group:'J11',venue:'San Mamés'},
+    {date:'2026-11-02',time:'21:00',home:'Deportivo',away:'Osasuna',group:'J11',venue:'Riazor'},
   ];
 
   // ── TEXTOS MULTIIDIOMA ────────────────────────────────────────
   var HOY_TXT = {
     es: {
-      noMatches:   'Hoy no hay partidos del Mundial.',
+      noMatches:   'Hoy no hay partidos de LaLiga.',
       next:        'Próximo partido',
       tomorrow:    'Mañana',
       live:        '● EN VIVO',
@@ -694,7 +567,7 @@
       andMore:     'y {n} más',
     },
     en: {
-      noMatches:   'No World Cup matches today.',
+      noMatches:   'No LaLiga matches today.',
       next:        'Next match',
       tomorrow:    'Tomorrow',
       live:        '● LIVE NOW',
@@ -702,7 +575,7 @@
       andMore:     'and {n} more',
     },
     fr: {
-      noMatches:   "Pas de matchs de la Coupe du Monde aujourd'hui.",
+      noMatches:   "Pas de matchs de LaLiga aujourd'hui.",
       next:        'Prochain match',
       tomorrow:    'Demain',
       live:        '● EN DIRECT',
@@ -746,17 +619,10 @@
 
   function groupLabel(g) {
     var lang = getLang();
-    var grp = {es:'Grupo', en:'Group', fr:'Groupe'}[lang] || 'Grupo';
-    var map = {
-      '16':   {es:'⚡ Dieciseisavos',    en:'⚡ Round of 32',       fr:'⚡ Seizièmes'},
-      'QF':   {es:'⚡ Octavos de Final', en:'⚡ Round of 16',       fr:'⚡ Huitièmes'},
-      'SF':   {es:'⚡ Cuartos de Final', en:'⚡ Quarter-finals',    fr:'⚡ Quarts de finale'},
-      'SEMI': {es:'⚡ Semifinales',      en:'⚡ Semi-finals',       fr:'⚡ Demi-finales'},
-      '3RD':  {es:'🥉 3er y 4º Puesto',  en:'🥉 Third place',      fr:'🥉 3e place'},
-      'FINAL':{es:'🏆 FINAL',            en:'🏆 FINAL',             fr:'🏆 FINALE'}
-    };
-    if (map[g]) return map[g][lang] || map[g]['es'];
-    return grp + ' ' + g;
+    // g = 'J11', 'J12'...  ->  "Jornada 11" / "Matchday 11" / "Journée 11"
+    var word = {es:'Jornada', en:'Matchday', fr:'Journée'}[lang] || 'Jornada';
+    var num = (g || '').replace(/[^0-9]/g,'');
+    return '⚽ ' + word + (num ? ' ' + num : '');
   }
 
   function renderHoy() {
@@ -787,9 +653,9 @@
     var html = '<div class="hoy-grid">';
     todayMatches.forEach(function(m, i) {
       var live    = isLive(m.date, m.time);
-      var isSpain = m.spain || false;
-      var cardClass  = 'hoy-card' + (isSpain ? ' spain' : '');
-      var badgeClass = 'hoy-badge' + (isSpain ? ' gold' : '');
+      var isBarca = m.barca || false;
+      var cardClass  = 'hoy-card' + (isBarca ? ' spain' : '');
+      var badgeClass = 'hoy-badge' + (isBarca ? ' gold' : '');
       var delay = (i*0.08).toFixed(2);
 
       html += '<div class="'+cardClass+'" style="animation-delay:'+delay+'s">';
@@ -802,9 +668,9 @@
       }
       html += '</div>';
       html += '<div class="hoy-teams">';
-      html += '<span class="hoy-team'+(isSpain && m.home.includes('España')?' bold':'')+'">'+m.home+'</span>';
+      html += '<span class="hoy-team'+(isBarca && m.home.indexOf('Barcelona')>-1?' bold':'')+'">'+m.home+'</span>';
       html += '<span class="hoy-vs">VS</span>';
-      html += '<span class="hoy-team right'+(isSpain && m.away.includes('España')?' bold':'')+'">'+m.away+'</span>';
+      html += '<span class="hoy-team right'+(isBarca && m.away.indexOf('Barcelona')>-1?' bold':'')+'">'+m.away+'</span>';
       html += '</div>';
       html += '<div class="hoy-venue">📍 '+m.venue+'</div>';
       html += '</div>';
@@ -866,36 +732,38 @@
    ════════════════════════════════════════════════════════════════ */
 var EVENTOS_CONFIG = [
   {
-    dia:          24,
-    mes:          'Jun',
-    hora:         '23:00',
+    dia:          'TODOS',
+    mes:          'Los días',
+    hora:         '22:00',
+    genero:       'Karaoke',
     foto:         'fotos/evento-1.jpg',
-    fotoAlt:      'The Midnight Groove en escenario',
-    titulo:       'San Juan en Otitanuz',
-    descripcion:  '👉 ¡Reserva ahora y asegura tu noche de San Juan con nosotros!. No te pierdas de espectaculos inimaginables.',
+    fotoAlt:      'Noche de karaoke en Otitanuz Bar',
+    titulo:       'Karaoke',
+    descripcion:  'Todos los días. Sube al escenario, elige tu canción y vívela con el mejor ambiente de Barcelona.',
     color1:       'rgba(0,60,140,0.6)',
     color2:       '#0a0f1a',
   },
   {
-    dia:          26,
-    mes:          'Jun',
-    hora:         '23:30',
+    dia:          'SÁB',
+    mes:          'Cada',
+    hora:         '22:00',
+    genero:       'Música en Vivo',
     foto:         'fotos/evento-2.jpg',
-    fotoAlt:      'Elena Voss Quartet en directo',
-    titulo:       'Pride en Otitanuz',
-    descripcion:  'Prepárate para un show de strippers explosivo y shots de bienvenida gratis para calentar la noche. ¿Quieres continuar la fiesta al máximo nivel? Tenemos tus entradas garantizadas para Safari y Arena. No te conformes con menos. .',
+    fotoAlt:      'Concierto de música en vivo los sábados',
+    titulo:       'Sábados de Música en Vivo',
+    descripcion:  'Cada sábado, directos sobre el escenario. Bandas y artistas en vivo para acompañar tus copas.',
     color1:       'rgba(0,40,100,0.7)',
     color2:       '#080c14',
   },
   {
-    dia:          28,
-    mes:          'Jun',
-    hora:         '23:00',
-    genero:       'Electro · Ambient',
+    dia:          31,
+    mes:          'Oct',
+    hora:         '22:00',
+    genero:       'Fiesta Especial',
     foto:         'fotos/evento-3.jpg',
-    fotoAlt:      'Nyx & The Machines con visuales',
-    titulo:       'Nyx & The Machines',
-    descripcion:  'Electrónica experimental en vivo: sintetizadores analógicos, percusión y visuales inmersivos.',
+    fotoAlt:      'Fiesta de Halloween en Otitanuz Bar',
+    titulo:       'Halloween Party',
+    descripcion:  'La noche más terrorífica del año. Ven disfrazado, cócteles especiales y música hasta tarde.',
     color1:       'rgba(0,80,160,0.55)',
     color2:       '#050912',
   },
@@ -945,23 +813,23 @@ var EVENTOS_CONFIG = [
       <div>
         <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,200,0,0.12);border:1px solid rgba(255,200,0,0.35);border-radius:30px;padding:0.35rem 1rem;margin-bottom:1.8rem;">
           <span>⚽</span>
-          <span style="font-size:0.68rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#ffc800;" data-i18n="fut-badge">FIFA World Cup 2026™</span>
+          <span style="font-size:0.68rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#ffc800;" data-i18n="fut-badge">LaLiga EA Sports 2026-27</span>
         </div>
         <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);line-height:0.95;letter-spacing:0.04em;margin-bottom:1.2rem;">
           <span style="color:#fff;display:block;" data-i18n="fut-h-line1">TU CUARTEL</span>
-          <span style="color:#ffc800;display:block;" data-i18n="fut-h-line2">GENERAL DEL</span>
-          <span style="color:#007bff;display:block;" data-i18n="fut-h-line3">MUNDIAL 2026</span>
+          <span style="color:#ffc800;display:block;" data-i18n="fut-h-line2">DE LOS</span>
+          <span style="color:#007bff;display:block;" data-i18n="fut-h-line3">PARTIDOS</span>
         </h2>
-        <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:1.8rem;" data-i18n="fut-sedes">🇺🇸 USA · 🇨🇦 CANADÁ · 🇲🇽 MÉXICO · 11 JUN — 19 JUL</p>
-        <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;max-width:500px;margin-bottom:2rem;" data-i18n="fut-desc2">48 selecciones, 104 partidos, una sola sede en Barcelona para vivirlos: la nuestra.</p>
+        <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-bottom:1.8rem;" data-i18n="fut-sedes">⚽ BARÇA · REAL MADRID · ATLÉTICO · TODA LALIGA</p>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.8;max-width:500px;margin-bottom:2rem;" data-i18n="fut-desc2">Todos los partidos de LaLiga en nuestras pantallas, con el mejor ambiente de Barcelona. Reserva tu mesa para los grandes duelos.</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2.5rem;">
-          <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--muted);"><span style="width:22px;height:22px;border-radius:50%;background:#ffc800;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;color:#000;flex-shrink:0;">✓</span><span data-i18n="fut-check1">Todos los partidos de España en directo</span></li>
-          <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--muted);"><span style="width:22px;height:22px;border-radius:50%;background:#ffc800;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;color:#000;flex-shrink:0;">✓</span><span data-i18n="fut-check2">Pantalla principal reservada para octavos, cuartos y final</span></li>
+          <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--muted);"><span style="width:22px;height:22px;border-radius:50%;background:#ffc800;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;color:#000;flex-shrink:0;">✓</span><span data-i18n="fut-check1">Todos los partidos del Barça en directo</span></li>
+          <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--muted);"><span style="width:22px;height:22px;border-radius:50%;background:#ffc800;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;color:#000;flex-shrink:0;">✓</span><span data-i18n="fut-check2">Pantalla principal para los grandes partidos</span></li>
           <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--muted);"><span style="width:22px;height:22px;border-radius:50%;background:#ffc800;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;color:#000;flex-shrink:0;">✓</span><span data-i18n="fut-check3">Menús especiales y promociones de cerveza</span></li>
           <li style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--muted);"><span style="width:22px;height:22px;border-radius:50%;background:#ffc800;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:900;color:#000;flex-shrink:0;">✓</span><span data-i18n="fut-check4">Ambiente internacional y multilingüe</span></li>
         </ul>
         <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-          <a href="https://wa.me/34693296828" class="btn-primary" data-i18n="fut-reservar">RESERVAR PARA EL MUNDIAL →</a>
+          <a href="https://wa.me/34693296828" class="btn-primary" data-i18n="fut-reservar">RESERVAR PARA EL PARTIDO →</a>
           <a href="partidos.html" class="btn-ghost" data-i18n="fut-ver-fechas">VER FECHAS DE PARTIDOS 📅</a>
         </div>
       </div>
@@ -1245,17 +1113,17 @@ var EVENTOS_CONFIG = [
     'ev-title':     {es:'Próximos Eventos',en:'Upcoming Events',fr:'Prochains Événements'},
     'ev-all':       {es:'Ver todos los eventos',en:'See all events',fr:'Tous les événements'},
     'ev-reservar':  {es:'Reservar',en:'Book',fr:'Réserver'},
-    'fut-badge':    {es:'⚽ FIFA World Cup 2026™',en:'⚽ FIFA World Cup 2026™',fr:'⚽ Coupe du Monde FIFA 2026™'},
-    'fut-h-line1':  {es:'TU CUARTEL',en:'YOUR WORLD CUP',fr:'TON QUARTIER'},
-    'fut-h-line2':  {es:'GENERAL DEL',en:'HEADQUARTERS',fr:'GÉNÉRAL DE LA'},
-    'fut-h-line3':  {es:'MUNDIAL 2026',en:'WORLD CUP 2026',fr:'COUPE DU MONDE 2026'},
-    'fut-sedes':    {es:'🇺🇸 USA · 🇨🇦 CANADÁ · 🇲🇽 MÉXICO · 11 JUN — 19 JUL',en:'🇺🇸 USA · 🇨🇦 CANADA · 🇲🇽 MEXICO · 11 JUN — 19 JUL',fr:'🇺🇸 USA · 🇨🇦 CANADA · 🇲🇽 MEXIQUE · 11 JUIN — 19 JUIL'},
-    'fut-desc2':    {es:'48 selecciones, 104 partidos, una sola sede en Barcelona para vivirlos: la nuestra.',en:'48 teams, 104 matches, one venue in Barcelona to experience them: ours.',fr:'48 équipes, 104 matchs, un seul lieu à Barcelone pour les vivre: le nôtre.'},
-    'fut-check1':   {es:'Todos los partidos de España en directo',en:'All Spain matches live',fr:'Tous les matchs d\'Espagne en direct'},
-    'fut-check2':   {es:'Pantalla principal reservada para octavos, cuartos y final',en:'Main screen reserved for last 16, quarters and final',fr:'Écran principal réservé pour les 8es, quarts et finale'},
+    'fut-badge':    {es:'⚽ LaLiga EA Sports 2026-27',en:'⚽ LaLiga EA Sports 2026-27',fr:'⚽ LaLiga EA Sports 2026-27'},
+    'fut-h-line1':  {es:'TU CUARTEL',en:'YOUR MATCHDAY',fr:'TON QUARTIER'},
+    'fut-h-line2':  {es:'DE LOS',en:'HQ FOR THE',fr:'DES'},
+    'fut-h-line3':  {es:'PARTIDOS',en:'MATCHES',fr:'MATCHS'},
+    'fut-sedes':    {es:'⚽ BARÇA · REAL MADRID · ATLÉTICO · TODA LALIGA',en:'⚽ BARÇA · REAL MADRID · ATLÉTICO · ALL LALIGA',fr:'⚽ BARÇA · REAL MADRID · ATLÉTICO · TOUTE LALIGA'},
+    'fut-desc2':    {es:'Todos los partidos de LaLiga en nuestras pantallas, con el mejor ambiente de Barcelona. Reserva tu mesa para los grandes duelos.',en:'Every LaLiga match live on our screens, with the best atmosphere in Barcelona. Book your table for the big games.',fr:'Tous les matchs de LaLiga sur nos écrans, dans la meilleure ambiance de Barcelone. Réservez votre table pour les grands duels.'},
+    'fut-check1':   {es:'Todos los partidos del Barça en directo',en:'All Barça matches live',fr:'Tous les matchs du Barça en direct'},
+    'fut-check2':   {es:'Pantalla principal para los grandes partidos',en:'Main screen for the big matches',fr:'Écran principal pour les grands matchs'},
     'fut-check3':   {es:'Menús especiales y promociones de cerveza',en:'Special menus and beer promotions',fr:'Menus spéciaux et promotions bières'},
     'fut-check4':   {es:'Ambiente internacional y multilingüe',en:'International and multilingual atmosphere',fr:'Ambiance internationale et multilingue'},
-    'fut-reservar': {es:'RESERVAR PARA EL MUNDIAL →',en:'BOOK FOR THE WORLD CUP →',fr:'RÉSERVER POUR LA COUPE DU MONDE →'},
+    'fut-reservar': {es:'RESERVAR PARA EL PARTIDO →',en:'BOOK FOR THE MATCH →',fr:'RÉSERVER POUR LE MATCH →'},
     'fut-ver-fechas':{es:'VER FECHAS DE PARTIDOS 📅',en:'SEE MATCH SCHEDULE 📅',fr:'VOIR LE CALENDRIER 📅'},
     'rev-label':    {es:'Google Reviews',en:'Google Reviews',fr:'Avis Google'},
     'rev-title':    {es:'Lo que dicen nuestros clientes',en:'What our customers say',fr:'Ce que disent nos clients'},
@@ -1269,7 +1137,7 @@ var EVENTOS_CONFIG = [
                      fr:'© 2025 <span style="color:var(--neon);">OTITANUZ BAR</span> — Tous droits réservés.'},
 
     // ── VISÍTANOS ─────────────────────────────────────────────
-    'hoy-label':    {es:'Mundial 2026 · Hoy en Otitanuz', en:'World Cup 2026 · On Today at Otitanuz', fr:'Coupe du Monde 2026 · Ce soir à Otitanuz'},
+    'hoy-label':    {es:'LaLiga · Hoy en Otitanuz', en:'LaLiga · On Today at Otitanuz', fr:'LaLiga · Ce soir à Otitanuz'},
     'vis-label':      {es:'Visítanos',              en:'Visit Us',              fr:'Nous Rendre Visite'   },
     'vis-title1':     {es:'En el corazón',           en:'In the heart',          fr:'Au cœur'              },
     'vis-title2':     {es:"de l'Eixample",           en:'of l\'Eixample',         fr:"de l'Eixample"        },
